@@ -14,12 +14,13 @@ namespace NetCoreMicroserviceSample.Api
     {
         public static int Main(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
             Log.Logger = new LoggerConfiguration()
-               .Enrich.FromLogContext()
-               .WriteTo.Debug()
-               .WriteTo.Console()
-               .WriteTo.Seq("http://localhost:5341")
-               .CreateLogger();
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
 
             try
             {
