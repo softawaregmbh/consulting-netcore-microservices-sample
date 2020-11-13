@@ -1,20 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace NetCoreMicroserviceSample.Api.Controllers
+﻿namespace NetCoreMicroserviceSample.Api.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
     public class HealthController : ControllerBase
     {
         [HttpGet]
-        public string Get()
-        {
-            return "I'm alive ;)";
-        }
+        public string Get() => "I'm alive ;)";
     }
 }
