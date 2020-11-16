@@ -24,8 +24,4 @@
   <ItemGroup>
     <EmbeddedResource Include="wwwroot/*" />
   </ItemGroup>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="copy $(ProjectDir)..\NetCoreMicroserviceSample.UserInterface\dist $(ProjectDir)wwwroot" />
-  </Target>
 </Project>

@@ -1,9 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
-  devtool: 'inline-source-map',
+  performance: { hints: false },
   module: {
     rules: [
       {
@@ -25,8 +26,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Chart Demo',
         template: './src/index.html'
       })
   ],
