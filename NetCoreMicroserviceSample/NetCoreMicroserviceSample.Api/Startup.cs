@@ -26,7 +26,13 @@ namespace NetCoreMicroserviceSample.Api
         {
             services.AddDbContext<MachineVisualizerDataContext>(options => options.UseInMemoryDatabase("machines"));
 
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                    {
+                        builder.WithOrigins("http://localhost:8080", "https://localhost:8080");
+                    });
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

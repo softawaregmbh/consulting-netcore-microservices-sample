@@ -6,6 +6,6 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   plugins: [
-    new DefinePlugin({ API_DOMAIN: JSON.stringify('http://localhost:5001') })
+    new DefinePlugin({ API_DOMAIN: JSON.stringify('https://localhost:5001') })
   ]
 });
