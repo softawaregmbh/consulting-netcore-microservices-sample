@@ -5,10 +5,12 @@ namespace NetCoreMicroserviceSample.Api
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.FileProviders;
     using Microsoft.Extensions.Hosting;
     using Microsoft.OpenApi.Models;
     using NetCoreMicroserviceSample.Api.Repository;
     using Serilog;
+    using System.IO;
 
     public class Startup
     {
@@ -24,6 +26,7 @@ namespace NetCoreMicroserviceSample.Api
         {
             services.AddDbContext<MachineVisualizerDataContext>(options => options.UseInMemoryDatabase("machines"));
 
+            services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -41,6 +44,12 @@ namespace NetCoreMicroserviceSample.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetCoreMicroserviceSample.Api v1"));
                 dbContext.Database.EnsureCreated();
             }
+
+            var fp = new ManifestEmbeddedFileProvider(typeof(Startup).Assembly, "wwwroot");
+            app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = fp });
+            app.UseStaticFiles(new StaticFileOptions { FileProvider = fp });
+
+            app.UseCors();
 
             app.UseSerilogRequestLogging();
 
