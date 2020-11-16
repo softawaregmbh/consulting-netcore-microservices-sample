@@ -11,8 +11,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const dom = {
         loadingIndicator: document.getElementById('loading-indicator'),
         loadedContent: document.getElementById('loaded-content'),
-        machinesDropdown: document.getElementById('machines-dropdown')
+        machinesDropdown: document.getElementById('machines-dropdown'),
+        hook: document.getElementById('hook')
     };
+
+    const initialHookDistance = -340;
+    const maxHookDistance = 30;
+
+    let hookDistanceX = initialHookDistance;
 
     try {
         const machinesRaw = await fetch(API_DOMAIN + '/api/machines');
@@ -33,12 +39,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         dom.loadingIndicator.hidden = true;
         dom.loadedContent.hidden = false;
 
+        animateHook();
+
     } catch (e) {
         console.error('Looks like there was a problem. Status Code: ' + e);
     }
 
+    async function selectMachine(m: Machine) {
+        console.log(m.name + ' selected');
+    }
+
+    function animateHook() {
+
+        hookDistanceX += 5;
+        if (hookDistanceX > maxHookDistance) {
+            hookDistanceX = initialHookDistance;
+        }
+
+        dom.hook.setAttribute('x', hookDistanceX + "")
+
+        setTimeout(() => {
+            animateHook();
+        }, 200);
+    }
 }, false);
 
-async function selectMachine(m: Machine) {
-    console.log(m.name + ' selected');
-}
