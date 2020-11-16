@@ -1,50 +1,65 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NetCoreMicroserviceSample.Common.Domain;
-using NetCoreMicroserviceSample.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace NetCoreMicroserviceSample.Api.Controllers
+﻿namespace NetCoreMicroserviceSample.Api.Controllers
 {
-    [Route("api/[controller]")]
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using NetCoreMicroserviceSample.Api.Domain;
+    using NetCoreMicroserviceSample.Api.Repository;
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Threading.Tasks;
+
+    [Route("api/machines")]
     [ApiController]
     public class MachineController : ControllerBase
     {
-        private readonly IMachineRepository machineRepository;
+        private readonly MachineVisualizerDataContext dbContext;
 
-        public MachineController(IMachineRepository machineRepository)
-        {
-            this.machineRepository = machineRepository ?? throw new ArgumentNullException(nameof(machineRepository));
-        }
+        public MachineController(MachineVisualizerDataContext dbContext) =>
+            this.dbContext = dbContext;
 
         [HttpGet]
-        public async Task<IEnumerable<Machine>> Get()
+        [ProducesResponseType(typeof(IEnumerable<Machine>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Get() =>
+            Ok(await dbContext.Machines.ToListAsync());
+
+        [HttpGet("{id}", Name = "MachineById")]
+        [ProducesResponseType(typeof(Machine), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetAsync(Guid id)
         {
-            return await this.machineRepository.GetMachinesAsync();
+            var machine = await dbContext.Machines.SingleOrDefaultAsync(m => m.Id == id);
+            return machine switch
+            {
+                null => NotFound(),
+                _ => Ok(machine)
+            };
         }
 
-        [HttpGet("{id}")]
-        public async Task<Machine> GetAsync(Guid id)
-        {
-            return await this.machineRepository.GetMachineByIdAsync(id);
-        }
-
-        // POST api/<MachineController>
         [HttpPost]
-        public async Task<Machine> PostAsync([FromBody] Machine machine)
+        [ProducesResponseType(typeof(Machine), (int)HttpStatusCode.Created)]
+        public async Task<IActionResult> PostAsync([FromBody] Machine machine)
         {
-            return await this.machineRepository.AddOrUpdateMachine(machine);
+            dbContext.Machines.Add(machine);
+            await dbContext.SaveChangesAsync();
+            return CreatedAtRoute("MachineById", new { Id = machine.Id }, machine);
         }
 
-        // DELETE api/<MachineController>/5
         [HttpDelete("{id}")]
-        public async Task Delete(Guid id)
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> Delete(Guid id)
         {
-            await this.machineRepository.DeleteMachineAsync(id);
+            var machine = await dbContext.Machines.SingleOrDefaultAsync(m => m.Id == id);
+            if (machine == null)
+            {
+                return NotFound();
+            }
+
+            dbContext.Machines.Remove(machine);
+            await dbContext.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
