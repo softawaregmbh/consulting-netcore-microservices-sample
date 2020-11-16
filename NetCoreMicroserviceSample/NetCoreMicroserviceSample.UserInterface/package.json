@@ -1,15 +1,15 @@
 {
-  "name": "9040-chart",
+  "name": "net-microservice-sample-ui",
   "version": "1.0.0",
-  "description": "",
+  "description": "DotNet Microservices Sample - User Interface",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
     "start": "webpack serve"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Rainer Stropek, Philipp Pendelin",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.14.7",
     "css-loader": "^5.0.1",
