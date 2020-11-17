@@ -1,14 +1,14 @@
-import { Machine } from './dtos/machine';
+import { MachineMetadata } from "./apiClient/models";
 
 export class MachineConfigurationViewModel {
     private loadingIndicator: HTMLDivElement;
     private loadedContent: HTMLDivElement;
     private machinesDropdown: HTMLSelectElement;
-    private machineList: Machine[];
+    private machineList: MachineMetadata[];
 
-    public selectMachine: (machine: Machine) => void;
+    public selectMachine: (machine: MachineMetadata) => void;
     
-    public set machines(machines: Machine[]) {
+    public set machines(machines: MachineMetadata[]) {
         // Clear existing list of machines
         while (this.machinesDropdown.options.length > 0)
         {
@@ -46,7 +46,7 @@ export class MachineConfigurationViewModel {
         }
     }
 
-    private addMachineToSelectionList(machine: Machine, selected: boolean = true): void {
+    private addMachineToSelectionList(machine: MachineMetadata, selected: boolean = true): void {
         // Add option to machine list
         const node = document.createElement('option');
         node.setAttribute('value', machine.id);

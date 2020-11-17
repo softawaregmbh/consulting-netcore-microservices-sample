@@ -19,7 +19,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         public MachineController(MachineVisualizerDataContext dbContext) =>
             this.dbContext = dbContext;
 
-        [HttpGet]
+        [HttpGet(Name = "GetAllMachines")]
         [ProducesResponseType(typeof(IEnumerable<MachineMetadata>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Get() =>
             Ok(await dbContext.Machines.Select(m => new MachineMetadata(m.Id, m.Name, m.Description)).ToListAsync());
@@ -39,7 +39,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
             };
         }
 
-        [HttpGet("{id}/image")]
+        [HttpGet("{id}/image", Name = "GetMachineImage")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetImageAsync(Guid id)
@@ -53,7 +53,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
             return new ContentResult { ContentType = "image/svg+xml", StatusCode = (int)HttpStatusCode.OK, Content = machine.SvgImage };
         }
 
-        [HttpPost]
+        [HttpPost(Name = "AddMachine")]
         [ProducesResponseType(typeof(Machine), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> PostAsync([FromBody] Machine machine)
         {
@@ -62,7 +62,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
             return CreatedAtRoute("MachineById", new { Id = machine.Id }, machine);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "DeleteMachine")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Delete(Guid id)

@@ -10,9 +10,24 @@ namespace NetCoreMicroserviceSample.Api
     using Microsoft.OpenApi.Models;
     using NetCoreMicroserviceSample.Api.Repository;
     using Serilog;
+    using Swashbuckle.AspNetCore.SwaggerGen;
 
     public class Startup
     {
+        private class AdditionalParametersDocumentFilter : IDocumentFilter
+        {
+            public void Apply(OpenApiDocument openApiDoc, DocumentFilterContext context)
+            {
+                foreach (var schema in context.SchemaRepository.Schemas)
+                {
+                    if (schema.Value.AdditionalProperties == null)
+                    {
+                        schema.Value.AdditionalPropertiesAllowed = true;
+                    }
+                }
+            }
+        }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,13 +44,15 @@ namespace NetCoreMicroserviceSample.Api
             {
                 options.AddDefaultPolicy(builder =>
                     {
-                        builder.WithOrigins("http://localhost:8080", "https://localhost:8080");
+                        // In practice, be more restrictive regarding CORS
+                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                     });
             });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NetCoreMicroserviceSample.Api", Version = "v1" });
+                c.DocumentFilter<AdditionalParametersDocumentFilter>();
             });
         }
 

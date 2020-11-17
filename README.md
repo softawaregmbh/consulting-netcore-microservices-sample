@@ -29,3 +29,18 @@ The following (sub-)projects are part of this sample:
 
 ## open questions, TODOs, to discuss
 * Should we use the domain model classes in the REST interface or should we build separated DTOs?
+
+## Notes
+
+* Swagger file generation
+
+```bash
+dotnet tool install
+dotnet swagger tofile --output obj\api.json bin\Debug\net5.0\NetCoreMicroserviceSample.Api.dll v1
+```
+
+* Autorest
+
+```bash
+autorest --input-file=..\NetCoreMicroserviceSample.Api\obj\api.json --typescript --v3
+```

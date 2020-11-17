@@ -2,11 +2,11 @@
 
 namespace NetCoreMicroserviceSample.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/health")]
     [ApiController]
     public class HealthController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet(Name = "GetHealth")]
         public string Get() => "I'm alive ;)";
     }
 }

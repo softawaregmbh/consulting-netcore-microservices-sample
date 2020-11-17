@@ -1,8 +1,8 @@
 import 'bootstrap';
 import "./index.css";
 import 'bootstrap/dist/css/bootstrap.css';
-import { Machine } from './dtos/machine';
 import { MachineConfigurationViewModel } from './viewModel';
+import { NetCoreMicroserviceSampleApi } from './apiClient/netCoreMicroserviceSampleApi';
 
 declare const API_DOMAIN: string;
 
@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     let hookDistanceX = initialHookDistance;
 
     try {
-        const machinesRaw = await fetch(API_DOMAIN + '/api/machines');
-        const machines = await machinesRaw.json() as Machine[];
+        var client = new NetCoreMicroserviceSampleApi({ baseUri: API_DOMAIN });
+        const machines = await client.getAllMachines();
 
         viewModel.machines = machines;
         viewModel.removeLoadingIndicator();
