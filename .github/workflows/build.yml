@@ -49,3 +49,23 @@ jobs:
       working-directory: ${{ env.UI_PATH }}
       run: npm install
 
+    - name: 'Generate API client'
+      working-directory: ${{ env.UI_PATH }}
+      run: |
+        npx autorest --input-file=../NetCoreMicroserviceSample.Api/obj/api.json --typescript --output-folder ../NetCoreMicroserviceSample.ApiClient --v3
+        cp ../NetCoreMicroserviceSample.ApiClient/src/* src/apiClient/
+        cp ../NetCoreMicroserviceSample.ApiClient/src/models/* src/apiClient/
+
+    - name: 'Build UI'
+      working-directory: ${{ env.UI_PATH }}
+      run: npm run build-prod
+
+    - name: 'Build API'
+      working-directory: ${{ env.API_PATH }}
+      run: dotnet publish --configuration Release -r win-x64 -p:PublishSingleFile=true --self-contained true --out out
+  
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build-result
+        path: ${{ env.API_PATH }}/out/*
+    
