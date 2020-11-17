@@ -1,14 +1,15 @@
-﻿namespace NetCoreMicroserviceSample.Api.Controllers
-{
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
-    using NetCoreMicroserviceSample.Api.Domain;
-    using NetCoreMicroserviceSample.Api.Repository;
-    using System;
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NetCoreMicroserviceSample.Api.Domain;
+using NetCoreMicroserviceSample.Api.Repository;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
+using System.Linq;
 
+namespace NetCoreMicroserviceSample.Api.Controllers
+{
     [Route("api/machines")]
     [ApiController]
     public class MachineController : ControllerBase
@@ -19,21 +20,37 @@
             this.dbContext = dbContext;
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<Machine>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<MachineMetadata>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Get() =>
-            Ok(await dbContext.Machines.ToListAsync());
+            Ok(await dbContext.Machines.Select(m => new MachineMetadata(m.Id, m.Name, m.Description)).ToListAsync());
 
         [HttpGet("{id}", Name = "MachineById")]
-        [ProducesResponseType(typeof(Machine), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(MachineMetadata), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetAsync(Guid id)
         {
-            var machine = await dbContext.Machines.SingleOrDefaultAsync(m => m.Id == id);
+            var machine = await dbContext.Machines
+                .Select(m => new MachineMetadata(m.Id, m.Name, m.Description))
+                .SingleOrDefaultAsync(m => m.Id == id);
             return machine switch
             {
                 null => NotFound(),
                 _ => Ok(machine)
             };
+        }
+
+        [HttpGet("{id}/image")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetImageAsync(Guid id)
+        {
+            var machine = await dbContext.Machines.Select(m => new { m.Id, m.SvgImage }).SingleOrDefaultAsync(m => m.Id == id);
+            if (machine == null || string.IsNullOrEmpty(machine.SvgImage))
+            {
+                return NotFound();
+            }
+
+            return new ContentResult { ContentType = "image/svg+xml", StatusCode = (int)HttpStatusCode.OK, Content = machine.SvgImage };
         }
 
         [HttpPost]

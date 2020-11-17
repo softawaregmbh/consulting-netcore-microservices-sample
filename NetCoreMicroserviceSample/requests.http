@@ -11,6 +11,11 @@ GET {{host}}/api/machines/{{firstMachine}}
 Accept: application/json
 
 ###
+@firstMachine={{machines.response.body.$.[0].id}}
+GET {{host}}/api/machines/{{firstMachine}}/image
+Accept: application/json
+
+###
 POST {{host}}/api/machines
 Accept: application/json
 Content-Type: application/json

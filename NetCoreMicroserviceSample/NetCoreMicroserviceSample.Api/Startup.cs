@@ -10,7 +10,6 @@ namespace NetCoreMicroserviceSample.Api
     using Microsoft.OpenApi.Models;
     using NetCoreMicroserviceSample.Api.Repository;
     using Serilog;
-    using System.IO;
 
     public class Startup
     {
