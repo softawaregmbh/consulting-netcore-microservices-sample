@@ -30,13 +30,13 @@ jobs:
 
     - name: 'Install dotnet tools'
       working-directory: ${{ env.API_PATH }}
-      run: dotnet tool install
+      run: dotnet tool restore
 
     - name: 'Build API'
       working-directory: ${{ env.API_PATH }}
       run: dotnet build --configuration ${{ env.CONFIG }}
 
-    - name: 'Generate API client'
+    - name: 'Generate Swagger file'
       working-directory: ${{ env.API_PATH }}
       run: dotnet swagger tofile --output obj\api.json bin\${{ env.CONFIG }}\net${{ env.DOTNET_VERSION }}\NetCoreMicroserviceSample.Api.dll v1
 
