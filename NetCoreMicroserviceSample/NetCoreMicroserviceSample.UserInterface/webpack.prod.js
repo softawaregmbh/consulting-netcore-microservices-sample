@@ -10,6 +10,6 @@ module.exports = merge(common, {
     minimizer: [new TerserPlugin()],
   },
   plugins: [
-    new DefinePlugin({ API_DOMAIN: JSON.stringify('') })
+    new DefinePlugin({ API_DOMAIN: JSON.stringify('/') })
   ]
 });
