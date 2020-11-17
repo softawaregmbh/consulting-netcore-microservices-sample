@@ -32,15 +32,4 @@ The following (sub-)projects are part of this sample:
 
 ## Notes
 
-* Swagger file generation
-
-```bash
-dotnet tool install
-dotnet swagger tofile --output obj\api.json bin\Debug\net5.0\NetCoreMicroserviceSample.Api.dll v1
-```
-
-* Autorest
-
-```bash
-autorest --input-file=..\NetCoreMicroserviceSample.Api\obj\api.json --typescript --v3
-```
+Project is built with [GitHub Actions](.github/workflows/build.yml).
