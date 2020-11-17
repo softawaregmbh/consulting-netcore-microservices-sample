@@ -1,0 +1,25 @@
+name: Build Microservice Demo App
+
+on:
+  push:
+    branches:
+      - master
+env:
+  DOTNET_VERSION: '5.0'
+
+jobs:
+  build-dotnet:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@master
+
+    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    
+    - name: 'Build API'
+      working-directory: './NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api'
+      run: dotnet build
+      
