@@ -34,13 +34,12 @@ jobs:
 
     - name: 'Build API'
       working-directory: ${{ env.API_PATH }}
-      run: dotnet build --configuration ${{ CONFIG }}
+      run: dotnet build --configuration ${{ env.CONFIG }}
 
     - name: 'Generate API client'
       working-directory: ${{ env.API_PATH }}
-      run: dotnet swagger tofile --output obj\api.json bin\${{ CONFIG }}\net${{ DOTNET_VERSION }}\NetCoreMicroserviceSample.Api.dll v1
+      run: dotnet swagger tofile --output obj\api.json bin\${{ env.CONFIG }}\net${{ env.DOTNET_VERSION }}\NetCoreMicroserviceSample.Api.dll v1
 
     - name: 'NPM Install'
       working-directory: ${{ env.UI_PATH }}
       run: npm install
-      
