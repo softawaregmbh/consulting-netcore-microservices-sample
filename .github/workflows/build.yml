@@ -80,6 +80,6 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ${{ env.API_PATH }}
-        file: ./Dockerfile
+        file: ${{ env.API_PATH }}/Dockerfile
         push: true
         tags: rstropek/net-core-microservice-sample:latest
