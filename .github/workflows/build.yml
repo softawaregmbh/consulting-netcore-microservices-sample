@@ -53,8 +53,8 @@ jobs:
       working-directory: ${{ env.UI_PATH }}
       run: |
         npx autorest --input-file=../NetCoreMicroserviceSample.Api/obj/api.json --typescript --output-folder=../NetCoreMicroserviceSample.ApiClient --v3
-        cp ../NetCoreMicroserviceSample.ApiClient/src/* src/apiClient/
-        cp ../NetCoreMicroserviceSample.ApiClient/src/models/* src/apiClient/
+        cd ../NetCoreMicroserviceSample.ApiClient/src
+        cp -r . src/apiClient
 
     - name: 'Build UI'
       working-directory: ${{ env.UI_PATH }}
