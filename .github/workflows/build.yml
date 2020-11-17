@@ -6,9 +6,13 @@ on:
       - main
 env:
   DOTNET_VERSION: '5.0'
+  NODE_VERSION: '14.x'
+  API_PATH: './NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api'
+  UI_PATH: './NetCoreMicroserviceSample/NetCoreMicroserviceSample.UserInterface'
+  CONFIG: 'Debug'
 
 jobs:
-  build-dotnet:
+  build:
     runs-on: 'ubuntu-latest'
     steps:
     - name: 'Checkout GitHub Action'
@@ -18,7 +22,25 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
-    
+
+    - name: 'Setup Node.js ${{ env.NODE_VERSION }} Environment'
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: 'Install dotnet tools'
+      working-directory: ${{ env.API_PATH }}
+      run: dotnet tool install
+
     - name: 'Build API'
-      working-directory: './NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api'
-      run: dotnet build
+      working-directory: ${{ env.API_PATH }}
+      run: dotnet build --configuration ${{ CONFIG }}
+
+    - name: 'Generate API client'
+      working-directory: ${{ env.API_PATH }}
+      run: dotnet swagger tofile --output obj\api.json bin\${{ CONFIG }}\net${{ DOTNET_VERSION }}\NetCoreMicroserviceSample.Api.dll v1
+
+    - name: 'NPM Install'
+      working-directory: ${{ env.UI_PATH }}
+      run: npm install
+      
