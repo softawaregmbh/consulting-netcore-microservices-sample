@@ -43,7 +43,7 @@ jobs:
 
     - name: 'Generate Swagger file'
       working-directory: ${{ env.API_PATH }}
-      run: dotnet swagger tofile --output obj\api.json bin\${{ env.CONFIG }}\net${{ env.DOTNET_VERSION }}\NetCoreMicroserviceSample.Api.dll v1
+      run: dotnet swagger tofile --output obj/api.json bin/${{ env.CONFIG }}/net${{ env.DOTNET_VERSION }}/NetCoreMicroserviceSample.Api.dll v1
 
     - name: 'NPM Install'
       working-directory: ${{ env.UI_PATH }}
