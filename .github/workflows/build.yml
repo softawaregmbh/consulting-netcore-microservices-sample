@@ -32,40 +32,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ env.NODE_VERSION }}
-
-    - name: 'Install dotnet tools'
-      working-directory: ${{ env.API_PATH }}
-      run: dotnet tool restore
-
-    - name: 'Build API'
-      working-directory: ${{ env.API_PATH }}
-      run: dotnet build --configuration ${{ env.CONFIG }}
-
-    - name: 'Generate Swagger file'
-      working-directory: ${{ env.API_PATH }}
-      run: dotnet swagger tofile --output obj/api.json bin/${{ env.CONFIG }}/net${{ env.DOTNET_VERSION }}/NetCoreMicroserviceSample.Api.dll v1
-
-    - name: 'NPM Install'
-      working-directory: ${{ env.UI_PATH }}
-      run: npm install
-
-    - name: 'Generate API client'
-      working-directory: ${{ env.UI_PATH }}
-      run: |
-        npx autorest --input-file=../NetCoreMicroserviceSample.Api/obj/api.json --typescript --output-folder=../NetCoreMicroserviceSample.ApiClient --v3
-        cd ../NetCoreMicroserviceSample.ApiClient/src
-        cp -r . ../../../${{ env.UI_PATH }}/src/apiClient
-
-    - name: 'Build UI'
-      working-directory: ${{ env.UI_PATH }}
-      run: npm run build-prod
-
-    - name: 'Build and publish API'
-      working-directory: ${{ env.API_PATH }}
-      run: |
-        dotnet build --configuration ${{ env.CONFIG }}
-        dotnet publish --configuration ${{ env.CONFIG }} --output out
-        cat ./wwwroot/index.html
   
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
@@ -78,6 +44,33 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: 'Install dotnet local tools'
+      working-directory: ${{ env.API_PATH }}
+      run: dotnet tool restore
+
+    - name: 'Build API (required for generating Swagger file)'
+      working-directory: ${{ env.API_PATH }}
+      run: dotnet build --configuration ${{ env.CONFIG }}
+
+    - name: 'Generate Swagger file'
+      working-directory: ${{ env.API_PATH }}
+      run: dotnet swagger tofile --output obj/api.json bin/${{ env.CONFIG }}/net${{ env.DOTNET_VERSION }}/NetCoreMicroserviceSample.Api.dll v1
+
+    - name: 'NPM Install'
+      working-directory: ${{ env.UI_PATH }}
+      run: npm install
+
+    - name: 'Generate API client with autorest from Swagger file'
+      working-directory: ${{ env.UI_PATH }}
+      run: |
+        npx autorest --input-file=../NetCoreMicroserviceSample.Api/obj/api.json --typescript --output-folder=../NetCoreMicroserviceSample.ApiClient --v3
+        cd ../NetCoreMicroserviceSample.ApiClient/src
+        cp -r . ../../../${{ env.UI_PATH }}/src/apiClient
+
+    - name: 'Build UI and copy result to API project'
+      working-directory: ${{ env.UI_PATH }}
+      run: npm run deploy
 
     - name: Build and push
       uses: docker/build-push-action@v2
