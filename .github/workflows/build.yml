@@ -60,9 +60,12 @@ jobs:
       working-directory: ${{ env.UI_PATH }}
       run: npm run build-prod
 
-    - name: 'Build API'
+    - name: 'Build and publish API'
       working-directory: ${{ env.API_PATH }}
-      run: dotnet publish --configuration Release --output out
+      run: |
+        dotnet build --configuration ${{ env.CONFIG }}
+        dotnet publish --configuration ${{ env.CONFIG }} --output out
+        cat ./wwwroot/index.html
   
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
