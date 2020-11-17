@@ -82,4 +82,4 @@ jobs:
         context: ${{ env.API_PATH }}
         file: ./Dockerfile
         push: true
-        tags: rstropek/NetCoreMicroserviceSample:latest
+        tags: rstropek/net-core-microservice-sample:latest
