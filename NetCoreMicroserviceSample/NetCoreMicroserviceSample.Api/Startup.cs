@@ -64,10 +64,11 @@ namespace NetCoreMicroserviceSample.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetCoreMicroserviceSample.Api v1"));
-                dbContext.Database.EnsureCreated();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetCoreMicroserviceSample.Api v1"));
+            dbContext.Database.EnsureCreated();
 
             var fp = new ManifestEmbeddedFileProvider(typeof(Startup).Assembly, "wwwroot");
             app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = fp });
