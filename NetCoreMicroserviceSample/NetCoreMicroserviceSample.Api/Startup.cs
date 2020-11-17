@@ -11,9 +11,11 @@ namespace NetCoreMicroserviceSample.Api
     using NetCoreMicroserviceSample.Api.Repository;
     using Serilog;
     using Swashbuckle.AspNetCore.SwaggerGen;
+    using System.Diagnostics.CodeAnalysis;
 
     public class Startup
     {
+        [SuppressMessage("Design", "CA1812", Justification = "Instantiated by Swashbuckle")]
         private class AdditionalParametersDocumentFilter : IDocumentFilter
         {
             public void Apply(OpenApiDocument openApiDoc, DocumentFilterContext context)

@@ -59,7 +59,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         {
             dbContext.Machines.Add(machine);
             await dbContext.SaveChangesAsync();
-            return CreatedAtRoute("MachineById", new { Id = machine.Id }, machine);
+            return CreatedAtRoute("MachineById", new { machine.Id }, machine);
         }
 
         [HttpDelete("{id}", Name = "DeleteMachine")]
