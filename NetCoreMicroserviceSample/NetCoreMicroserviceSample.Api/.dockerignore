@@ -1,0 +1,7 @@
+.config
+bin
+obj
+.dockerignore
+.gitignore
+Dockerfile
+*.user
