@@ -62,7 +62,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
             return CreatedAtRoute("MachineById", new { machine.Id }, machine);
         }
 
-        [HttpPost(Name = "UpdateMachine")]
+        [HttpPut(Name = "UpdateMachine")]
         [ProducesResponseType(typeof(Machine), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> PutAsync([FromBody] Machine machine)
