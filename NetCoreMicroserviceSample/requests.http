@@ -30,3 +30,49 @@ Content-Type: application/json
 ###
 @firstMachine={{machines.response.body.$.[0].id}}
 DELETE {{host}}/api/machines/{{firstMachine}}
+
+###
+@firstMachine={{machines.response.body.$.[0].id}}
+GET {{host}}/api/machines/{{firstMachine}}/settings
+Accept: application/json
+
+###
+@firstMachine={{machines.response.body.$.[0].id}}
+GET {{host}}/api/machines/{{firstMachine}}/switches
+Accept: application/json
+
+###
+@firstMachine={{machines.response.body.$.[0].id}}
+PUT {{host}}/api/machines/{{firstMachine}}/settings
+Accept: application/json
+Content-Type: application/json
+
+[
+  {
+    "id": "{{$guid}}",
+    "name": "Setting 1",
+    "description": "Description Setting 1",
+    "value": 33.484,
+    "positionX": 10,
+    "positionY": 480
+  },
+  {
+    "id": "{{$guid}}",
+    "name": "Setting 2",
+    "description": "Description Setting 2",
+    "value": 5.8,
+    "positionX": 120,
+    "positionY": 40
+  }
+]
+
+###
+@firstMachine={{machines.response.body.$.[0].id}}
+PUT {{host}}/api/machines/{{firstMachine}}/switch
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": "{{$guid}}",
+  "value": true
+}

@@ -7,10 +7,12 @@ export class MachineConfigurationViewModel {
     private machinesDropdown: HTMLSelectElement;
     private machineName: HTMLInputElement;
     private machineDescription: HTMLInputElement;
-    private machineSaveButton: HTMLButtonElement;
+    private machineUpdateButton: HTMLButtonElement;
     private machineImageContainer: HTMLDivElement;
 
     private machineList: MachineMetadata[];
+
+    private selectedMachine: MachineMetadata;
 
     public selectMachine: (machine: MachineMetadata) => void;
     public updateMachineData: (machine: MachineMetadata) => void;
@@ -39,11 +41,11 @@ export class MachineConfigurationViewModel {
         this.machinesDropdown = <HTMLSelectElement>document.getElementById('machines-dropdown');
         this.machineName = <HTMLInputElement>document.getElementById('machine-name');
         this.machineDescription = <HTMLInputElement>document.getElementById('machine-description');
-        this.machineSaveButton = <HTMLButtonElement>document.getElementById('machine-save-btn');
+        this.machineUpdateButton = <HTMLButtonElement>document.getElementById('machine-update-btn');
         this.machineImageContainer = <HTMLDivElement>document.getElementById('machine-container');
 
         this.machinesDropdown.onchange = ev => this.onSelectedMachineChanged(ev);
-        this.machineSaveButton.onclick = ev => this.onMachineSave(ev);
+        this.machineUpdateButton.onclick = ev => this.onMachineUpdate(ev);
     }
 
     private onSelectedMachineChanged(ev: Event): void {
@@ -65,9 +67,12 @@ export class MachineConfigurationViewModel {
         this.machineDescription.value = m.description;
     }
 
-    private onMachineSave(ev: Event): void {
+    private onMachineUpdate(ev: Event): void {
         if (this.updateMachineData) {
-            this.selectMachine(null);
+
+            const dataToUpdate = { ... this.selectMachine };
+
+            // this.updateMachineData()
         }
     }
 

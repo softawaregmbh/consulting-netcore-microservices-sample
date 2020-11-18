@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Linq;
+using NetCoreMicroserviceSample.Api.Dto;
 
 namespace NetCoreMicroserviceSample.Api.Controllers
 {
@@ -95,6 +96,61 @@ namespace NetCoreMicroserviceSample.Api.Controllers
             await dbContext.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpGet("{id}/settings", Name = "GetMachineSettings")]
+        [ProducesResponseType(typeof(MachineSetting[]),(int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetSettingsAsync(Guid id)
+        {
+            var settings = await dbContext.MachineSettings.Where(s => s.MachineId == id).ToListAsync();
+
+            return Ok(settings);
+        }
+
+        [HttpGet("{id}/switches", Name = "GetMachineSwitches")]
+        [ProducesResponseType(typeof(MachineSwitch[]), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetSwitchesAsync(Guid id)
+        {
+            var switches = await dbContext.MachineSettings.Where(s => s.MachineId == id).ToListAsync();
+
+            return Ok(switches);
+        }
+
+        [HttpPut("{id}/settings", Name = "UpdateMachineSettings")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> PutSettingsAsync(Guid id, [FromBody] MachineSettingsUpdateDto[] settings)
+        {
+            var existingSettings = await dbContext.MachineSettings.Where(s => s.MachineId == id).ToListAsync();
+
+            dbContext.MachineSettings.RemoveRange(existingSettings);
+
+            // TODO add automapper?
+            var newSettings = settings.Select(s => new MachineSetting
+            {
+                Id = s.Id,
+                Description = s.Description,
+                MachineId = id,
+                Name = s.Name,
+                PositionX = s.PositionX,
+                PositionY = s.PositionY,
+                Value = s.Value
+            });
+
+            dbContext.MachineSettings.AddRange(newSettings);
+
+            await dbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPut("{id}/switch", Name = "SetMachineSwitch")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> PutSwitchAsync(Guid id, [FromBody] MachineSwitchValueDto value)
+        {
+            // TODO - forward value through gRPC
+            return Ok();
         }
     }
 }

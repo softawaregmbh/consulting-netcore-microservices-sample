@@ -11,13 +11,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     viewModel.selectMachine = async m => {
         console.log(m.name + ' selected');
-        const imageResponse = await client.getMachineImage(m.id);
 
+        const imageResponse = await client.getMachineImage(m.id);
         viewModel.setMachineImage(imageResponse._response.bodyAsText);
+
+        const settings = await client.getMachineSettings(m.id);
+        const switches = await client.getMachineSwitches(m.id);
+
+        console.log("settings", settings);
+        console.log("switches", switches);
     }
 
-    viewModel.updateMachineData = m => {
-        console.log(m + ' update');
+    viewModel.updateMachineData = async m => {
+        await client.updateMachine(m);
     }
 
     const initialHookDistance = -340;

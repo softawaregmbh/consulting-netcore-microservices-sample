@@ -8,6 +8,9 @@ namespace NetCoreMicroserviceSample.Api.Repository
     {
         public DbSet<Machine> Machines { get; set; }
 
+        public DbSet<MachineSetting> MachineSettings { get; set; }
+        public DbSet<MachineSwitch> MachineSwitches { get; set; }
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public MachineVisualizerDataContext(DbContextOptions<MachineVisualizerDataContext> options)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -49,27 +52,74 @@ namespace NetCoreMicroserviceSample.Api.Repository
             base.OnModelCreating(modelBuilder);
 
             // Add demo data
+            var machineGuid1 = Guid.NewGuid();
             modelBuilder.Entity<Machine>().HasData(new
             {
-                Id = Guid.NewGuid(),
+                Id = machineGuid1,
                 Name = "Machine 1",
                 Description = "Description 1",
-                SvgImage = CraneImage.Replace("#hookOfssetPlaceholder#", "-130")
+                SvgImage = CraneImage.Replace(HookOffsetPlaceholder, "-130")
             });
             modelBuilder.Entity<Machine>().HasData(new
             {
                 Id = Guid.NewGuid(),
                 Name = "Machine 2",
                 Description = "Description 2",
-                SvgImage = CraneImage.Replace("#hookOfssetPlaceholder#", "0")
+                SvgImage = CraneImage.Replace(HookOffsetPlaceholder, "0")
             });
             modelBuilder.Entity<Machine>().HasData(new
             {
                 Id = Guid.NewGuid(),
                 Name = "Machine 3",
                 Description = "Description 3",
-                SvgImage = CraneImage.Replace("#hookOfssetPlaceholder#", "30")
+                SvgImage = CraneImage.Replace(HookOffsetPlaceholder, "30")
             });
+
+            modelBuilder.Entity<MachineSetting>().HasData(new
+            {
+                Id = Guid.NewGuid(),
+                MachineId = machineGuid1,
+                Name = "Setting 1",
+                Description = "Description Setting 1",
+                Value = 5.6,
+                PositionX = 40,
+                PositionY = 89
+            });
+
+            modelBuilder.Entity<MachineSetting>().HasData(new
+            {
+                Id = Guid.NewGuid(),
+                MachineId = machineGuid1,
+                Name = "Setting 2",
+                Description = "Description Setting 2",
+                Value = 5.6,
+                PositionX = 140,
+                PositionY = 189
+            });
+
+
+            modelBuilder.Entity<MachineSwitch>().HasData(new
+            {
+                Id = Guid.NewGuid(),
+                MachineId = machineGuid1,
+                Name = "Switch 1",
+                Description = "Switch Setting 1",
+                Value = true,
+                PositionX = 67,
+                PositionY = 143
+            });
+
+            modelBuilder.Entity<MachineSwitch>().HasData(new
+            {
+                Id = Guid.NewGuid(),
+                MachineId = machineGuid1,
+                Name = "Switch 2",
+                Description = "Switch Setting 2",
+                Value = false,
+                PositionX = 54,
+                PositionY = 234
+            });
+
         }
     }
 }
