@@ -2,6 +2,7 @@ import { Machine, MachineMetadata, MachineSetting, MachineSwitch } from "./apiCl
 
 export class MachineConfigurationViewModel {
     private loadingIndicator: HTMLDivElement;
+    private settingsContainer: HTMLDivElement;
     private loadedContent: HTMLDivElement;
     private machinesDropdown: HTMLSelectElement;
     private machineDescription: HTMLInputElement;
@@ -38,6 +39,7 @@ export class MachineConfigurationViewModel {
         if (this.selectMachine && this.machineList.length > 0) {
             // cleanup
             this.cleanUpImage();
+            this.settingsContainer.hidden = true;
 
             this.selectedMachine = this.machineList[0];
 
@@ -59,6 +61,7 @@ export class MachineConfigurationViewModel {
 
     constructor() {
         this.loadingIndicator = <HTMLDivElement>document.getElementById('loading-indicator');
+        this.settingsContainer = <HTMLDivElement>document.getElementById('settings');
         this.loadedContent = <HTMLDivElement>document.getElementById('loaded-content');
         this.machinesDropdown = <HTMLSelectElement>document.getElementById('machines-dropdown');
         this.machineDescription = <HTMLInputElement>document.getElementById('machine-description');
@@ -80,6 +83,7 @@ export class MachineConfigurationViewModel {
 
                 // cleanup
                 this.selectedSetting = null;
+                this.settingsContainer.hidden = true;
                 this.cleanUpImage();
 
                 // Select machine
@@ -95,6 +99,7 @@ export class MachineConfigurationViewModel {
 
         const clickedSetting = this.machineSettings.find(s => s.id == (<HTMLElement>ev.target).id);
         this.selectedSetting = clickedSetting;
+        this.settingsContainer.hidden = false;
         this.settingName.value = clickedSetting.name;
         this.settingValue.value = clickedSetting.value + "";
     }
