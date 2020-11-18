@@ -55,6 +55,13 @@ export interface NetCoreMicroserviceSampleApiAddMachineOptionalParams extends ms
 }
 
 /**
+ * Optional Parameters.
+ */
+export interface NetCoreMicroserviceSampleApiUpdateMachineOptionalParams extends msRest.RequestOptionsBase {
+  body?: Machine;
+}
+
+/**
  * Contains response data for the getHealth operation.
  */
 export type GetHealthResponse = {
@@ -116,6 +123,31 @@ export type AddMachineResponse = Machine & {
        * The response body as parsed JSON or XML
        */
       parsedBody: Machine;
+    };
+};
+
+/**
+ * Contains response data for the updateMachine operation.
+ */
+export type UpdateMachineResponse = {
+  /**
+   * The parsed response body.
+   */
+  body: any;
+
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: any;
     };
 };
 

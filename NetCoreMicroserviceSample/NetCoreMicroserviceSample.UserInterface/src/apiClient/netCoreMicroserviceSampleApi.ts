@@ -89,6 +89,29 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
+   * @param [options] The optional parameters
+   * @returns Promise<Models.UpdateMachineResponse>
+   */
+  updateMachine(options?: Models.NetCoreMicroserviceSampleApiUpdateMachineOptionalParams): Promise<Models.UpdateMachineResponse>;
+  /**
+   * @param callback The callback
+   */
+  updateMachine(callback: msRest.ServiceCallback<any>): void;
+  /**
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  updateMachine(options: Models.NetCoreMicroserviceSampleApiUpdateMachineOptionalParams, callback: msRest.ServiceCallback<any>): void;
+  updateMachine(options?: Models.NetCoreMicroserviceSampleApiUpdateMachineOptionalParams | msRest.ServiceCallback<any>, callback?: msRest.ServiceCallback<any>): Promise<Models.UpdateMachineResponse> {
+    return this.sendOperationRequest(
+      {
+        options
+      },
+      updateMachineOperationSpec,
+      callback) as Promise<Models.UpdateMachineResponse>;
+  }
+
+  /**
    * @param id
    * @param [options] The optional parameters
    * @returns Promise<Models.MachineByIdResponse>
@@ -225,6 +248,28 @@ const addMachineOperationSpec: msRest.OperationSpec = {
   responses: {
     201: {
       bodyMapper: Mappers.Machine
+    },
+    default: {}
+  },
+  serializer
+};
+
+const updateMachineOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PUT",
+  path: "api/machines",
+  requestBody: {
+    parameterPath: [
+      "options",
+      "body"
+    ],
+    mapper: Mappers.Machine
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.Machine
+    },
+    404: {
+      bodyMapper: Mappers.ProblemDetails
     },
     default: {}
   },
