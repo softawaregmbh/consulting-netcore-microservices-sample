@@ -1019,7 +1019,7 @@
      "$id": "157",
      "isReadOnly": false,
      "realPath": [
-      "name"
+      "value"
      ],
      "deprecated": false,
      "collectionFormat": "none",
@@ -1036,165 +1036,19 @@
      "name": {
       "$id": "160",
       "fixed": false,
-      "raw": "name"
-     },
-     "serializedName": "name",
-     "modelType": {
-      "$id": "161",
-      "$type": "PrimaryType",
-      "knownPrimaryType": "string",
-      "deprecated": false,
-      "name": {
-       "$id": "162",
-       "fixed": false,
-       "raw": "String"
-      }
-     }
-    },
-    {
-     "$id": "163",
-     "isReadOnly": false,
-     "realPath": [
-      "description"
-     ],
-     "deprecated": false,
-     "collectionFormat": "none",
-     "defaultValue": {
-      "$id": "164",
-      "fixed": false
-     },
-     "documentation": {
-      "$id": "165",
-      "fixed": false
-     },
-     "isRequired": false,
-     "isConstant": false,
-     "name": {
-      "$id": "166",
-      "fixed": false,
-      "raw": "description"
-     },
-     "serializedName": "description",
-     "modelType": {
-      "$id": "167",
-      "$type": "PrimaryType",
-      "knownPrimaryType": "string",
-      "deprecated": false,
-      "name": {
-       "$id": "168",
-       "fixed": false,
-       "raw": "String"
-      }
-     }
-    },
-    {
-     "$id": "169",
-     "isReadOnly": false,
-     "realPath": [
-      "value"
-     ],
-     "deprecated": false,
-     "collectionFormat": "none",
-     "defaultValue": {
-      "$id": "170",
-      "fixed": false
-     },
-     "documentation": {
-      "$id": "171",
-      "fixed": false
-     },
-     "isRequired": false,
-     "isConstant": false,
-     "name": {
-      "$id": "172",
-      "fixed": false,
       "raw": "value"
      },
      "serializedName": "value",
      "modelType": {
-      "$id": "173",
+      "$id": "161",
       "$type": "PrimaryType",
       "format": "double",
       "knownPrimaryType": "double",
       "deprecated": false,
       "name": {
-       "$id": "174",
+       "$id": "162",
        "fixed": false,
        "raw": "Double"
-      }
-     }
-    },
-    {
-     "$id": "175",
-     "isReadOnly": false,
-     "realPath": [
-      "positionX"
-     ],
-     "deprecated": false,
-     "collectionFormat": "none",
-     "defaultValue": {
-      "$id": "176",
-      "fixed": false
-     },
-     "documentation": {
-      "$id": "177",
-      "fixed": false
-     },
-     "isRequired": false,
-     "isConstant": false,
-     "name": {
-      "$id": "178",
-      "fixed": false,
-      "raw": "positionX"
-     },
-     "serializedName": "positionX",
-     "modelType": {
-      "$id": "179",
-      "$type": "PrimaryType",
-      "format": "int32",
-      "knownPrimaryType": "int",
-      "deprecated": false,
-      "name": {
-       "$id": "180",
-       "fixed": false,
-       "raw": "Int"
-      }
-     }
-    },
-    {
-     "$id": "181",
-     "isReadOnly": false,
-     "realPath": [
-      "positionY"
-     ],
-     "deprecated": false,
-     "collectionFormat": "none",
-     "defaultValue": {
-      "$id": "182",
-      "fixed": false
-     },
-     "documentation": {
-      "$id": "183",
-      "fixed": false
-     },
-     "isRequired": false,
-     "isConstant": false,
-     "name": {
-      "$id": "184",
-      "fixed": false,
-      "raw": "positionY"
-     },
-     "serializedName": "positionY",
-     "modelType": {
-      "$id": "185",
-      "$type": "PrimaryType",
-      "format": "int32",
-      "knownPrimaryType": "int",
-      "deprecated": false,
-      "name": {
-       "$id": "186",
-       "fixed": false,
-       "raw": "Int"
       }
      }
     }
@@ -1203,7 +1057,7 @@
    "containsConstantProperties": false,
    "deprecated": false,
    "name": {
-    "$id": "187",
+    "$id": "163",
     "fixed": false,
     "raw": "MachineSettingsUpdateDto"
    },
@@ -1223,40 +1077,40 @@
    }
   },
   {
-   "$id": "188",
+   "$id": "164",
    "$type": "CompositeType",
    "properties": [
     {
-     "$id": "189",
+     "$id": "165",
      "isReadOnly": false,
      "deprecated": false,
      "collectionFormat": "none",
      "defaultValue": {
-      "$id": "190",
+      "$id": "166",
       "fixed": false
      },
      "documentation": {
-      "$id": "191",
+      "$id": "167",
       "fixed": false,
       "raw": "Unmatched properties from the message are deserialized this collection"
      },
      "isRequired": false,
      "isConstant": false,
      "name": {
-      "$id": "192",
+      "$id": "168",
       "fixed": false,
       "raw": "additionalProperties"
      },
      "modelType": {
-      "$id": "193",
+      "$id": "169",
       "$type": "DictionaryType",
       "valueType": {
-       "$id": "194",
+       "$id": "170",
        "$type": "PrimaryType",
        "knownPrimaryType": "object",
        "deprecated": false,
        "name": {
-        "$id": "195",
+        "$id": "171",
         "fixed": false,
         "raw": "Object"
        }
@@ -1264,8 +1118,156 @@
       "supportsAdditionalProperties": true,
       "deprecated": false,
       "name": {
-       "$id": "196",
+       "$id": "172",
        "fixed": false
+      }
+     }
+    },
+    {
+     "$id": "173",
+     "isReadOnly": false,
+     "realPath": [
+      "type"
+     ],
+     "deprecated": false,
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "174",
+      "fixed": false
+     },
+     "documentation": {
+      "$id": "175",
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "$id": "176",
+      "fixed": false,
+      "raw": "type"
+     },
+     "serializedName": "type",
+     "modelType": {
+      "$id": "177",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "deprecated": false,
+      "name": {
+       "$id": "178",
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "179",
+     "isReadOnly": false,
+     "realPath": [
+      "title"
+     ],
+     "deprecated": false,
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "180",
+      "fixed": false
+     },
+     "documentation": {
+      "$id": "181",
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "$id": "182",
+      "fixed": false,
+      "raw": "title"
+     },
+     "serializedName": "title",
+     "modelType": {
+      "$id": "183",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "deprecated": false,
+      "name": {
+       "$id": "184",
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "185",
+     "isReadOnly": false,
+     "realPath": [
+      "status"
+     ],
+     "deprecated": false,
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "186",
+      "fixed": false
+     },
+     "documentation": {
+      "$id": "187",
+      "fixed": false
+     },
+     "extensions": {
+      "x-nullable": true
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "$id": "188",
+      "fixed": false,
+      "raw": "status"
+     },
+     "serializedName": "status",
+     "modelType": {
+      "$id": "189",
+      "$type": "PrimaryType",
+      "format": "int32",
+      "knownPrimaryType": "int",
+      "deprecated": false,
+      "name": {
+       "$id": "190",
+       "fixed": false,
+       "raw": "Int"
+      }
+     }
+    },
+    {
+     "$id": "191",
+     "isReadOnly": false,
+     "realPath": [
+      "detail"
+     ],
+     "deprecated": false,
+     "collectionFormat": "none",
+     "defaultValue": {
+      "$id": "192",
+      "fixed": false
+     },
+     "documentation": {
+      "$id": "193",
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "$id": "194",
+      "fixed": false,
+      "raw": "detail"
+     },
+     "serializedName": "detail",
+     "modelType": {
+      "$id": "195",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "deprecated": false,
+      "name": {
+       "$id": "196",
+       "fixed": false,
+       "raw": "String"
       }
      }
     },
@@ -1273,7 +1275,7 @@
      "$id": "197",
      "isReadOnly": false,
      "realPath": [
-      "type"
+      "instance"
      ],
      "deprecated": false,
      "collectionFormat": "none",
@@ -1290,9 +1292,9 @@
      "name": {
       "$id": "200",
       "fixed": false,
-      "raw": "type"
+      "raw": "instance"
      },
-     "serializedName": "type",
+     "serializedName": "instance",
      "modelType": {
       "$id": "201",
       "$type": "PrimaryType",
@@ -1304,161 +1306,13 @@
        "raw": "String"
       }
      }
-    },
-    {
-     "$id": "203",
-     "isReadOnly": false,
-     "realPath": [
-      "title"
-     ],
-     "deprecated": false,
-     "collectionFormat": "none",
-     "defaultValue": {
-      "$id": "204",
-      "fixed": false
-     },
-     "documentation": {
-      "$id": "205",
-      "fixed": false
-     },
-     "isRequired": false,
-     "isConstant": false,
-     "name": {
-      "$id": "206",
-      "fixed": false,
-      "raw": "title"
-     },
-     "serializedName": "title",
-     "modelType": {
-      "$id": "207",
-      "$type": "PrimaryType",
-      "knownPrimaryType": "string",
-      "deprecated": false,
-      "name": {
-       "$id": "208",
-       "fixed": false,
-       "raw": "String"
-      }
-     }
-    },
-    {
-     "$id": "209",
-     "isReadOnly": false,
-     "realPath": [
-      "status"
-     ],
-     "deprecated": false,
-     "collectionFormat": "none",
-     "defaultValue": {
-      "$id": "210",
-      "fixed": false
-     },
-     "documentation": {
-      "$id": "211",
-      "fixed": false
-     },
-     "extensions": {
-      "x-nullable": true
-     },
-     "isRequired": false,
-     "isConstant": false,
-     "name": {
-      "$id": "212",
-      "fixed": false,
-      "raw": "status"
-     },
-     "serializedName": "status",
-     "modelType": {
-      "$id": "213",
-      "$type": "PrimaryType",
-      "format": "int32",
-      "knownPrimaryType": "int",
-      "deprecated": false,
-      "name": {
-       "$id": "214",
-       "fixed": false,
-       "raw": "Int"
-      }
-     }
-    },
-    {
-     "$id": "215",
-     "isReadOnly": false,
-     "realPath": [
-      "detail"
-     ],
-     "deprecated": false,
-     "collectionFormat": "none",
-     "defaultValue": {
-      "$id": "216",
-      "fixed": false
-     },
-     "documentation": {
-      "$id": "217",
-      "fixed": false
-     },
-     "isRequired": false,
-     "isConstant": false,
-     "name": {
-      "$id": "218",
-      "fixed": false,
-      "raw": "detail"
-     },
-     "serializedName": "detail",
-     "modelType": {
-      "$id": "219",
-      "$type": "PrimaryType",
-      "knownPrimaryType": "string",
-      "deprecated": false,
-      "name": {
-       "$id": "220",
-       "fixed": false,
-       "raw": "String"
-      }
-     }
-    },
-    {
-     "$id": "221",
-     "isReadOnly": false,
-     "realPath": [
-      "instance"
-     ],
-     "deprecated": false,
-     "collectionFormat": "none",
-     "defaultValue": {
-      "$id": "222",
-      "fixed": false
-     },
-     "documentation": {
-      "$id": "223",
-      "fixed": false
-     },
-     "isRequired": false,
-     "isConstant": false,
-     "name": {
-      "$id": "224",
-      "fixed": false,
-      "raw": "instance"
-     },
-     "serializedName": "instance",
-     "modelType": {
-      "$id": "225",
-      "$type": "PrimaryType",
-      "knownPrimaryType": "string",
-      "deprecated": false,
-      "name": {
-       "$id": "226",
-       "fixed": false,
-       "raw": "String"
-      }
-     }
     }
    ],
    "serializedName": "ProblemDetails",
    "containsConstantProperties": false,
    "deprecated": false,
    "name": {
-    "$id": "227",
+    "$id": "203",
     "fixed": false,
     "raw": "ProblemDetails"
    },
@@ -1476,107 +1330,6 @@
      ]
     }
    }
-  },
-  {
-   "$id": "228",
-   "$type": "CompositeType",
-   "properties": [
-    {
-     "$id": "229",
-     "isReadOnly": false,
-     "realPath": [
-      "id"
-     ],
-     "deprecated": false,
-     "collectionFormat": "none",
-     "defaultValue": {
-      "$id": "230",
-      "fixed": false
-     },
-     "documentation": {
-      "$id": "231",
-      "fixed": false
-     },
-     "isRequired": false,
-     "isConstant": false,
-     "name": {
-      "$id": "232",
-      "fixed": false,
-      "raw": "id"
-     },
-     "serializedName": "id",
-     "modelType": {
-      "$id": "233",
-      "$type": "PrimaryType",
-      "format": "uuid",
-      "knownPrimaryType": "uuid",
-      "deprecated": false,
-      "name": {
-       "$id": "234",
-       "fixed": false,
-       "raw": "Uuid"
-      }
-     }
-    },
-    {
-     "$id": "235",
-     "isReadOnly": false,
-     "realPath": [
-      "value"
-     ],
-     "deprecated": false,
-     "collectionFormat": "none",
-     "defaultValue": {
-      "$id": "236",
-      "fixed": false
-     },
-     "documentation": {
-      "$id": "237",
-      "fixed": false
-     },
-     "isRequired": false,
-     "isConstant": false,
-     "name": {
-      "$id": "238",
-      "fixed": false,
-      "raw": "value"
-     },
-     "serializedName": "value",
-     "modelType": {
-      "$id": "239",
-      "$type": "PrimaryType",
-      "knownPrimaryType": "boolean",
-      "deprecated": false,
-      "name": {
-       "$id": "240",
-       "fixed": false,
-       "raw": "Boolean"
-      }
-     }
-    }
-   ],
-   "serializedName": "MachineSwitchValueDto",
-   "containsConstantProperties": false,
-   "deprecated": false,
-   "name": {
-    "$id": "241",
-    "fixed": false,
-    "raw": "MachineSwitchValueDto"
-   },
-   "extensions": {
-    "x-ms-metadata": {
-     "apiVersions": [
-      "v1"
-     ],
-     "filename": [
-      "mem:///121?oai3.shaken.json"
-     ],
-     "name": "MachineSwitchValueDto",
-     "originalLocations": [
-      "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/schemas/MachineSwitchValueDto"
-     ]
-    }
-   }
   }
  ],
  "name": "NetCoreMicroserviceSampleApi",
@@ -1586,7 +1339,7 @@
  "baseUrl": "http://localhost",
  "properties": [
   {
-   "$id": "242",
+   "$id": "204",
    "isReadOnly": false,
    "realPath": [
     "id"
@@ -1594,11 +1347,11 @@
    "deprecated": false,
    "collectionFormat": "none",
    "defaultValue": {
-    "$id": "243",
+    "$id": "205",
     "fixed": false
    },
    "documentation": {
-    "$id": "244",
+    "$id": "206",
     "fixed": false
    },
    "extensions": {
@@ -1619,26 +1372,26 @@
    "isRequired": true,
    "isConstant": false,
    "name": {
-    "$id": "245",
+    "$id": "207",
     "fixed": false,
     "raw": "id"
    },
    "serializedName": "id",
    "modelType": {
-    "$id": "246",
+    "$id": "208",
     "$type": "PrimaryType",
     "format": "uuid",
     "knownPrimaryType": "uuid",
     "deprecated": false,
     "name": {
-     "$id": "247",
+     "$id": "209",
      "fixed": false,
      "raw": "Uuid"
     }
    }
   },
   {
-   "$id": "248",
+   "$id": "210",
    "isReadOnly": false,
    "realPath": [
     "id"
@@ -1646,11 +1399,11 @@
    "deprecated": false,
    "collectionFormat": "none",
    "defaultValue": {
-    "$id": "249",
+    "$id": "211",
     "fixed": false
    },
    "documentation": {
-    "$id": "250",
+    "$id": "212",
     "fixed": false
    },
    "extensions": {
@@ -1671,26 +1424,26 @@
    "isRequired": true,
    "isConstant": false,
    "name": {
-    "$id": "251",
+    "$id": "213",
     "fixed": false,
     "raw": "Id1"
    },
    "serializedName": "id",
    "modelType": {
-    "$id": "252",
+    "$id": "214",
     "$type": "PrimaryType",
     "format": "uuid",
     "knownPrimaryType": "uuid",
     "deprecated": false,
     "name": {
-     "$id": "253",
+     "$id": "215",
      "fixed": false,
      "raw": "Uuid"
     }
    }
   },
   {
-   "$id": "254",
+   "$id": "216",
    "isReadOnly": false,
    "realPath": [
     "id"
@@ -1698,11 +1451,11 @@
    "deprecated": false,
    "collectionFormat": "none",
    "defaultValue": {
-    "$id": "255",
+    "$id": "217",
     "fixed": false
    },
    "documentation": {
-    "$id": "256",
+    "$id": "218",
     "fixed": false
    },
    "extensions": {
@@ -1723,26 +1476,26 @@
    "isRequired": true,
    "isConstant": false,
    "name": {
-    "$id": "257",
+    "$id": "219",
     "fixed": false,
     "raw": "Id2"
    },
    "serializedName": "id",
    "modelType": {
-    "$id": "258",
+    "$id": "220",
     "$type": "PrimaryType",
     "format": "uuid",
     "knownPrimaryType": "uuid",
     "deprecated": false,
     "name": {
-     "$id": "259",
+     "$id": "221",
      "fixed": false,
      "raw": "Uuid"
     }
    }
   },
   {
-   "$id": "260",
+   "$id": "222",
    "isReadOnly": false,
    "realPath": [
     "id"
@@ -1750,11 +1503,11 @@
    "deprecated": false,
    "collectionFormat": "none",
    "defaultValue": {
-    "$id": "261",
+    "$id": "223",
     "fixed": false
    },
    "documentation": {
-    "$id": "262",
+    "$id": "224",
     "fixed": false
    },
    "extensions": {
@@ -1775,26 +1528,26 @@
    "isRequired": true,
    "isConstant": false,
    "name": {
-    "$id": "263",
+    "$id": "225",
     "fixed": false,
     "raw": "Id3"
    },
    "serializedName": "id",
    "modelType": {
-    "$id": "264",
+    "$id": "226",
     "$type": "PrimaryType",
     "format": "uuid",
     "knownPrimaryType": "uuid",
     "deprecated": false,
     "name": {
-     "$id": "265",
+     "$id": "227",
      "fixed": false,
      "raw": "Uuid"
     }
    }
   },
   {
-   "$id": "266",
+   "$id": "228",
    "isReadOnly": false,
    "realPath": [
     "id"
@@ -1802,11 +1555,11 @@
    "deprecated": false,
    "collectionFormat": "none",
    "defaultValue": {
-    "$id": "267",
+    "$id": "229",
     "fixed": false
    },
    "documentation": {
-    "$id": "268",
+    "$id": "230",
     "fixed": false
    },
    "extensions": {
@@ -1827,26 +1580,26 @@
    "isRequired": true,
    "isConstant": false,
    "name": {
-    "$id": "269",
+    "$id": "231",
     "fixed": false,
     "raw": "Id4"
    },
    "serializedName": "id",
    "modelType": {
-    "$id": "270",
+    "$id": "232",
     "$type": "PrimaryType",
     "format": "uuid",
     "knownPrimaryType": "uuid",
     "deprecated": false,
     "name": {
-     "$id": "271",
+     "$id": "233",
      "fixed": false,
      "raw": "Uuid"
     }
    }
   },
   {
-   "$id": "272",
+   "$id": "234",
    "isReadOnly": false,
    "realPath": [
     "id"
@@ -1854,11 +1607,11 @@
    "deprecated": false,
    "collectionFormat": "none",
    "defaultValue": {
-    "$id": "273",
+    "$id": "235",
     "fixed": false
    },
    "documentation": {
-    "$id": "274",
+    "$id": "236",
     "fixed": false
    },
    "extensions": {
@@ -1879,26 +1632,26 @@
    "isRequired": true,
    "isConstant": false,
    "name": {
-    "$id": "275",
+    "$id": "237",
     "fixed": false,
     "raw": "Id5"
    },
    "serializedName": "id",
    "modelType": {
-    "$id": "276",
+    "$id": "238",
     "$type": "PrimaryType",
     "format": "uuid",
     "knownPrimaryType": "uuid",
     "deprecated": false,
     "name": {
-     "$id": "277",
+     "$id": "239",
      "fixed": false,
      "raw": "Uuid"
     }
    }
   },
   {
-   "$id": "278",
+   "$id": "240",
    "isReadOnly": false,
    "realPath": [
     "id"
@@ -1906,11 +1659,11 @@
    "deprecated": false,
    "collectionFormat": "none",
    "defaultValue": {
-    "$id": "279",
+    "$id": "241",
     "fixed": false
    },
    "documentation": {
-    "$id": "280",
+    "$id": "242",
     "fixed": false
    },
    "extensions": {
@@ -1921,9 +1674,9 @@
      "filename": [
       "mem:///121?oai3.shaken.json"
      ],
-     "name": "paths·12zldv3·api-machines-id-switch·put·parameters·0",
+     "name": "paths·aneryf·api-machines-id-switches-switchid·post·parameters·0",
      "originalLocations": [
-      "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·12zldv3·api-machines-id-switch·put·parameters·0"
+      "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·aneryf·api-machines-id-switches-switchid·post·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -1931,19 +1684,71 @@
    "isRequired": true,
    "isConstant": false,
    "name": {
-    "$id": "281",
+    "$id": "243",
     "fixed": false,
     "raw": "Id6"
    },
    "serializedName": "id",
    "modelType": {
-    "$id": "282",
+    "$id": "244",
     "$type": "PrimaryType",
     "format": "uuid",
     "knownPrimaryType": "uuid",
     "deprecated": false,
     "name": {
-     "$id": "283",
+     "$id": "245",
+     "fixed": false,
+     "raw": "Uuid"
+    }
+   }
+  },
+  {
+   "$id": "246",
+   "isReadOnly": false,
+   "realPath": [
+    "switchId"
+   ],
+   "deprecated": false,
+   "collectionFormat": "none",
+   "defaultValue": {
+    "$id": "247",
+    "fixed": false
+   },
+   "documentation": {
+    "$id": "248",
+    "fixed": false
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "v1"
+     ],
+     "filename": [
+      "mem:///121?oai3.shaken.json"
+     ],
+     "name": "paths·qgyofn·api-machines-id-switches-switchid·post·parameters·1",
+     "originalLocations": [
+      "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·qgyofn·api-machines-id-switches-switchid·post·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "$id": "249",
+    "fixed": false,
+    "raw": "switchId"
+   },
+   "serializedName": "switchId",
+   "modelType": {
+    "$id": "250",
+    "$type": "PrimaryType",
+    "format": "uuid",
+    "knownPrimaryType": "uuid",
+    "deprecated": false,
+    "name": {
+     "$id": "251",
      "fixed": false,
      "raw": "Uuid"
     }
@@ -1952,17 +1757,17 @@
  ],
  "operations": [
   {
-   "$id": "284",
+   "$id": "252",
    "methods": [
     {
-     "$id": "285",
+     "$id": "253",
      "name": {
-      "$id": "286",
+      "$id": "254",
       "fixed": false,
       "raw": "GetHealth"
      },
      "group": {
-      "$id": "287",
+      "$id": "255",
       "fixed": false,
       "raw": ""
      },
@@ -1972,20 +1777,20 @@
      "httpMethod": "get",
      "responses": {
       "OK": {
-       "$id": "288",
+       "$id": "256",
        "body": {
-        "$id": "289",
+        "$id": "257",
         "$type": "PrimaryType",
         "knownPrimaryType": "string",
         "deprecated": false,
         "name": {
-         "$id": "290",
+         "$id": "258",
          "fixed": false,
          "raw": "String"
         }
        },
        "extensions": {
-        "$id": "291",
+        "$id": "259",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -2003,13 +1808,13 @@
       }
      },
      "defaultResponse": {
-      "$id": "292",
+      "$id": "260",
       "isNullable": true
      },
      "returnType": {
-      "$id": "293",
+      "$id": "261",
       "body": {
-       "$ref": "289"
+       "$ref": "257"
       },
       "isNullable": true
      },
@@ -2026,14 +1831,14 @@
      "hidden": false
     },
     {
-     "$id": "294",
+     "$id": "262",
      "name": {
-      "$id": "295",
+      "$id": "263",
       "fixed": false,
       "raw": "GetAllMachines"
      },
      "group": {
-      "$id": "296",
+      "$id": "264",
       "fixed": false,
       "raw": ""
      },
@@ -2043,21 +1848,21 @@
      "httpMethod": "get",
      "responses": {
       "OK": {
-       "$id": "297",
+       "$id": "265",
        "body": {
-        "$id": "298",
+        "$id": "266",
         "$type": "SequenceType",
         "elementType": {
          "$ref": "2"
         },
         "deprecated": false,
         "name": {
-         "$id": "299",
+         "$id": "267",
          "fixed": false
         }
        },
        "extensions": {
-        "$id": "300",
+        "$id": "268",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -2075,13 +1880,13 @@
       }
      },
      "defaultResponse": {
-      "$id": "301",
+      "$id": "269",
       "isNullable": true
      },
      "returnType": {
-      "$id": "302",
+      "$id": "270",
       "body": {
-       "$ref": "298"
+       "$ref": "266"
       },
       "isNullable": true
      },
@@ -2098,19 +1903,19 @@
      "hidden": false
     },
     {
-     "$id": "303",
+     "$id": "271",
      "parameters": [
       {
-       "$id": "304",
+       "$id": "272",
        "location": "body",
        "deprecated": false,
        "collectionFormat": "none",
        "defaultValue": {
-        "$id": "305",
+        "$id": "273",
         "fixed": false
        },
        "documentation": {
-        "$id": "306",
+        "$id": "274",
         "fixed": false
        },
        "extensions": {
@@ -2130,7 +1935,7 @@
        "isRequired": false,
        "isConstant": false,
        "name": {
-        "$id": "307",
+        "$id": "275",
         "fixed": false,
         "raw": "body"
        },
@@ -2141,12 +1946,12 @@
       }
      ],
      "name": {
-      "$id": "308",
+      "$id": "276",
       "fixed": false,
       "raw": "AddMachine"
      },
      "group": {
-      "$id": "309",
+      "$id": "277",
       "fixed": false,
       "raw": ""
      },
@@ -2156,12 +1961,12 @@
      "httpMethod": "post",
      "responses": {
       "Created": {
-       "$id": "310",
+       "$id": "278",
        "body": {
         "$ref": "39"
        },
        "extensions": {
-        "$id": "311",
+        "$id": "279",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -2179,13 +1984,294 @@
       }
      },
      "defaultResponse": {
-      "$id": "312",
+      "$id": "280",
       "isNullable": true
      },
      "returnType": {
-      "$id": "313",
+      "$id": "281",
       "body": {
        "$ref": "39"
+      },
+      "isNullable": true
+     },
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "text/plain",
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": []
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "282",
+     "parameters": [
+      {
+       "$id": "283",
+       "location": "body",
+       "deprecated": false,
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "284",
+        "fixed": false
+       },
+       "documentation": {
+        "$id": "285",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "v1"
+         ],
+         "filename": [
+          "mem:///121?oai3.shaken.json"
+         ],
+         "name": "paths·1i5930·api-machines·put·requestbody",
+         "originalLocations": [
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/requestBodies/paths·1i5930·api-machines·put·requestbody"
+         ]
+        }
+       },
+       "isRequired": false,
+       "isConstant": false,
+       "name": {
+        "$id": "286",
+        "fixed": false,
+        "raw": "body"
+       },
+       "serializedName": "body",
+       "modelType": {
+        "$ref": "39"
+       }
+      }
+     ],
+     "name": {
+      "$id": "287",
+      "fixed": false,
+      "raw": "UpdateMachine"
+     },
+     "group": {
+      "$id": "288",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "UpdateMachine",
+     "url": "/api/machines",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "OK": {
+       "$id": "289",
+       "body": {
+        "$ref": "39"
+       },
+       "extensions": {
+        "$id": "290",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "v1"
+         ],
+         "filename": [
+          "mem:///121?oai3.shaken.json"
+         ],
+         "name": "paths·1efghc8·api-machines·put·responses·200",
+         "originalLocations": [
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1efghc8·api-machines·put·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "NotFound": {
+       "$id": "291",
+       "body": {
+        "$ref": "164"
+       },
+       "extensions": {
+        "$id": "292",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "v1"
+         ],
+         "filename": [
+          "mem:///121?oai3.shaken.json"
+         ],
+         "name": "paths·1slh694·api-machines·put·responses·404",
+         "originalLocations": [
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1slh694·api-machines·put·responses·404"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "293",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "294",
+      "body": {
+       "$id": "295",
+       "$type": "PrimaryType",
+       "knownPrimaryType": "object",
+       "deprecated": false,
+       "name": {
+        "$id": "296",
+        "fixed": false,
+        "raw": "Object"
+       }
+      },
+      "isNullable": true
+     },
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "text/plain",
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": []
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "$id": "297",
+     "parameters": [
+      {
+       "$id": "298",
+       "clientProperty": {
+        "$ref": "204"
+       },
+       "location": "path",
+       "deprecated": false,
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "299",
+        "fixed": false
+       },
+       "documentation": {
+        "$id": "300",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "v1"
+         ],
+         "filename": [
+          "mem:///121?oai3.shaken.json"
+         ],
+         "name": "paths·d85rsx·api-machines-id·get·parameters·0",
+         "originalLocations": [
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·d85rsx·api-machines-id·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "301",
+        "fixed": false,
+        "raw": "id"
+       },
+       "serializedName": "id",
+       "modelType": {
+        "$id": "302",
+        "$type": "PrimaryType",
+        "format": "uuid",
+        "knownPrimaryType": "uuid",
+        "deprecated": false,
+        "name": {
+         "$id": "303",
+         "fixed": false,
+         "raw": "Uuid"
+        }
+       }
+      }
+     ],
+     "name": {
+      "$id": "304",
+      "fixed": false,
+      "raw": "MachineById"
+     },
+     "group": {
+      "$id": "305",
+      "fixed": false,
+      "raw": ""
+     },
+     "serializedName": "MachineById",
+     "url": "/api/machines/{id}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "$id": "306",
+       "body": {
+        "$ref": "2"
+       },
+       "extensions": {
+        "$id": "307",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "v1"
+         ],
+         "filename": [
+          "mem:///121?oai3.shaken.json"
+         ],
+         "name": "paths·1oe3mfj·api-machines-id·get·responses·200",
+         "originalLocations": [
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1oe3mfj·api-machines-id·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "NotFound": {
+       "$id": "308",
+       "body": {
+        "$ref": "164"
+       },
+       "extensions": {
+        "$id": "309",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "v1"
+         ],
+         "filename": [
+          "mem:///121?oai3.shaken.json"
+         ],
+         "name": "paths·1j9skxa·api-machines-id·get·responses·404",
+         "originalLocations": [
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1j9skxa·api-machines-id·get·responses·404"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "$id": "310",
+      "isNullable": true
+     },
+     "returnType": {
+      "$id": "311",
+      "body": {
+       "$id": "312",
+       "$type": "PrimaryType",
+       "knownPrimaryType": "object",
+       "deprecated": false,
+       "name": {
+        "$id": "313",
+        "fixed": false,
+        "raw": "Object"
+       }
       },
       "isNullable": true
      },
@@ -2206,7 +2292,10 @@
      "parameters": [
       {
        "$id": "315",
-       "location": "body",
+       "clientProperty": {
+        "$ref": "204"
+       },
+       "location": "path",
        "deprecated": false,
        "collectionFormat": "none",
        "defaultValue": {
@@ -2225,67 +2314,52 @@
          "filename": [
           "mem:///121?oai3.shaken.json"
          ],
-         "name": "paths·1i5930·api-machines·put·requestbody",
+         "name": "paths·b55n49·api-machines-id·delete·parameters·0",
          "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/requestBodies/paths·1i5930·api-machines·put·requestbody"
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·b55n49·api-machines-id·delete·parameters·0"
          ]
-        }
+        },
+        "x-ms-parameter-location": "method"
        },
-       "isRequired": false,
+       "isRequired": true,
        "isConstant": false,
        "name": {
         "$id": "318",
         "fixed": false,
-        "raw": "body"
+        "raw": "id"
        },
-       "serializedName": "body",
+       "serializedName": "id",
        "modelType": {
-        "$ref": "39"
+        "$id": "319",
+        "$type": "PrimaryType",
+        "format": "uuid",
+        "knownPrimaryType": "uuid",
+        "deprecated": false,
+        "name": {
+         "$id": "320",
+         "fixed": false,
+         "raw": "Uuid"
+        }
        }
       }
      ],
      "name": {
-      "$id": "319",
+      "$id": "321",
       "fixed": false,
-      "raw": "UpdateMachine"
+      "raw": "DeleteMachine"
      },
      "group": {
-      "$id": "320",
+      "$id": "322",
       "fixed": false,
       "raw": ""
      },
-     "serializedName": "UpdateMachine",
-     "url": "/api/machines",
+     "serializedName": "DeleteMachine",
+     "url": "/api/machines/{id}",
      "isAbsoluteUrl": false,
-     "httpMethod": "put",
+     "httpMethod": "delete",
      "responses": {
-      "OK": {
-       "$id": "321",
-       "body": {
-        "$ref": "39"
-       },
-       "extensions": {
-        "$id": "322",
-        "x-ms-metadata": {
-         "apiVersions": [
-          "v1"
-         ],
-         "filename": [
-          "mem:///121?oai3.shaken.json"
-         ],
-         "name": "paths·1efghc8·api-machines·put·responses·200",
-         "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1efghc8·api-machines·put·responses·200"
-         ]
-        }
-       },
-       "isNullable": true
-      },
-      "NotFound": {
+      "NoContent": {
        "$id": "323",
-       "body": {
-        "$ref": "188"
-       },
        "extensions": {
         "$id": "324",
         "x-ms-metadata": {
@@ -2295,9 +2369,31 @@
          "filename": [
           "mem:///121?oai3.shaken.json"
          ],
-         "name": "paths·1slh694·api-machines·put·responses·404",
+         "name": "paths·1018kce·api-machines-id·delete·responses·204",
          "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1slh694·api-machines·put·responses·404"
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1018kce·api-machines-id·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "NotFound": {
+       "$id": "325",
+       "body": {
+        "$ref": "164"
+       },
+       "extensions": {
+        "$id": "326",
+        "x-ms-metadata": {
+         "apiVersions": [
+          "v1"
+         ],
+         "filename": [
+          "mem:///121?oai3.shaken.json"
+         ],
+         "name": "paths·1ri70p2·api-machines-id·delete·responses·404",
+         "originalLocations": [
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1ri70p2·api-machines-id·delete·responses·404"
          ]
         }
        },
@@ -2305,21 +2401,13 @@
       }
      },
      "defaultResponse": {
-      "$id": "325",
+      "$id": "327",
       "isNullable": true
      },
      "returnType": {
-      "$id": "326",
+      "$id": "328",
       "body": {
-       "$id": "327",
-       "$type": "PrimaryType",
-       "knownPrimaryType": "object",
-       "deprecated": false,
-       "name": {
-        "$id": "328",
-        "fixed": false,
-        "raw": "Object"
-       }
+       "$ref": "164"
       },
       "isNullable": true
      },
@@ -2341,7 +2429,7 @@
       {
        "$id": "330",
        "clientProperty": {
-        "$ref": "242"
+        "$ref": "204"
        },
        "location": "path",
        "deprecated": false,
@@ -2362,9 +2450,9 @@
          "filename": [
           "mem:///121?oai3.shaken.json"
          ],
-         "name": "paths·d85rsx·api-machines-id·get·parameters·0",
+         "name": "paths·17ugw0w·api-machines-id-image·get·parameters·0",
          "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·d85rsx·api-machines-id·get·parameters·0"
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·17ugw0w·api-machines-id-image·get·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -2394,293 +2482,10 @@
      "name": {
       "$id": "336",
       "fixed": false,
-      "raw": "MachineById"
-     },
-     "group": {
-      "$id": "337",
-      "fixed": false,
-      "raw": ""
-     },
-     "serializedName": "MachineById",
-     "url": "/api/machines/{id}",
-     "isAbsoluteUrl": false,
-     "httpMethod": "get",
-     "responses": {
-      "OK": {
-       "$id": "338",
-       "body": {
-        "$ref": "2"
-       },
-       "extensions": {
-        "$id": "339",
-        "x-ms-metadata": {
-         "apiVersions": [
-          "v1"
-         ],
-         "filename": [
-          "mem:///121?oai3.shaken.json"
-         ],
-         "name": "paths·1oe3mfj·api-machines-id·get·responses·200",
-         "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1oe3mfj·api-machines-id·get·responses·200"
-         ]
-        }
-       },
-       "isNullable": true
-      },
-      "NotFound": {
-       "$id": "340",
-       "body": {
-        "$ref": "188"
-       },
-       "extensions": {
-        "$id": "341",
-        "x-ms-metadata": {
-         "apiVersions": [
-          "v1"
-         ],
-         "filename": [
-          "mem:///121?oai3.shaken.json"
-         ],
-         "name": "paths·1j9skxa·api-machines-id·get·responses·404",
-         "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1j9skxa·api-machines-id·get·responses·404"
-         ]
-        }
-       },
-       "isNullable": true
-      }
-     },
-     "defaultResponse": {
-      "$id": "342",
-      "isNullable": true
-     },
-     "returnType": {
-      "$id": "343",
-      "body": {
-       "$id": "344",
-       "$type": "PrimaryType",
-       "knownPrimaryType": "object",
-       "deprecated": false,
-       "name": {
-        "$id": "345",
-        "fixed": false,
-        "raw": "Object"
-       }
-      },
-      "isNullable": true
-     },
-     "requestContentType": "application/json; charset=utf-8",
-     "responseContentTypes": [
-      "text/plain",
-      "application/json",
-      "text/json"
-     ],
-     "extensions": {
-      "servers": []
-     },
-     "deprecated": false,
-     "hidden": false
-    },
-    {
-     "$id": "346",
-     "parameters": [
-      {
-       "$id": "347",
-       "clientProperty": {
-        "$ref": "242"
-       },
-       "location": "path",
-       "deprecated": false,
-       "collectionFormat": "none",
-       "defaultValue": {
-        "$id": "348",
-        "fixed": false
-       },
-       "documentation": {
-        "$id": "349",
-        "fixed": false
-       },
-       "extensions": {
-        "x-ms-metadata": {
-         "apiVersions": [
-          "v1"
-         ],
-         "filename": [
-          "mem:///121?oai3.shaken.json"
-         ],
-         "name": "paths·b55n49·api-machines-id·delete·parameters·0",
-         "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·b55n49·api-machines-id·delete·parameters·0"
-         ]
-        },
-        "x-ms-parameter-location": "method"
-       },
-       "isRequired": true,
-       "isConstant": false,
-       "name": {
-        "$id": "350",
-        "fixed": false,
-        "raw": "id"
-       },
-       "serializedName": "id",
-       "modelType": {
-        "$id": "351",
-        "$type": "PrimaryType",
-        "format": "uuid",
-        "knownPrimaryType": "uuid",
-        "deprecated": false,
-        "name": {
-         "$id": "352",
-         "fixed": false,
-         "raw": "Uuid"
-        }
-       }
-      }
-     ],
-     "name": {
-      "$id": "353",
-      "fixed": false,
-      "raw": "DeleteMachine"
-     },
-     "group": {
-      "$id": "354",
-      "fixed": false,
-      "raw": ""
-     },
-     "serializedName": "DeleteMachine",
-     "url": "/api/machines/{id}",
-     "isAbsoluteUrl": false,
-     "httpMethod": "delete",
-     "responses": {
-      "NoContent": {
-       "$id": "355",
-       "extensions": {
-        "$id": "356",
-        "x-ms-metadata": {
-         "apiVersions": [
-          "v1"
-         ],
-         "filename": [
-          "mem:///121?oai3.shaken.json"
-         ],
-         "name": "paths·1018kce·api-machines-id·delete·responses·204",
-         "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1018kce·api-machines-id·delete·responses·204"
-         ]
-        }
-       },
-       "isNullable": true
-      },
-      "NotFound": {
-       "$id": "357",
-       "body": {
-        "$ref": "188"
-       },
-       "extensions": {
-        "$id": "358",
-        "x-ms-metadata": {
-         "apiVersions": [
-          "v1"
-         ],
-         "filename": [
-          "mem:///121?oai3.shaken.json"
-         ],
-         "name": "paths·1ri70p2·api-machines-id·delete·responses·404",
-         "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1ri70p2·api-machines-id·delete·responses·404"
-         ]
-        }
-       },
-       "isNullable": true
-      }
-     },
-     "defaultResponse": {
-      "$id": "359",
-      "isNullable": true
-     },
-     "returnType": {
-      "$id": "360",
-      "body": {
-       "$ref": "188"
-      },
-      "isNullable": true
-     },
-     "requestContentType": "application/json; charset=utf-8",
-     "responseContentTypes": [
-      "text/plain",
-      "application/json",
-      "text/json"
-     ],
-     "extensions": {
-      "servers": []
-     },
-     "deprecated": false,
-     "hidden": false
-    },
-    {
-     "$id": "361",
-     "parameters": [
-      {
-       "$id": "362",
-       "clientProperty": {
-        "$ref": "242"
-       },
-       "location": "path",
-       "deprecated": false,
-       "collectionFormat": "none",
-       "defaultValue": {
-        "$id": "363",
-        "fixed": false
-       },
-       "documentation": {
-        "$id": "364",
-        "fixed": false
-       },
-       "extensions": {
-        "x-ms-metadata": {
-         "apiVersions": [
-          "v1"
-         ],
-         "filename": [
-          "mem:///121?oai3.shaken.json"
-         ],
-         "name": "paths·17ugw0w·api-machines-id-image·get·parameters·0",
-         "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·17ugw0w·api-machines-id-image·get·parameters·0"
-         ]
-        },
-        "x-ms-parameter-location": "method"
-       },
-       "isRequired": true,
-       "isConstant": false,
-       "name": {
-        "$id": "365",
-        "fixed": false,
-        "raw": "id"
-       },
-       "serializedName": "id",
-       "modelType": {
-        "$id": "366",
-        "$type": "PrimaryType",
-        "format": "uuid",
-        "knownPrimaryType": "uuid",
-        "deprecated": false,
-        "name": {
-         "$id": "367",
-         "fixed": false,
-         "raw": "Uuid"
-        }
-       }
-      }
-     ],
-     "name": {
-      "$id": "368",
-      "fixed": false,
       "raw": "GetMachineImage"
      },
      "group": {
-      "$id": "369",
+      "$id": "337",
       "fixed": false,
       "raw": ""
      },
@@ -2690,9 +2495,9 @@
      "httpMethod": "get",
      "responses": {
       "OK": {
-       "$id": "370",
+       "$id": "338",
        "extensions": {
-        "$id": "371",
+        "$id": "339",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -2709,12 +2514,12 @@
        "isNullable": true
       },
       "NotFound": {
-       "$id": "372",
+       "$id": "340",
        "body": {
-        "$ref": "188"
+        "$ref": "164"
        },
        "extensions": {
-        "$id": "373",
+        "$id": "341",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -2732,13 +2537,13 @@
       }
      },
      "defaultResponse": {
-      "$id": "374",
+      "$id": "342",
       "isNullable": true
      },
      "returnType": {
-      "$id": "375",
+      "$id": "343",
       "body": {
-       "$ref": "188"
+       "$ref": "164"
       },
       "isNullable": true
      },
@@ -2755,22 +2560,22 @@
      "hidden": false
     },
     {
-     "$id": "376",
+     "$id": "344",
      "parameters": [
       {
-       "$id": "377",
+       "$id": "345",
        "clientProperty": {
-        "$ref": "242"
+        "$ref": "204"
        },
        "location": "path",
        "deprecated": false,
        "collectionFormat": "none",
        "defaultValue": {
-        "$id": "378",
+        "$id": "346",
         "fixed": false
        },
        "documentation": {
-        "$id": "379",
+        "$id": "347",
         "fixed": false
        },
        "extensions": {
@@ -2791,19 +2596,19 @@
        "isRequired": true,
        "isConstant": false,
        "name": {
-        "$id": "380",
+        "$id": "348",
         "fixed": false,
         "raw": "id"
        },
        "serializedName": "id",
        "modelType": {
-        "$id": "381",
+        "$id": "349",
         "$type": "PrimaryType",
         "format": "uuid",
         "knownPrimaryType": "uuid",
         "deprecated": false,
         "name": {
-         "$id": "382",
+         "$id": "350",
          "fixed": false,
          "raw": "Uuid"
         }
@@ -2811,12 +2616,12 @@
       }
      ],
      "name": {
-      "$id": "383",
+      "$id": "351",
       "fixed": false,
       "raw": "GetMachineSettings"
      },
      "group": {
-      "$id": "384",
+      "$id": "352",
       "fixed": false,
       "raw": ""
      },
@@ -2826,21 +2631,21 @@
      "httpMethod": "get",
      "responses": {
       "OK": {
-       "$id": "385",
+       "$id": "353",
        "body": {
-        "$id": "386",
+        "$id": "354",
         "$type": "SequenceType",
         "elementType": {
          "$ref": "69"
         },
         "deprecated": false,
         "name": {
-         "$id": "387",
+         "$id": "355",
          "fixed": false
         }
        },
        "extensions": {
-        "$id": "388",
+        "$id": "356",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -2858,13 +2663,13 @@
       }
      },
      "defaultResponse": {
-      "$id": "389",
+      "$id": "357",
       "isNullable": true
      },
      "returnType": {
-      "$id": "390",
+      "$id": "358",
       "body": {
-       "$ref": "386"
+       "$ref": "354"
       },
       "isNullable": true
      },
@@ -2881,19 +2686,19 @@
      "hidden": false
     },
     {
-     "$id": "391",
+     "$id": "359",
      "parameters": [
       {
-       "$id": "392",
+       "$id": "360",
        "location": "body",
        "deprecated": false,
        "collectionFormat": "none",
        "defaultValue": {
-        "$id": "393",
+        "$id": "361",
         "fixed": false
        },
        "documentation": {
-        "$id": "394",
+        "$id": "362",
         "fixed": false
        },
        "extensions": {
@@ -2913,38 +2718,38 @@
        "isRequired": false,
        "isConstant": false,
        "name": {
-        "$id": "395",
+        "$id": "363",
         "fixed": false,
         "raw": "body"
        },
        "serializedName": "body",
        "modelType": {
-        "$id": "396",
+        "$id": "364",
         "$type": "SequenceType",
         "elementType": {
          "$ref": "150"
         },
         "deprecated": false,
         "name": {
-         "$id": "397",
+         "$id": "365",
          "fixed": false
         }
        }
       },
       {
-       "$id": "398",
+       "$id": "366",
        "clientProperty": {
-        "$ref": "242"
+        "$ref": "204"
        },
        "location": "path",
        "deprecated": false,
        "collectionFormat": "none",
        "defaultValue": {
-        "$id": "399",
+        "$id": "367",
         "fixed": false
        },
        "documentation": {
-        "$id": "400",
+        "$id": "368",
         "fixed": false
        },
        "extensions": {
@@ -2965,19 +2770,19 @@
        "isRequired": true,
        "isConstant": false,
        "name": {
-        "$id": "401",
+        "$id": "369",
         "fixed": false,
         "raw": "id"
        },
        "serializedName": "id",
        "modelType": {
-        "$id": "402",
+        "$id": "370",
         "$type": "PrimaryType",
         "format": "uuid",
         "knownPrimaryType": "uuid",
         "deprecated": false,
         "name": {
-         "$id": "403",
+         "$id": "371",
          "fixed": false,
          "raw": "Uuid"
         }
@@ -2985,12 +2790,12 @@
       }
      ],
      "name": {
-      "$id": "404",
+      "$id": "372",
       "fixed": false,
       "raw": "UpdateMachineSettings"
      },
      "group": {
-      "$id": "405",
+      "$id": "373",
       "fixed": false,
       "raw": ""
      },
@@ -3000,9 +2805,9 @@
      "httpMethod": "put",
      "responses": {
       "OK": {
-       "$id": "406",
+       "$id": "374",
        "extensions": {
-        "$id": "407",
+        "$id": "375",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -3019,12 +2824,12 @@
        "isNullable": true
       },
       "NotFound": {
-       "$id": "408",
+       "$id": "376",
        "body": {
-        "$ref": "188"
+        "$ref": "164"
        },
        "extensions": {
-        "$id": "409",
+        "$id": "377",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -3042,13 +2847,13 @@
       }
      },
      "defaultResponse": {
-      "$id": "410",
+      "$id": "378",
       "isNullable": true
      },
      "returnType": {
-      "$id": "411",
+      "$id": "379",
       "body": {
-       "$ref": "188"
+       "$ref": "164"
       },
       "isNullable": true
      },
@@ -3065,22 +2870,22 @@
      "hidden": false
     },
     {
-     "$id": "412",
+     "$id": "380",
      "parameters": [
       {
-       "$id": "413",
+       "$id": "381",
        "clientProperty": {
-        "$ref": "242"
+        "$ref": "204"
        },
        "location": "path",
        "deprecated": false,
        "collectionFormat": "none",
        "defaultValue": {
-        "$id": "414",
+        "$id": "382",
         "fixed": false
        },
        "documentation": {
-        "$id": "415",
+        "$id": "383",
         "fixed": false
        },
        "extensions": {
@@ -3101,19 +2906,19 @@
        "isRequired": true,
        "isConstant": false,
        "name": {
-        "$id": "416",
+        "$id": "384",
         "fixed": false,
         "raw": "id"
        },
        "serializedName": "id",
        "modelType": {
-        "$id": "417",
+        "$id": "385",
         "$type": "PrimaryType",
         "format": "uuid",
         "knownPrimaryType": "uuid",
         "deprecated": false,
         "name": {
-         "$id": "418",
+         "$id": "386",
          "fixed": false,
          "raw": "Uuid"
         }
@@ -3121,12 +2926,12 @@
       }
      ],
      "name": {
-      "$id": "419",
+      "$id": "387",
       "fixed": false,
       "raw": "GetMachineSwitches"
      },
      "group": {
-      "$id": "420",
+      "$id": "388",
       "fixed": false,
       "raw": ""
      },
@@ -3136,21 +2941,21 @@
      "httpMethod": "get",
      "responses": {
       "OK": {
-       "$id": "421",
+       "$id": "389",
        "body": {
-        "$id": "422",
+        "$id": "390",
         "$type": "SequenceType",
         "elementType": {
          "$ref": "22"
         },
         "deprecated": false,
         "name": {
-         "$id": "423",
+         "$id": "391",
          "fixed": false
         }
        },
        "extensions": {
-        "$id": "424",
+        "$id": "392",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -3167,12 +2972,12 @@
        "isNullable": true
       },
       "NotFound": {
-       "$id": "425",
+       "$id": "393",
        "body": {
-        "$ref": "188"
+        "$ref": "164"
        },
        "extensions": {
-        "$id": "426",
+        "$id": "394",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -3190,18 +2995,18 @@
       }
      },
      "defaultResponse": {
-      "$id": "427",
+      "$id": "395",
       "isNullable": true
      },
      "returnType": {
-      "$id": "428",
+      "$id": "396",
       "body": {
-       "$id": "429",
+       "$id": "397",
        "$type": "PrimaryType",
        "knownPrimaryType": "object",
        "deprecated": false,
        "name": {
-        "$id": "430",
+        "$id": "398",
         "fixed": false,
         "raw": "Object"
        }
@@ -3221,61 +3026,22 @@
      "hidden": false
     },
     {
-     "$id": "431",
+     "$id": "399",
      "parameters": [
       {
-       "$id": "432",
-       "location": "body",
-       "deprecated": false,
-       "collectionFormat": "none",
-       "defaultValue": {
-        "$id": "433",
-        "fixed": false
-       },
-       "documentation": {
-        "$id": "434",
-        "fixed": false
-       },
-       "extensions": {
-        "x-ms-metadata": {
-         "apiVersions": [
-          "v1"
-         ],
-         "filename": [
-          "mem:///121?oai3.shaken.json"
-         ],
-         "name": "paths·1ne6j43·api-machines-id-switch·put·requestbody",
-         "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/requestBodies/paths·1ne6j43·api-machines-id-switch·put·requestbody"
-         ]
-        }
-       },
-       "isRequired": false,
-       "isConstant": false,
-       "name": {
-        "$id": "435",
-        "fixed": false,
-        "raw": "body"
-       },
-       "serializedName": "body",
-       "modelType": {
-        "$ref": "228"
-       }
-      },
-      {
-       "$id": "436",
+       "$id": "400",
        "clientProperty": {
-        "$ref": "242"
+        "$ref": "204"
        },
        "location": "path",
        "deprecated": false,
        "collectionFormat": "none",
        "defaultValue": {
-        "$id": "437",
+        "$id": "401",
         "fixed": false
        },
        "documentation": {
-        "$id": "438",
+        "$id": "402",
         "fixed": false
        },
        "extensions": {
@@ -3286,9 +3052,9 @@
          "filename": [
           "mem:///121?oai3.shaken.json"
          ],
-         "name": "paths·12zldv3·api-machines-id-switch·put·parameters·0",
+         "name": "paths·aneryf·api-machines-id-switches-switchid·post·parameters·0",
          "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·12zldv3·api-machines-id-switch·put·parameters·0"
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·aneryf·api-machines-id-switches-switchid·post·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -3296,19 +3062,71 @@
        "isRequired": true,
        "isConstant": false,
        "name": {
-        "$id": "439",
+        "$id": "403",
         "fixed": false,
         "raw": "id"
        },
        "serializedName": "id",
        "modelType": {
-        "$id": "440",
+        "$id": "404",
         "$type": "PrimaryType",
         "format": "uuid",
         "knownPrimaryType": "uuid",
         "deprecated": false,
         "name": {
-         "$id": "441",
+         "$id": "405",
+         "fixed": false,
+         "raw": "Uuid"
+        }
+       }
+      },
+      {
+       "$id": "406",
+       "clientProperty": {
+        "$ref": "246"
+       },
+       "location": "path",
+       "deprecated": false,
+       "collectionFormat": "none",
+       "defaultValue": {
+        "$id": "407",
+        "fixed": false
+       },
+       "documentation": {
+        "$id": "408",
+        "fixed": false
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "v1"
+         ],
+         "filename": [
+          "mem:///121?oai3.shaken.json"
+         ],
+         "name": "paths·qgyofn·api-machines-id-switches-switchid·post·parameters·1",
+         "originalLocations": [
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/parameters/paths·qgyofn·api-machines-id-switches-switchid·post·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "$id": "409",
+        "fixed": false,
+        "raw": "switchId"
+       },
+       "serializedName": "switchId",
+       "modelType": {
+        "$id": "410",
+        "$type": "PrimaryType",
+        "format": "uuid",
+        "knownPrimaryType": "uuid",
+        "deprecated": false,
+        "name": {
+         "$id": "411",
          "fixed": false,
          "raw": "Uuid"
         }
@@ -3316,24 +3134,24 @@
       }
      ],
      "name": {
-      "$id": "442",
+      "$id": "412",
       "fixed": false,
       "raw": "SetMachineSwitch"
      },
      "group": {
-      "$id": "443",
+      "$id": "413",
       "fixed": false,
       "raw": ""
      },
      "serializedName": "SetMachineSwitch",
-     "url": "/api/machines/{id}/switch",
+     "url": "/api/machines/{id}/switches/{switchId}",
      "isAbsoluteUrl": false,
-     "httpMethod": "put",
+     "httpMethod": "post",
      "responses": {
       "OK": {
-       "$id": "444",
+       "$id": "414",
        "extensions": {
-        "$id": "445",
+        "$id": "415",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -3341,21 +3159,21 @@
          "filename": [
           "mem:///121?oai3.shaken.json"
          ],
-         "name": "paths·1glt8ej·api-machines-id-switch·put·responses·200",
+         "name": "paths·1du5hox·api-machines-id-switches-switchid·post·responses·200",
          "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1glt8ej·api-machines-id-switch·put·responses·200"
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·1du5hox·api-machines-id-switches-switchid·post·responses·200"
          ]
         }
        },
        "isNullable": true
       },
       "NotFound": {
-       "$id": "446",
+       "$id": "416",
        "body": {
-        "$ref": "188"
+        "$ref": "164"
        },
        "extensions": {
-        "$id": "447",
+        "$id": "417",
         "x-ms-metadata": {
          "apiVersions": [
           "v1"
@@ -3363,9 +3181,9 @@
          "filename": [
           "mem:///121?oai3.shaken.json"
          ],
-         "name": "paths·7lpn0h·api-machines-id-switch·put·responses·404",
+         "name": "paths·qeo79g·api-machines-id-switches-switchid·post·responses·404",
          "originalLocations": [
-          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·7lpn0h·api-machines-id-switch·put·responses·404"
+          "file:///D:/softaware%20gmbh/consulting-netcore-microservices-sample/NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/obj/api.json#/components/responses/paths·qeo79g·api-machines-id-switches-switchid·post·responses·404"
          ]
         }
        },
@@ -3373,13 +3191,13 @@
       }
      },
      "defaultResponse": {
-      "$id": "448",
+      "$id": "418",
       "isNullable": true
      },
      "returnType": {
-      "$id": "449",
+      "$id": "419",
       "body": {
-       "$ref": "188"
+       "$ref": "164"
       },
       "isNullable": true
      },
@@ -3397,12 +3215,12 @@
     }
    ],
    "name": {
-    "$id": "450",
+    "$id": "420",
     "fixed": false,
     "raw": ""
    },
    "typeName": {
-    "$id": "451",
+    "$id": "421",
     "fixed": false
    },
    "nameForProperty": "NetCoreMicroserviceSampleApi"

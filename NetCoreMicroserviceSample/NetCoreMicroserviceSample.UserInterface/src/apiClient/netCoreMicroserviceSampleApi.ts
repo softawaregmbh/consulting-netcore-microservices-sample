@@ -275,25 +275,29 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
 
   /**
    * @param id
+   * @param switchId
    * @param [options] The optional parameters
    * @returns Promise<Models.SetMachineSwitchResponse>
    */
-  setMachineSwitch(id: string, options?: Models.NetCoreMicroserviceSampleApiSetMachineSwitchOptionalParams): Promise<Models.SetMachineSwitchResponse>;
+  setMachineSwitch(id: string, switchId: string, options?: msRest.RequestOptionsBase): Promise<Models.SetMachineSwitchResponse>;
   /**
    * @param id
+   * @param switchId
    * @param callback The callback
    */
-  setMachineSwitch(id: string, callback: msRest.ServiceCallback<Models.ProblemDetails>): void;
+  setMachineSwitch(id: string, switchId: string, callback: msRest.ServiceCallback<Models.ProblemDetails>): void;
   /**
    * @param id
+   * @param switchId
    * @param options The optional parameters
    * @param callback The callback
    */
-  setMachineSwitch(id: string, options: Models.NetCoreMicroserviceSampleApiSetMachineSwitchOptionalParams, callback: msRest.ServiceCallback<Models.ProblemDetails>): void;
-  setMachineSwitch(id: string, options?: Models.NetCoreMicroserviceSampleApiSetMachineSwitchOptionalParams | msRest.ServiceCallback<Models.ProblemDetails>, callback?: msRest.ServiceCallback<Models.ProblemDetails>): Promise<Models.SetMachineSwitchResponse> {
+  setMachineSwitch(id: string, switchId: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ProblemDetails>): void;
+  setMachineSwitch(id: string, switchId: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ProblemDetails>, callback?: msRest.ServiceCallback<Models.ProblemDetails>): Promise<Models.SetMachineSwitchResponse> {
     return this.sendOperationRequest(
       {
         id,
+        switchId,
         options
       },
       setMachineSwitchOperationSpec,
@@ -524,18 +528,12 @@ const getMachineSwitchesOperationSpec: msRest.OperationSpec = {
 };
 
 const setMachineSwitchOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PUT",
-  path: "api/machines/{id}/switch",
+  httpMethod: "POST",
+  path: "api/machines/{id}/switches/{switchId}",
   urlParameters: [
-    Parameters.id
+    Parameters.id,
+    Parameters.switchId
   ],
-  requestBody: {
-    parameterPath: [
-      "options",
-      "body"
-    ],
-    mapper: Mappers.MachineSwitchValueDto
-  },
   responses: {
     200: {},
     404: {

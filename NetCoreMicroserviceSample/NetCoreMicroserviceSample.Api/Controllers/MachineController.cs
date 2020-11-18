@@ -124,30 +124,21 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         {
             var existingSettings = await dbContext.MachineSettings.Where(s => s.MachineId == id).ToListAsync();
 
-            dbContext.MachineSettings.RemoveRange(existingSettings);
-
-            // TODO add automapper?
-            var newSettings = settings.Select(s => new MachineSetting
+            foreach (var settingToWrite in settings)
             {
-                Id = s.Id,
-                Description = s.Description,
-                MachineId = id,
-                Name = s.Name,
-                PositionX = s.PositionX,
-                PositionY = s.PositionY,
-                Value = s.Value
-            });
+                var settingToUpdateInDb = existingSettings.Single(s => s.Id == settingToWrite.Id);
 
-            dbContext.MachineSettings.AddRange(newSettings);
+                settingToUpdateInDb.Value = settingToWrite.value;
+            }
 
             await dbContext.SaveChangesAsync();
             return Ok();
         }
 
-        [HttpPut("{id}/switch", Name = "SetMachineSwitch")]
+        [HttpPost("{id}/switches/{switchId}", Name = "SetMachineSwitch")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> PutSwitchAsync(Guid id, [FromBody] MachineSwitchValueDto value)
+        public async Task<IActionResult> PostSwitchAsync(Guid id, Guid switchId)
         {
             // TODO - forward value through gRPC
             return Ok();

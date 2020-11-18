@@ -218,32 +218,8 @@ export const MachineSettingsUpdateDto: msRest.CompositeMapper = {
           name: "Uuid"
         }
       },
-      name: {
-        serializedName: "name",
-        type: {
-          name: "String"
-        }
-      },
-      description: {
-        serializedName: "description",
-        type: {
-          name: "String"
-        }
-      },
       value: {
         serializedName: "value",
-        type: {
-          name: "Number"
-        }
-      },
-      positionX: {
-        serializedName: "positionX",
-        type: {
-          name: "Number"
-        }
-      },
-      positionY: {
-        serializedName: "positionY",
         type: {
           name: "Number"
         }
@@ -293,28 +269,6 @@ export const ProblemDetails: msRest.CompositeMapper = {
     additionalProperties: {
       type: {
         name: "Object"
-      }
-    }
-  }
-};
-
-export const MachineSwitchValueDto: msRest.CompositeMapper = {
-  serializedName: "MachineSwitchValueDto",
-  type: {
-    name: "Composite",
-    className: "MachineSwitchValueDto",
-    modelProperties: {
-      id: {
-        serializedName: "id",
-        type: {
-          name: "Uuid"
-        }
-      },
-      value: {
-        serializedName: "value",
-        type: {
-          name: "Boolean"
-        }
       }
     }
   }

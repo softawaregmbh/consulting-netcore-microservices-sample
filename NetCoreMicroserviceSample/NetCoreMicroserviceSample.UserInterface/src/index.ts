@@ -3,6 +3,7 @@ import "./index.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import { MachineConfigurationViewModel } from './viewModel';
 import { NetCoreMicroserviceSampleApi } from './apiClient/netCoreMicroserviceSampleApi';
+import { MachineSettingsUpdateDto } from './apiClient/models';
 
 declare const API_DOMAIN: string;
 
@@ -23,8 +24,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         await client.updateMachine(m);
     }
 
-    viewModel.switchClicked = s => {
+    viewModel.settingsSaveClicked = async (machine, settings) => {
+        console.log("setting save clicked", machine, settings);
+
+        const settingsToUpdate = settings.map(s => <MachineSettingsUpdateDto>{
+            id: s.id,
+            value: s.value
+        });
+
+        // console.log(settingsToUpdate);
+
+        await client.updateMachineSettings(machine.id, settingsToUpdate);
+    }
+
+    viewModel.switchClicked = async s => {
         console.log("switch clicked", s);
+
+        await client.setMachineSwitch(s.machineId, s.id);
     }
 
     const initialHookDistance = -340;

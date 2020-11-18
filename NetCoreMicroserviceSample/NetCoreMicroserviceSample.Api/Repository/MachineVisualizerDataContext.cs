@@ -82,8 +82,8 @@ namespace NetCoreMicroserviceSample.Api.Repository
                 Name = "Setting 1",
                 Description = "Description Setting 1",
                 Value = 5.6,
-                PositionX = 40,
-                PositionY = 89
+                PositionX = 124,
+                PositionY = -7
             });
 
             modelBuilder.Entity<MachineSetting>().HasData(new
@@ -92,9 +92,9 @@ namespace NetCoreMicroserviceSample.Api.Repository
                 MachineId = machineGuid1,
                 Name = "Setting 2",
                 Description = "Description Setting 2",
-                Value = 5.6,
-                PositionX = 140,
-                PositionY = 189
+                Value = 132.54,
+                PositionX = 439,
+                PositionY = -7
             });
 
 
@@ -105,8 +105,8 @@ namespace NetCoreMicroserviceSample.Api.Repository
                 Name = "Switch 1",
                 Description = "Switch Setting 1",
                 Value = true,
-                PositionX = 67,
-                PositionY = 143
+                PositionX = 212,
+                PositionY = 80
             });
 
             modelBuilder.Entity<MachineSwitch>().HasData(new
@@ -116,8 +116,8 @@ namespace NetCoreMicroserviceSample.Api.Repository
                 Name = "Switch 2",
                 Description = "Switch Setting 2",
                 Value = false,
-                PositionX = 54,
-                PositionY = 234
+                PositionX = 139,
+                PositionY = 282
             });
 
         }

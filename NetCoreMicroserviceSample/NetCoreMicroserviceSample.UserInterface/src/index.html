@@ -26,21 +26,26 @@
       </div>
 
       <div class="text-left">
-        <h3>Metadata</h3>
-        <div class="form-group">
-          <label for="machine-name">Machine Name</label>
-          <input type="text" class="form-control" id="machine-name" placeholder="Enter machine name">
-        </div>
         <div class="form-group">
           <label for="machine-description">Machine Description</label>
-          <input type="text" class="form-control" id="machine-description" placeholder="Enter machine description">
+          <input type="text" class="form-control" id="machine-description" readonly>
         </div>
-        <button id="machine-update-btn" class="btn btn-primary">Update</button>
+
+        <h3>Settings</h3>
+        <div class="form-group">
+          <label for="setting-name">Setting Name</label>
+          <input type="text" class="form-control" id="setting-name" readonly>
+        </div>
+        <div class="form-group">
+          <label for="setting-value">Setting Value</label>
+          <input type="number" class="form-control" id="setting-value" placeholder="Enter setting value">
+        </div>
+
+        <button id="settings-update-btn" class="btn btn-primary">Update</button>
       </div>
 
       <div id="machine-container" class="machine-container mt-4">
-        <div id="machine-image-container">
-        </div>
+
       </div>
     </div>
   </div>

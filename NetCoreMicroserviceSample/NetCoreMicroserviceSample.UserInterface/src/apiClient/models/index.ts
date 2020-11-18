@@ -65,11 +65,7 @@ export interface MachineSetting {
  */
 export interface MachineSettingsUpdateDto {
   id?: string;
-  name?: string;
-  description?: string;
   value?: number;
-  positionX?: number;
-  positionY?: number;
 }
 
 /**
@@ -85,14 +81,6 @@ export interface ProblemDetails {
    * Describes unknown properties. The value of an unknown property can be of "any" type.
    */
   [property: string]: any;
-}
-
-/**
- * An interface representing MachineSwitchValueDto.
- */
-export interface MachineSwitchValueDto {
-  id?: string;
-  value?: boolean;
 }
 
 /**
@@ -121,13 +109,6 @@ export interface NetCoreMicroserviceSampleApiUpdateMachineOptionalParams extends
  */
 export interface NetCoreMicroserviceSampleApiUpdateMachineSettingsOptionalParams extends msRest.RequestOptionsBase {
   body?: MachineSettingsUpdateDto[];
-}
-
-/**
- * Optional Parameters.
- */
-export interface NetCoreMicroserviceSampleApiSetMachineSwitchOptionalParams extends msRest.RequestOptionsBase {
-  body?: MachineSwitchValueDto;
 }
 
 /**

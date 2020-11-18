@@ -1,25 +1,28 @@
-import { MachineMetadata, MachineSetting, MachineSwitch } from "./apiClient/models";
-import { Machine } from "./apiClient/models/mappers";
+import { Machine, MachineMetadata, MachineSetting, MachineSwitch } from "./apiClient/models";
 
 export class MachineConfigurationViewModel {
     private loadingIndicator: HTMLDivElement;
     private loadedContent: HTMLDivElement;
     private machinesDropdown: HTMLSelectElement;
-    private machineName: HTMLInputElement;
     private machineDescription: HTMLInputElement;
-    private machineUpdateButton: HTMLButtonElement;
+    private settingName: HTMLInputElement;
+    private settingValue: HTMLInputElement;
+    private settingsUpdateButton: HTMLButtonElement;
     private machineContainer: HTMLDivElement;
     private machineImageContainer: HTMLDivElement;
 
     private machineList: MachineMetadata[];
+    private machineSettings: MachineSetting[];
     private machineSwitches: MachineSwitch[];
 
     private selectedMachine: MachineMetadata;
+    private selectedSetting: MachineSetting;
 
     public selectMachine: (machine: MachineMetadata) => void;
     public updateMachineData: (machine: MachineMetadata) => void;
 
     public switchClicked: (machineSwitch: MachineSwitch) => void;
+    public settingsSaveClicked: (machine: MachineMetadata, settings: MachineSetting[]) => void;
 
     public set machines(machines: MachineMetadata[]) {
         // Clear existing list of machines
@@ -33,13 +36,19 @@ export class MachineConfigurationViewModel {
         // Store machines for later use
         this.machineList = machines;
         if (this.selectMachine && this.machineList.length > 0) {
+            // cleanup
+            this.cleanUpImage();
+
+            this.selectedMachine = this.machineList[0];
+
             // Select first machine and set metadata
-            this.setMachineMetadata(this.machineList[0]);
-            this.selectMachine(this.machineList[0]);
+            this.setMachineMetadata(this.selectedMachine);
+            this.selectMachine(this.selectedMachine);
         }
     }
 
     public set settings(settings: MachineSetting[]) {
+        this.machineSettings = settings;
         settings.forEach(s => this.addSettingToImage(s));
     }
 
@@ -52,14 +61,15 @@ export class MachineConfigurationViewModel {
         this.loadingIndicator = <HTMLDivElement>document.getElementById('loading-indicator');
         this.loadedContent = <HTMLDivElement>document.getElementById('loaded-content');
         this.machinesDropdown = <HTMLSelectElement>document.getElementById('machines-dropdown');
-        this.machineName = <HTMLInputElement>document.getElementById('machine-name');
         this.machineDescription = <HTMLInputElement>document.getElementById('machine-description');
-        this.machineUpdateButton = <HTMLButtonElement>document.getElementById('machine-update-btn');
+        this.settingName = <HTMLInputElement>document.getElementById('setting-name');
+        this.settingValue = <HTMLInputElement>document.getElementById('setting-value');
+        this.settingsUpdateButton = <HTMLButtonElement>document.getElementById('settings-update-btn');
         this.machineContainer = <HTMLDivElement>document.getElementById('machine-container');
         this.machineImageContainer = <HTMLDivElement>document.getElementById('machine-image-container');
 
         this.machinesDropdown.onchange = ev => this.onSelectedMachineChanged(ev);
-        this.machineUpdateButton.onclick = ev => this.onMachineUpdate(ev);
+        this.settingsUpdateButton.onclick = ev => this.onSettingsUpdate(ev);
     }
 
     private onSelectedMachineChanged(ev: Event): void {
@@ -67,37 +77,60 @@ export class MachineConfigurationViewModel {
             // Get currently selected machine
             const machineId = ((<HTMLSelectElement>ev.target).value);
             if (machineId) {
+
+                // cleanup
+                this.selectedSetting = null;
+                this.cleanUpImage();
+
                 // Select machine
-                const selectedMachine = this.machineList.filter(m => m.id === machineId)[0];
-                this.setMachineMetadata(selectedMachine);
-                this.selectMachine(selectedMachine);
+                this.selectedMachine = this.machineList.find(m => m.id === machineId);
+                this.setMachineMetadata(this.selectedMachine);
+                this.selectMachine(this.selectedMachine);
             }
         }
     }
 
     private onSettingClicked(ev: Event) {
         console.log("setting clicked", (<HTMLElement>ev.target).id);
+
+        const clickedSetting = this.machineSettings.find(s => s.id == (<HTMLElement>ev.target).id);
+        this.selectedSetting = clickedSetting;
+        this.settingName.value = clickedSetting.name;
+        this.settingValue.value = clickedSetting.value + "";
     }
 
     private onSwitchClicked(ev: Event) {
         if (this.switchClicked) {
-            const clickedSwitch = this.machineSwitches.filter(s => s.id == (<HTMLElement>ev.target).id)[0];
+            const clickedSwitch = this.machineSwitches.find(s => s.id == (<HTMLElement>ev.target).id);
             this.switchClicked(clickedSwitch);
         }
     }
 
     private setMachineMetadata(m: MachineMetadata) {
-        this.machineName.value = m.name;
         this.machineDescription.value = m.description;
     }
 
-    private onMachineUpdate(ev: Event): void {
-        if (this.updateMachineData) {
+    private onSettingsUpdate(ev: Event): void {
+        if (this.settingsSaveClicked && this.selectedSetting) {
 
-            const dataToUpdate = { ... this.selectMachine };
+            const dataToUpdate = [... this.machineSettings];
 
-            // this.updateMachineData()
+            var settingToUpdate = dataToUpdate.find(s => s.id === this.selectedSetting.id);
+            settingToUpdate.value = parseFloat(this.settingValue.value);
+
+            this.settingsSaveClicked(this.selectedMachine, dataToUpdate);
         }
+    }
+
+    private cleanUpImage() {
+        this.machineContainer.innerHTML = "";
+
+        const imageContainer = document.createElement('div');
+        imageContainer.setAttribute("id", "machine-image-container");
+
+        this.machineImageContainer = imageContainer;
+
+        this.machineContainer.appendChild(imageContainer);
     }
 
     private addMachineToSelectionList(machine: MachineMetadata, selected: boolean = true): void {
