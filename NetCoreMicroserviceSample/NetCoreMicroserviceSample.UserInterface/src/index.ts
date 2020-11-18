@@ -8,8 +8,16 @@ declare const API_DOMAIN: string;
 
 document.addEventListener('DOMContentLoaded', async () => {
     var viewModel = new MachineConfigurationViewModel();
-    viewModel.selectMachine = m => {
+
+    viewModel.selectMachine = async m => {
         console.log(m.name + ' selected');
+        const imageResponse = await client.getMachineImage(m.id);
+
+        viewModel.setMachineImage(imageResponse._response.bodyAsText);
+    }
+
+    viewModel.updateMachineData = m => {
+        console.log(m + ' update');
     }
 
     const initialHookDistance = -340;

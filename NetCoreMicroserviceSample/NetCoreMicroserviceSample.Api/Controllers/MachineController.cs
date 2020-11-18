@@ -62,6 +62,24 @@ namespace NetCoreMicroserviceSample.Api.Controllers
             return CreatedAtRoute("MachineById", new { machine.Id }, machine);
         }
 
+        [HttpPost(Name = "UpdateMachine")]
+        [ProducesResponseType(typeof(Machine), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> PutAsync([FromBody] Machine machine)
+        {
+            var machineToUpdate = await dbContext.Machines.SingleOrDefaultAsync(m => m.Id == machine.Id);
+            if (machineToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            machineToUpdate.Name = machine.Name;
+            machineToUpdate.Description = machine.Description;
+
+            await dbContext.SaveChangesAsync();
+            return Ok();
+        }
+
         [HttpDelete("{id}", Name = "DeleteMachine")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]

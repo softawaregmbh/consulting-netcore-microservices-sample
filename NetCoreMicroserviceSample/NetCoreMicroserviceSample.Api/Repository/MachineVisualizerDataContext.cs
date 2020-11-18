@@ -15,9 +15,11 @@ namespace NetCoreMicroserviceSample.Api.Repository
         {
         }
 
+        private const string HookOffsetPlaceholder = "#hookOfssetPlaceholder#";
+
         #region Images
         private const string CraneImage = @"
-            <svg xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 906.4 980"">
+            <svg class=""machine"" xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 906.4 980"">
                 <g id=""Ebene_2"" data-name=""Ebene 2"">
                     <g id=""Ebene_1-2"" data-name=""Ebene 1"">
                         <g id=""crane"" >
@@ -28,7 +30,7 @@ namespace NetCoreMicroserviceSample.Api.Repository
                             <path
                               d=""M15.66,938.6C14.22,940.66,0,977.94,0,979.18c0,.41,115.36.82,256.47.82s256.47-.62,256.27-1.65c0-.82-3.5-10.3-7.62-21l-7.83-19.57-240.2-.62C117.63,937,16.28,937.56,15.66,938.6Z"" />
                         </g>
-                        <svg id=""hook"" x=""0"">
+                        <svg id=""hook"" x=""#hookOfssetPlaceholder#"">
                             <g id=""Ebene_1-2-2"" data-name=""Ebene 1-2"">
                                 <path
                                   d=""M777.73,305.46c-9.27,0-13.8,2.68-13.8,8.28,0,1.85,11.13,16.69,24.72,33l24.72,29.66v12c0,15.45,3.09,22.66,16.27,37.49,12.36,14.42,13.6,21.84,5.15,31.93-9.68,11.54-22.87,6.8-27.81-10.09-2.47-8.24-2.68-8.24-12.77-8.24H783.93l1.44,8.45c3.71,23.07,17.1,35.43,38.31,35.43,20.8,0,35-12.57,36.67-32.55,1.24-14.83-1.85-23.07-14.83-37.9-10.32-12-11.35-13.88-12-24.59l-.62-11.74,25.13-30.49c14-16.89,25.34-30.9,25.34-31.52,1.58-2.84.85-4,0-5.63-1.65-3.09-6.59-3.43-14.42-3.43"" />
@@ -52,21 +54,21 @@ namespace NetCoreMicroserviceSample.Api.Repository
                 Id = Guid.NewGuid(),
                 Name = "Machine 1",
                 Description = "Description 1",
-                SvgImage = CraneImage,
+                SvgImage = CraneImage.Replace("#hookOfssetPlaceholder#", "-130")
             });
             modelBuilder.Entity<Machine>().HasData(new
             {
                 Id = Guid.NewGuid(),
                 Name = "Machine 2",
                 Description = "Description 2",
-                SvgImage = CraneImage,
+                SvgImage = CraneImage.Replace("#hookOfssetPlaceholder#", "0")
             });
             modelBuilder.Entity<Machine>().HasData(new
             {
                 Id = Guid.NewGuid(),
                 Name = "Machine 3",
                 Description = "Description 3",
-                SvgImage = CraneImage,
+                SvgImage = CraneImage.Replace("#hookOfssetPlaceholder#", "30")
             });
         }
     }
