@@ -15,15 +15,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         const imageResponse = await client.getMachineImage(m.id);
         viewModel.setMachineImage(imageResponse._response.bodyAsText);
 
-        const settings = await client.getMachineSettings(m.id);
-        const switches = await client.getMachineSwitches(m.id);
-
-        console.log("settings", settings);
-        console.log("switches", switches);
+        viewModel.settings = await client.getMachineSettings(m.id);
+        viewModel.switches = await client.getMachineSwitches(m.id);
     }
 
     viewModel.updateMachineData = async m => {
         await client.updateMachine(m);
+    }
+
+    viewModel.switchClicked = s => {
+        console.log("switch clicked", s);
     }
 
     const initialHookDistance = -340;

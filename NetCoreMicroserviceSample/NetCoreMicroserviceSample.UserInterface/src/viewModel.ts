@@ -1,4 +1,4 @@
-import { MachineMetadata } from "./apiClient/models";
+import { MachineMetadata, MachineSetting, MachineSwitch } from "./apiClient/models";
 import { Machine } from "./apiClient/models/mappers";
 
 export class MachineConfigurationViewModel {
@@ -8,14 +8,18 @@ export class MachineConfigurationViewModel {
     private machineName: HTMLInputElement;
     private machineDescription: HTMLInputElement;
     private machineUpdateButton: HTMLButtonElement;
+    private machineContainer: HTMLDivElement;
     private machineImageContainer: HTMLDivElement;
 
     private machineList: MachineMetadata[];
+    private machineSwitches: MachineSwitch[];
 
     private selectedMachine: MachineMetadata;
 
     public selectMachine: (machine: MachineMetadata) => void;
     public updateMachineData: (machine: MachineMetadata) => void;
+
+    public switchClicked: (machineSwitch: MachineSwitch) => void;
 
     public set machines(machines: MachineMetadata[]) {
         // Clear existing list of machines
@@ -35,6 +39,15 @@ export class MachineConfigurationViewModel {
         }
     }
 
+    public set settings(settings: MachineSetting[]) {
+        settings.forEach(s => this.addSettingToImage(s));
+    }
+
+    public set switches(switches: any) { // TODO - why is the MachineSwitch[] not working here?
+        this.machineSwitches = switches;
+        switches.forEach(s => this.addSwitchToImage(s));
+    }
+
     constructor() {
         this.loadingIndicator = <HTMLDivElement>document.getElementById('loading-indicator');
         this.loadedContent = <HTMLDivElement>document.getElementById('loaded-content');
@@ -42,7 +55,8 @@ export class MachineConfigurationViewModel {
         this.machineName = <HTMLInputElement>document.getElementById('machine-name');
         this.machineDescription = <HTMLInputElement>document.getElementById('machine-description');
         this.machineUpdateButton = <HTMLButtonElement>document.getElementById('machine-update-btn');
-        this.machineImageContainer = <HTMLDivElement>document.getElementById('machine-container');
+        this.machineContainer = <HTMLDivElement>document.getElementById('machine-container');
+        this.machineImageContainer = <HTMLDivElement>document.getElementById('machine-image-container');
 
         this.machinesDropdown.onchange = ev => this.onSelectedMachineChanged(ev);
         this.machineUpdateButton.onclick = ev => this.onMachineUpdate(ev);
@@ -57,8 +71,18 @@ export class MachineConfigurationViewModel {
                 const selectedMachine = this.machineList.filter(m => m.id === machineId)[0];
                 this.setMachineMetadata(selectedMachine);
                 this.selectMachine(selectedMachine);
-
             }
+        }
+    }
+
+    private onSettingClicked(ev: Event) {
+        console.log("setting clicked", (<HTMLElement>ev.target).id);
+    }
+
+    private onSwitchClicked(ev: Event) {
+        if (this.switchClicked) {
+            const clickedSwitch = this.machineSwitches.filter(s => s.id == (<HTMLElement>ev.target).id)[0];
+            this.switchClicked(clickedSwitch);
         }
     }
 
@@ -83,6 +107,32 @@ export class MachineConfigurationViewModel {
         const text = document.createTextNode(machine.name);
         node.appendChild(text);
         this.machinesDropdown.append(node);
+    }
+
+    private addSettingToImage(setting: MachineSetting): void {
+        // Add option to machine list
+        const node = document.createElement('div');
+        node.setAttribute('style', "cursor: pointer; font-size: 82px; color: red; position: absolute; left:" + setting.positionX + "px; top:" + setting.positionY + "px;");
+        node.setAttribute('id', setting.id);
+        const text = document.createTextNode("•");
+        node.appendChild(text);
+
+        node.onclick = ev => this.onSettingClicked(ev);
+
+        this.machineContainer.appendChild(node);
+    }
+
+    private addSwitchToImage(switchToAdd: MachineSwitch): void {
+        // Add option to machine list
+        const node = document.createElement('button');
+        node.setAttribute('style', "position: absolute; left:" + switchToAdd.positionX + "px; top:" + switchToAdd.positionY + "px;");
+        node.setAttribute('id', switchToAdd.id);
+        const text = document.createTextNode(switchToAdd.name);
+        node.appendChild(text);
+
+        node.onclick = ev => this.onSwitchClicked(ev);
+
+        this.machineContainer.appendChild(node);
     }
 
     public removeLoadingIndicator(): void {

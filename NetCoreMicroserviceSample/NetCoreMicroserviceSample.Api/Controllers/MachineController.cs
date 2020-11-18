@@ -112,7 +112,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetSwitchesAsync(Guid id)
         {
-            var switches = await dbContext.MachineSettings.Where(s => s.MachineId == id).ToListAsync();
+            var switches = await dbContext.MachineSwitches.Where(s => s.MachineId == id).ToListAsync();
 
             return Ok(switches);
         }

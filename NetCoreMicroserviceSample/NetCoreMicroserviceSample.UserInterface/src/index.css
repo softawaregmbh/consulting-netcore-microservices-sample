@@ -4,6 +4,8 @@ body {
 
 .machine-container {
   text-align: center;
+  position: relative;
+  width: 600px;
 }
 
 .machine {
