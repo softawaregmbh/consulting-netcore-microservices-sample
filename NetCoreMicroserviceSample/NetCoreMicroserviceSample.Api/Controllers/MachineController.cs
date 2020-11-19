@@ -8,6 +8,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Linq;
 using NetCoreMicroserviceSample.Api.Dto;
+using NetCoreMicroserviceSample.MachineService;
 
 namespace NetCoreMicroserviceSample.Api.Controllers
 {
@@ -16,9 +17,13 @@ namespace NetCoreMicroserviceSample.Api.Controllers
     public class MachineController : ControllerBase
     {
         private readonly MachineVisualizerDataContext dbContext;
+        private readonly MachineAccess.MachineAccessClient machineClient;
 
-        public MachineController(MachineVisualizerDataContext dbContext) =>
+        public MachineController(MachineVisualizerDataContext dbContext, MachineAccess.MachineAccessClient machineClient)
+        {
             this.dbContext = dbContext;
+            this.machineClient = machineClient;
+        }
 
         [HttpGet(Name = "GetAllMachines")]
         [ProducesResponseType(typeof(IEnumerable<MachineMetadata>), (int)HttpStatusCode.OK)]
@@ -127,8 +132,14 @@ namespace NetCoreMicroserviceSample.Api.Controllers
             foreach (var settingToWrite in settings)
             {
                 var settingToUpdateInDb = existingSettings.Single(s => s.Id == settingToWrite.Id);
-
                 settingToUpdateInDb.Value = settingToWrite.value;
+
+                await machineClient.UpdateSettingsAsync(new MachineSettingsUpdate
+                {
+                    MachineId = id.ToString(),
+                    SettingId = settingToWrite.Id.ToString(),
+                    Value = settingToWrite.value
+                });
             }
 
             await dbContext.SaveChangesAsync();
@@ -140,7 +151,12 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> PostSwitchAsync(Guid id, Guid switchId)
         {
-            // TODO - forward value through gRPC
+            await machineClient.TriggerSwitchAsync(new SwitchTrigger
+            {
+                MachineId = id.ToString(),
+                SwitchId = switchId.ToString()
+            });
+
             return Ok();
         }
     }

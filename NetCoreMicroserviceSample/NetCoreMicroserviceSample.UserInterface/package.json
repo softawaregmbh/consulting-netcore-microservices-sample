@@ -28,6 +28,7 @@
     "webpack-merge": "^5.4.0"
   },
   "dependencies": {
+    "@aspnet/signalr": "^1.1.4",
     "@azure/ms-rest-js": "^2.1.0",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",

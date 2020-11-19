@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { MachineConfigurationViewModel } from './viewModel';
 import { NetCoreMicroserviceSampleApi } from './apiClient/netCoreMicroserviceSampleApi';
 import { MachineSettingsUpdateDto } from './apiClient/models';
+import { HubConnection } from '@aspnet/signalr';
 
 declare const API_DOMAIN: string;
 

@@ -9,8 +9,10 @@ namespace NetCoreMicroserviceSample.Api
     using Microsoft.Extensions.Hosting;
     using Microsoft.OpenApi.Models;
     using NetCoreMicroserviceSample.Api.Repository;
+    using NetCoreMicroserviceSample.MachineService;
     using Serilog;
     using Swashbuckle.AspNetCore.SwaggerGen;
+    using System;
     using System.Diagnostics.CodeAnalysis;
 
     public class Startup
@@ -41,7 +43,10 @@ namespace NetCoreMicroserviceSample.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MachineVisualizerDataContext>(options => options.UseInMemoryDatabase("machines"));
-
+            services.AddGrpcClient<MachineAccess.MachineAccessClient>(o =>
+            {
+                o.Address = new Uri(Configuration["MachineGrpcService"]);
+            });
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
