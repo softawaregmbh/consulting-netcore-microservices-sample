@@ -11,6 +11,7 @@ export class MachineConfigurationViewModel {
     private settingsUpdateButton: HTMLButtonElement;
     private machineContainer: HTMLDivElement;
     private machineImageContainer: HTMLDivElement;
+    private machineSensorValue: HTMLInputElement;
 
     private machineList: MachineMetadata[];
     private machineSettings: MachineSetting[];
@@ -59,6 +60,10 @@ export class MachineConfigurationViewModel {
         switches.forEach(s => this.addSwitchToImage(s));
     }
 
+    public set sensorValue(value: number) {
+        this.machineSensorValue.value = value + "";
+    }
+
     constructor() {
         this.loadingIndicator = <HTMLDivElement>document.getElementById('loading-indicator');
         this.settingsContainer = <HTMLDivElement>document.getElementById('settings');
@@ -70,6 +75,7 @@ export class MachineConfigurationViewModel {
         this.settingsUpdateButton = <HTMLButtonElement>document.getElementById('settings-update-btn');
         this.machineContainer = <HTMLDivElement>document.getElementById('machine-container');
         this.machineImageContainer = <HTMLDivElement>document.getElementById('machine-image-container');
+        this.machineSensorValue = <HTMLInputElement>document.getElementById('machine-sensor-value');
 
         this.machinesDropdown.onchange = ev => this.onSelectedMachineChanged(ev);
         this.settingsUpdateButton.onclick = ev => this.onSettingsUpdate(ev);

@@ -4,11 +4,30 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { MachineConfigurationViewModel } from './viewModel';
 import { NetCoreMicroserviceSampleApi } from './apiClient/netCoreMicroserviceSampleApi';
 import { MachineSettingsUpdateDto } from './apiClient/models';
-import { HubConnection } from '@aspnet/signalr';
+import { HubConnectionBuilder, IStreamResult } from '@aspnet/signalr';
 
 declare const API_DOMAIN: string;
 
 document.addEventListener('DOMContentLoaded', async () => {
+    var hubConnection = new HubConnectionBuilder()
+        .withUrl(API_DOMAIN + "/livedata")
+        .build();
+
+    hubConnection.start().then(() => {
+        hubConnection.stream("MachineData")
+            .subscribe({
+                next: (value) => {
+                    viewModel.sensorValue = value;
+                },
+                complete: () => {
+                    console.log("complete");
+                },
+                error: (err) => {
+                    console.error(err);
+                },
+            });
+    });
+
     var viewModel = new MachineConfigurationViewModel();
 
     viewModel.selectMachine = async m => {
@@ -19,6 +38,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         viewModel.settings = await client.getMachineSettings(m.id);
         viewModel.switches = await client.getMachineSwitches(m.id);
+
+        await hubConnection.invoke("registerForMachineUpdates", m.id);
     }
 
     viewModel.updateMachineData = async m => {
@@ -52,6 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let hookDistanceX = initialHookDistance;
 
     try {
+        console.log(API_DOMAIN);
         var client = new NetCoreMicroserviceSampleApi({ baseUri: API_DOMAIN });
         const machines = await client.getAllMachines();
 

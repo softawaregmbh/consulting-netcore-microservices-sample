@@ -8,6 +8,7 @@ namespace NetCoreMicroserviceSample.Api
     using Microsoft.Extensions.FileProviders;
     using Microsoft.Extensions.Hosting;
     using Microsoft.OpenApi.Models;
+    using NetCoreMicroserviceSample.Api.Hubs;
     using NetCoreMicroserviceSample.Api.Repository;
     using NetCoreMicroserviceSample.MachineService;
     using Serilog;
@@ -61,6 +62,8 @@ namespace NetCoreMicroserviceSample.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NetCoreMicroserviceSample.Api", Version = "v1" });
                 c.DocumentFilter<AdditionalParametersDocumentFilter>();
             });
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,10 +78,6 @@ namespace NetCoreMicroserviceSample.Api
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetCoreMicroserviceSample.Api v1"));
             dbContext.Database.EnsureCreated();
 
-            var fp = new ManifestEmbeddedFileProvider(typeof(Startup).Assembly, "wwwroot");
-            app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = fp });
-            app.UseStaticFiles(new StaticFileOptions { FileProvider = fp });
-
             app.UseCors();
 
             app.UseSerilogRequestLogging();
@@ -92,7 +91,22 @@ namespace NetCoreMicroserviceSample.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<MachineDataHub>("/livedata");
             });
+
+            if (env.IsDevelopment())
+            {
+                app.UseSpa(spa =>
+                {
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                });
+            }
+            else
+            {
+                var fp = new ManifestEmbeddedFileProvider(typeof(Startup).Assembly, "wwwroot");
+                app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = fp });
+                app.UseStaticFiles(new StaticFileOptions { FileProvider = fp });
+            }
         }
     }
 }
