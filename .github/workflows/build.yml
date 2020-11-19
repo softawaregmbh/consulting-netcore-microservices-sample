@@ -75,7 +75,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: ${{ env.API_PATH }}
+        context: ${{ env.API_PATH }}/..
         file: ${{ env.API_PATH }}/Dockerfile
         push: true
         tags: rstropek/net-core-microservice-sample:latest
