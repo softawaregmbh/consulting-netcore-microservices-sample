@@ -34,7 +34,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // console.log(settingsToUpdate);
 
-        await client.updateMachineSettings(machine.id, settingsToUpdate);
+        await client.updateMachineSettings(machine.id, {
+            body: settingsToUpdate
+        });
     }
 
     viewModel.switchClicked = async s => {
