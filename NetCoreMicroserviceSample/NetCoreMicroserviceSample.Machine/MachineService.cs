@@ -1,7 +1,9 @@
 ﻿using Google.Protobuf.Collections;
 using Grpc.Core;
+using Microsoft.Extensions.Logging;
 using NetCoreMicroserviceSample.MachineService;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +13,14 @@ namespace NetCoreMicroserviceSample.Machine
 {
     public class MachineService : MachineAccessBase
     {
+        private readonly ILogger<MachineService> logger;
+        private readonly ConcurrentDictionary<Guid, double> speeds = new();
+
+        public MachineService(ILogger<MachineService> logger)
+        {
+            this.logger = logger;
+        }
+
         public override Task<MachineResponse> UpdateSettings(MachineSettingsUpdate request, ServerCallContext context)
         {
             Console.WriteLine($"Updating setting {request.SettingId} for Machine {request.MachineId}: {request.Value:F2}");
@@ -23,18 +33,26 @@ namespace NetCoreMicroserviceSample.Machine
             return Task.FromResult(new MachineResponse() { ResultCode = 1 });
         }
 
-        public override async Task GetMeasurements(MeasurementRequest request, IServerStreamWriter<MeasurementResponse> responseStream, ServerCallContext context)
+        public override async Task GetMeasurementStream(MeasurementRequest request, IServerStreamWriter<MeasurementResponse> responseStream, ServerCallContext context)
         {
-            var rnd = new Random();
-            while (true)
+            try
             {
-                var response = new MeasurementResponse() { MachineId = request.MachineId };
-                foreach(var m in request.MeasurementId)
+                var current = 0d;
+                while (true)
                 {
-                    response.Values.Add(new MeasurementValue { MeasurementId = m, Value = rnd.NextDouble() * 100 });
-                }
+                    await responseStream.WriteAsync(new MeasurementResponse() { MachineId = request.MachineId, Value = current - 300d });
+                    current += 1d;
+                    if (current > 300d)
+                    {
+                        current = 0d;
+                    }
 
-                await responseStream.WriteAsync(response);
+                    await Task.Delay(TimeSpan.FromMilliseconds(25));
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                logger.LogInformation(ex, "Measurement stream cancelled");
             }
         }
     }

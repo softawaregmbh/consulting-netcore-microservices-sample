@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Grpc.Core;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
+using NetCoreMicroserviceSample.MachineService;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -13,31 +15,33 @@ namespace NetCoreMicroserviceSample.Api.Hubs
     public class MachineDataHub : Hub
     {
         private readonly ILogger<MachineDataHub> logger;
+        private readonly MachineAccess.MachineAccessClient machineClient;
 
-        public MachineDataHub(ILogger<MachineDataHub> logger)
+        public MachineDataHub(ILogger<MachineDataHub> logger, MachineAccess.MachineAccessClient machineClient)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.machineClient = machineClient;
         }
 
-        public async IAsyncEnumerable<int> MachineData(
+        public async IAsyncEnumerable<double> MachineData(
             Guid machineId,
         [EnumeratorCancellation]
         CancellationToken cancellationToken)
         {
-            this.logger.LogInformation($"start streaming for machine {machineId}");
+            logger.LogInformation($"start streaming for machine {machineId}");
+            using var measurementStream = machineClient.GetMeasurementStream(
+                new() { MachineId = machineId.ToString() }, 
+                cancellationToken: cancellationToken);
             try
             {
-                // TODO: check if current machine is selected for receiving streaming data
-                while (!cancellationToken.IsCancellationRequested)
+                await foreach(var m in measurementStream.ResponseStream.ReadAllAsync(cancellationToken))
                 {
-                    yield return (new Random().Next(1, 100)) - 50;
-
-                    await Task.Delay(20, cancellationToken);
+                    yield return m.Value;
                 }
             }
             finally
             {
-                this.logger.LogInformation($"stopped streaming for machine {machineId}");
+                logger.LogInformation($"stopped streaming for machine {machineId}");
             }
         }
     }
