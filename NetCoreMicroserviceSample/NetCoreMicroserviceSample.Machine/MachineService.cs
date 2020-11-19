@@ -1,4 +1,5 @@
-﻿using Grpc.Core;
+﻿using Google.Protobuf.Collections;
+using Grpc.Core;
 using NetCoreMicroserviceSample.MachineService;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,21 @@ namespace NetCoreMicroserviceSample.Machine
         {
             Console.WriteLine($"Triggered switch {request.SwitchId} for Machine {request.MachineId}");
             return Task.FromResult(new MachineResponse() { ResultCode = 1 });
+        }
+
+        public override async Task GetMeasurements(MeasurementRequest request, IServerStreamWriter<MeasurementResponse> responseStream, ServerCallContext context)
+        {
+            var rnd = new Random();
+            while (true)
+            {
+                var response = new MeasurementResponse() { MachineId = request.MachineId };
+                foreach(var m in request.MeasurementId)
+                {
+                    response.Values.Add(new MeasurementValue { MeasurementId = m, Value = rnd.NextDouble() * 100 });
+                }
+
+                await responseStream.WriteAsync(response);
+            }
         }
     }
 }
