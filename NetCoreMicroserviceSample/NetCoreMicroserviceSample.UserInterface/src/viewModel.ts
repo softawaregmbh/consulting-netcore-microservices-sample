@@ -12,6 +12,7 @@ export class MachineConfigurationViewModel {
     private machineContainer: HTMLDivElement;
     private machineImageContainer: HTMLDivElement;
     private machineSensorValue: HTMLInputElement;
+    private hook: HTMLElement;
 
     private machineList: MachineMetadata[];
     private machineSettings: MachineSetting[];
@@ -62,6 +63,9 @@ export class MachineConfigurationViewModel {
 
     public set sensorValue(value: number) {
         this.machineSensorValue.value = value + "";
+
+        this.hook = <HTMLElement>document.getElementById('hook');
+        this.hook.setAttribute('x', value + "");
     }
 
     constructor() {

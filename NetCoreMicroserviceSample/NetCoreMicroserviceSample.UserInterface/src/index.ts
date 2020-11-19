@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { MachineConfigurationViewModel } from './viewModel';
 import { NetCoreMicroserviceSampleApi } from './apiClient/netCoreMicroserviceSampleApi';
 import { MachineSettingsUpdateDto } from './apiClient/models';
-import { HubConnectionBuilder, IStreamResult } from '@aspnet/signalr';
+import { HubConnectionBuilder } from '@aspnet/signalr';
 
 declare const API_DOMAIN: string;
 
@@ -13,20 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         .withUrl(API_DOMAIN + "/livedata")
         .build();
 
-    hubConnection.start().then(() => {
-        hubConnection.stream("MachineData")
-            .subscribe({
-                next: (value) => {
-                    viewModel.sensorValue = value;
-                },
-                complete: () => {
-                    console.log("complete");
-                },
-                error: (err) => {
-                    console.error(err);
-                },
-            });
-    });
+    hubConnection.start();
 
     var viewModel = new MachineConfigurationViewModel();
 
@@ -39,7 +26,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         viewModel.settings = await client.getMachineSettings(m.id);
         viewModel.switches = await client.getMachineSwitches(m.id);
 
-        await hubConnection.invoke("registerForMachineUpdates", m.id);
+        await hubConnection.stop();
+        await hubConnection.start();
+
+        hubConnection.stream("MachineData", m.id)
+            .subscribe({
+                next: (value) => {
+                    viewModel.sensorValue = value;
+                },
+                complete: () => {
+                    console.log("complete");
+                },
+                error: (err) => {
+                    console.log(err);
+                },
+            });
     }
 
     viewModel.updateMachineData = async m => {
