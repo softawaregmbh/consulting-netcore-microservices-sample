@@ -1,6 +1,7 @@
 import { Machine, MachineMetadata, MachineSetting, MachineSwitch } from "./apiClient/models";
 
 export class MachineConfigurationViewModel {
+    private profile: HTMLDivElement;
     private loadingIndicator: HTMLDivElement;
     private settingsContainer: HTMLDivElement;
     private loadedContent: HTMLDivElement;
@@ -13,6 +14,8 @@ export class MachineConfigurationViewModel {
     private machineImageContainer: HTMLDivElement;
     private machineSensorValue: HTMLInputElement;
     private hook: HTMLElement;
+    private login: HTMLAnchorElement;
+    private logout: HTMLAnchorElement;
 
     private machineList: MachineMetadata[];
     private machineSettings: MachineSetting[];
@@ -80,6 +83,9 @@ export class MachineConfigurationViewModel {
         this.machineContainer = <HTMLDivElement>document.getElementById('machine-container');
         this.machineImageContainer = <HTMLDivElement>document.getElementById('machine-image-container');
         this.machineSensorValue = <HTMLInputElement>document.getElementById('machine-sensor-value');
+        this.profile = <HTMLDivElement>document.getElementById('profile');
+        this.login = <HTMLAnchorElement>document.getElementById('login');
+        this.logout = <HTMLAnchorElement>document.getElementById('logout');
 
         this.machinesDropdown.onchange = ev => this.onSelectedMachineChanged(ev);
         this.settingsUpdateButton.onclick = ev => this.onSettingsUpdate(ev);
@@ -190,5 +196,11 @@ export class MachineConfigurationViewModel {
 
     public setMachineImage(svgImage: string) {
         this.machineImageContainer.innerHTML = svgImage;
+    }
+
+    public setProfile(profile: (string | null)) {
+        this.profile.innerText = profile ?? '';
+        this.login.hidden = !!profile;
+        this.logout.hidden = !!!profile;
     }
 }

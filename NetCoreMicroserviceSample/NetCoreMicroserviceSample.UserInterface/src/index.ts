@@ -3,7 +3,7 @@ import "./index.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import { MachineConfigurationViewModel } from './viewModel';
 import { NetCoreMicroserviceSampleApi } from './apiClient/netCoreMicroserviceSampleApi';
-import { MachineSettingsUpdateDto } from './apiClient/models';
+import { MachineSettingsUpdateDto, UserProfile } from './apiClient/models';
 import { HubConnectionBuilder } from '@aspnet/signalr';
 
 declare const API_DOMAIN: string;
@@ -14,8 +14,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         .build();
 
     hubConnection.start();
-
+    
     var viewModel = new MachineConfigurationViewModel();
+    
+    var profileClient = new NetCoreMicroserviceSampleApi({ baseUri: API_DOMAIN });
+    profileClient.getProfile().then(
+        response => viewModel.setProfile((response as any).name),
+        () => viewModel.setProfile(null));
 
     viewModel.selectMachine = async m => {
         console.log(m.name + ' selected');
@@ -74,7 +79,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     let hookDistanceX = initialHookDistance;
 
     try {
-        console.log(API_DOMAIN);
         var client = new NetCoreMicroserviceSampleApi({ baseUri: API_DOMAIN });
         const machines = await client.getAllMachines();
 
