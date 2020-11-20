@@ -228,6 +228,34 @@ export const MachineSettingsUpdateDto: msRest.CompositeMapper = {
   }
 };
 
+export const UserProfile: msRest.CompositeMapper = {
+  serializedName: "UserProfile",
+  type: {
+    name: "Composite",
+    className: "UserProfile",
+    modelProperties: {
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      email: {
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      },
+      subject: {
+        serializedName: "subject",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
 export const ProblemDetails: msRest.CompositeMapper = {
   serializedName: "ProblemDetails",
   type: {

@@ -69,6 +69,15 @@ export interface MachineSettingsUpdateDto {
 }
 
 /**
+ * An interface representing UserProfile.
+ */
+export interface UserProfile {
+  name?: string;
+  email?: string;
+  subject?: string;
+}
+
+/**
  * An interface representing ProblemDetails.
  */
 export interface ProblemDetails {
@@ -110,6 +119,31 @@ export interface NetCoreMicroserviceSampleApiUpdateMachineOptionalParams extends
 export interface NetCoreMicroserviceSampleApiUpdateMachineSettingsOptionalParams extends msRest.RequestOptionsBase {
   body?: MachineSettingsUpdateDto[];
 }
+
+/**
+ * Contains response data for the getProfile operation.
+ */
+export type GetProfileResponse = {
+  /**
+   * The parsed response body.
+   */
+  body: any;
+
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: any;
+    };
+};
 
 /**
  * Contains response data for the getHealth operation.

@@ -21,6 +21,52 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
 
   /**
    * @param [options] The optional parameters
+   * @returns Promise<msRest.RestResponse>
+   */
+  login(options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
+  /**
+   * @param callback The callback
+   */
+  login(callback: msRest.ServiceCallback<void>): void;
+  /**
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  login(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  login(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
+    return this.sendOperationRequest(
+      {
+        options
+      },
+      loginOperationSpec,
+      callback);
+  }
+
+  /**
+   * @param [options] The optional parameters
+   * @returns Promise<Models.GetProfileResponse>
+   */
+  getProfile(options?: msRest.RequestOptionsBase): Promise<Models.GetProfileResponse>;
+  /**
+   * @param callback The callback
+   */
+  getProfile(callback: msRest.ServiceCallback<any>): void;
+  /**
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  getProfile(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<any>): void;
+  getProfile(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<any>, callback?: msRest.ServiceCallback<any>): Promise<Models.GetProfileResponse> {
+    return this.sendOperationRequest(
+      {
+        options
+      },
+      getProfileOperationSpec,
+      callback) as Promise<Models.GetProfileResponse>;
+  }
+
+  /**
+   * @param [options] The optional parameters
    * @returns Promise<Models.GetHealthResponse>
    */
   getHealth(options?: msRest.RequestOptionsBase): Promise<Models.GetHealthResponse>;
@@ -307,6 +353,31 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
 
 // Operation Specifications
 const serializer = new msRest.Serializer(Mappers);
+const loginOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "api/Auth",
+  responses: {
+    200: {},
+    default: {}
+  },
+  serializer
+};
+
+const getProfileOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "api/Auth/profile",
+  responses: {
+    200: {
+      bodyMapper: Mappers.UserProfile
+    },
+    401: {
+      bodyMapper: Mappers.ProblemDetails
+    },
+    default: {}
+  },
+  serializer
+};
+
 const getHealthOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
   path: "api/health",
