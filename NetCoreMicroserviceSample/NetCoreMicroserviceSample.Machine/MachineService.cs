@@ -1,16 +1,19 @@
 ﻿using Google.Protobuf.Collections;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using NetCoreMicroserviceSample.MachineService;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using static NetCoreMicroserviceSample.MachineService.MachineAccess;
 
 namespace NetCoreMicroserviceSample.Machine
 {
+    [Authorize]
     public class MachineService : MachineAccessBase
     {
         private readonly ILogger<MachineService> logger;
@@ -23,6 +26,9 @@ namespace NetCoreMicroserviceSample.Machine
 
         public override Task<MachineResponse> UpdateSettings(MachineSettingsUpdate request, ServerCallContext context)
         {
+            var user = context.GetHttpContext().User;
+            logger.LogInformation($"Got request from client {user.Claims.Single(c => c.Type == "client_id")}");
+
             Console.WriteLine($"Updating setting {request.SettingId} for Machine {request.MachineId}: {request.Value:F2}");
             return Task.FromResult(new MachineResponse() { ResultCode = 1 });
         }

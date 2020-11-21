@@ -63,6 +63,11 @@ namespace NetCoreMicroserviceSample.Api
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddHttpClient("identity-server", c =>
+            {
+                c.BaseAddress = new Uri(Configuration["Oidc:Domain"]);
+            });
+
             // Add authentication services
             services.AddAuthentication(options =>
             {

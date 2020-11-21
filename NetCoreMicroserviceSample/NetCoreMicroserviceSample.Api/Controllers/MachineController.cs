@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 using System.Linq;
 using NetCoreMicroserviceSample.Api.Dto;
 using NetCoreMicroserviceSample.MachineService;
+using System.Net.Http;
+using Microsoft.Extensions.Configuration;
+using System.Net.Http.Json;
+using System.Text.Json.Serialization;
+using Grpc.Core;
 
 namespace NetCoreMicroserviceSample.Api.Controllers
 {
@@ -18,11 +23,16 @@ namespace NetCoreMicroserviceSample.Api.Controllers
     {
         private readonly MachineVisualizerDataContext dbContext;
         private readonly MachineAccess.MachineAccessClient machineClient;
+        private readonly IHttpClientFactory clientFactory;
+        private readonly IConfiguration configuration;
 
-        public MachineController(MachineVisualizerDataContext dbContext, MachineAccess.MachineAccessClient machineClient)
+        public MachineController(MachineVisualizerDataContext dbContext, MachineAccess.MachineAccessClient machineClient,
+            IHttpClientFactory clientFactory, IConfiguration configuration)
         {
             this.dbContext = dbContext;
             this.machineClient = machineClient;
+            this.clientFactory = clientFactory;
+            this.configuration = configuration;
         }
 
         [HttpGet(Name = "GetAllMachines")]
@@ -122,12 +132,35 @@ namespace NetCoreMicroserviceSample.Api.Controllers
             return Ok(switches);
         }
 
+        private class OidcAccessToken
+        {
+            [JsonPropertyName("access_token")]
+            public string AccessToken { get; set; } = string.Empty;
+        }
+
         [HttpPut("{id}/settings", Name = "UpdateMachineSettings")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> PutSettingsAsync(Guid id, [FromBody] MachineSettingsUpdateDto[] settings)
         {
             var existingSettings = await dbContext.MachineSettings.Where(s => s.MachineId == id).ToListAsync();
+
+            var client = clientFactory.CreateClient("identity-server");
+            var formDictionary = new Dictionary<string, string>
+            {
+                { "grant_type", "client_credentials" },
+                { "client_id", configuration["Oidc:MachineClientId"] },
+                { "client_secret", configuration["Oidc:MachineClientSecret"] },
+                { "audience", "api" }
+            };
+            using var formContent = new FormUrlEncodedContent(formDictionary!);
+            var response = await client.PostAsync(new Uri($"{configuration["Oidc:Domain"]}/connect/token"), formContent);
+            var token = await response.Content.ReadFromJsonAsync<OidcAccessToken>();
+
+            var headers = new Metadata
+            {
+                { "Authorization", $"Bearer {token!.AccessToken}" }
+            };
 
             foreach (var settingToWrite in settings)
             {
@@ -139,7 +172,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
                     MachineId = id.ToString(),
                     SettingId = settingToWrite.Id.ToString(),
                     Value = settingToWrite.value
-                });
+                }, headers);
             }
 
             await dbContext.SaveChangesAsync();
