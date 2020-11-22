@@ -20,6 +20,7 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
+   * @summary Trigger login process
    * @param [options] The optional parameters
    * @returns Promise<msRest.RestResponse>
    */
@@ -43,29 +44,31 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
+   * @summary Trigger logout process
    * @param [options] The optional parameters
-   * @returns Promise<msRest.RestResponse>
+   * @returns Promise<Models.LogoutResponse>
    */
-  logout(options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
+  logout(options?: msRest.RequestOptionsBase): Promise<Models.LogoutResponse>;
   /**
    * @param callback The callback
    */
-  logout(callback: msRest.ServiceCallback<void>): void;
+  logout(callback: msRest.ServiceCallback<Models.ProblemDetails>): void;
   /**
    * @param options The optional parameters
    * @param callback The callback
    */
-  logout(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
-  logout(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
+  logout(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.ProblemDetails>): void;
+  logout(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.ProblemDetails>, callback?: msRest.ServiceCallback<Models.ProblemDetails>): Promise<Models.LogoutResponse> {
     return this.sendOperationRequest(
       {
         options
       },
       logoutOperationSpec,
-      callback);
+      callback) as Promise<Models.LogoutResponse>;
   }
 
   /**
+   * @summary Get user profile of currently signed in user
    * @param [options] The optional parameters
    * @returns Promise<Models.GetProfileResponse>
    */
@@ -89,6 +92,7 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
+   * @summary Find out whether API is running
    * @param [options] The optional parameters
    * @returns Promise<Models.GetHealthResponse>
    */
@@ -112,6 +116,7 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
+   * @summary Get a list of available machines
    * @param [options] The optional parameters
    * @returns Promise<Models.GetAllMachinesResponse>
    */
@@ -135,6 +140,7 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
+   * @summary Create a machine
    * @param [options] The optional parameters
    * @returns Promise<Models.AddMachineResponse>
    */
@@ -158,41 +164,19 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
-   * @param [options] The optional parameters
-   * @returns Promise<Models.UpdateMachineResponse>
-   */
-  updateMachine(options?: Models.NetCoreMicroserviceSampleApiUpdateMachineOptionalParams): Promise<Models.UpdateMachineResponse>;
-  /**
-   * @param callback The callback
-   */
-  updateMachine(callback: msRest.ServiceCallback<any>): void;
-  /**
-   * @param options The optional parameters
-   * @param callback The callback
-   */
-  updateMachine(options: Models.NetCoreMicroserviceSampleApiUpdateMachineOptionalParams, callback: msRest.ServiceCallback<any>): void;
-  updateMachine(options?: Models.NetCoreMicroserviceSampleApiUpdateMachineOptionalParams | msRest.ServiceCallback<any>, callback?: msRest.ServiceCallback<any>): Promise<Models.UpdateMachineResponse> {
-    return this.sendOperationRequest(
-      {
-        options
-      },
-      updateMachineOperationSpec,
-      callback) as Promise<Models.UpdateMachineResponse>;
-  }
-
-  /**
-   * @param id
+   * @summary Get a machine by id
+   * @param id ID of the machine to get
    * @param [options] The optional parameters
    * @returns Promise<Models.MachineByIdResponse>
    */
   machineById(id: string, options?: msRest.RequestOptionsBase): Promise<Models.MachineByIdResponse>;
   /**
-   * @param id
+   * @param id ID of the machine to get
    * @param callback The callback
    */
   machineById(id: string, callback: msRest.ServiceCallback<any>): void;
   /**
-   * @param id
+   * @param id ID of the machine to get
    * @param options The optional parameters
    * @param callback The callback
    */
@@ -208,18 +192,48 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
-   * @param id
+   * ID in URL and body must match. If they don't, bad request is returned.
+   * @summary Update machine with given id
+   * @param id ID of the machine to update
+   * @param [options] The optional parameters
+   * @returns Promise<Models.UpdateMachineResponse>
+   */
+  updateMachine(id: string, options?: Models.NetCoreMicroserviceSampleApiUpdateMachineOptionalParams): Promise<Models.UpdateMachineResponse>;
+  /**
+   * @param id ID of the machine to update
+   * @param callback The callback
+   */
+  updateMachine(id: string, callback: msRest.ServiceCallback<any>): void;
+  /**
+   * @param id ID of the machine to update
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  updateMachine(id: string, options: Models.NetCoreMicroserviceSampleApiUpdateMachineOptionalParams, callback: msRest.ServiceCallback<any>): void;
+  updateMachine(id: string, options?: Models.NetCoreMicroserviceSampleApiUpdateMachineOptionalParams | msRest.ServiceCallback<any>, callback?: msRest.ServiceCallback<any>): Promise<Models.UpdateMachineResponse> {
+    return this.sendOperationRequest(
+      {
+        id,
+        options
+      },
+      updateMachineOperationSpec,
+      callback) as Promise<Models.UpdateMachineResponse>;
+  }
+
+  /**
+   * @summary Delete a machine with given ID
+   * @param id ID of the machine to delete
    * @param [options] The optional parameters
    * @returns Promise<Models.DeleteMachineResponse>
    */
   deleteMachine(id: string, options?: msRest.RequestOptionsBase): Promise<Models.DeleteMachineResponse>;
   /**
-   * @param id
+   * @param id ID of the machine to delete
    * @param callback The callback
    */
   deleteMachine(id: string, callback: msRest.ServiceCallback<Models.ProblemDetails>): void;
   /**
-   * @param id
+   * @param id ID of the machine to delete
    * @param options The optional parameters
    * @param callback The callback
    */
@@ -235,18 +249,19 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
-   * @param id
+   * @summary Get SVG image for machine with given ID
+   * @param id ID of the machine
    * @param [options] The optional parameters
    * @returns Promise<Models.GetMachineImageResponse>
    */
   getMachineImage(id: string, options?: msRest.RequestOptionsBase): Promise<Models.GetMachineImageResponse>;
   /**
-   * @param id
+   * @param id ID of the machine
    * @param callback The callback
    */
   getMachineImage(id: string, callback: msRest.ServiceCallback<Models.ProblemDetails>): void;
   /**
-   * @param id
+   * @param id ID of the machine
    * @param options The optional parameters
    * @param callback The callback
    */
@@ -262,23 +277,24 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
-   * @param id
+   * @summary Get settings for a given machine
+   * @param id Machine ID
    * @param [options] The optional parameters
    * @returns Promise<Models.GetMachineSettingsResponse>
    */
   getMachineSettings(id: string, options?: msRest.RequestOptionsBase): Promise<Models.GetMachineSettingsResponse>;
   /**
-   * @param id
+   * @param id Machine ID
    * @param callback The callback
    */
-  getMachineSettings(id: string, callback: msRest.ServiceCallback<Models.MachineSetting[]>): void;
+  getMachineSettings(id: string, callback: msRest.ServiceCallback<any>): void;
   /**
-   * @param id
+   * @param id Machine ID
    * @param options The optional parameters
    * @param callback The callback
    */
-  getMachineSettings(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.MachineSetting[]>): void;
-  getMachineSettings(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.MachineSetting[]>, callback?: msRest.ServiceCallback<Models.MachineSetting[]>): Promise<Models.GetMachineSettingsResponse> {
+  getMachineSettings(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<any>): void;
+  getMachineSettings(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<any>, callback?: msRest.ServiceCallback<any>): Promise<Models.GetMachineSettingsResponse> {
     return this.sendOperationRequest(
       {
         id,
@@ -289,18 +305,19 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
-   * @param id
+   * @summary Write settings to DB and to machine
+   * @param id ID of machine
    * @param [options] The optional parameters
    * @returns Promise<Models.UpdateMachineSettingsResponse>
    */
   updateMachineSettings(id: string, options?: Models.NetCoreMicroserviceSampleApiUpdateMachineSettingsOptionalParams): Promise<Models.UpdateMachineSettingsResponse>;
   /**
-   * @param id
+   * @param id ID of machine
    * @param callback The callback
    */
   updateMachineSettings(id: string, callback: msRest.ServiceCallback<Models.ProblemDetails>): void;
   /**
-   * @param id
+   * @param id ID of machine
    * @param options The optional parameters
    * @param callback The callback
    */
@@ -316,23 +333,24 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
-   * @param id
+   * @summary Get switches for a given machine
+   * @param id Machine ID
    * @param [options] The optional parameters
    * @returns Promise<Models.GetMachineSwitchesResponse>
    */
   getMachineSwitches(id: string, options?: msRest.RequestOptionsBase): Promise<Models.GetMachineSwitchesResponse>;
   /**
-   * @param id
+   * @param id Machine ID
    * @param callback The callback
    */
-  getMachineSwitches(id: string, callback: msRest.ServiceCallback<Models.MachineSwitch[]>): void;
+  getMachineSwitches(id: string, callback: msRest.ServiceCallback<any>): void;
   /**
-   * @param id
+   * @param id Machine ID
    * @param options The optional parameters
    * @param callback The callback
    */
-  getMachineSwitches(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.MachineSwitch[]>): void;
-  getMachineSwitches(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.MachineSwitch[]>, callback?: msRest.ServiceCallback<Models.MachineSwitch[]>): Promise<Models.GetMachineSwitchesResponse> {
+  getMachineSwitches(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<any>): void;
+  getMachineSwitches(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<any>, callback?: msRest.ServiceCallback<any>): Promise<Models.GetMachineSwitchesResponse> {
     return this.sendOperationRequest(
       {
         id,
@@ -343,21 +361,22 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
   }
 
   /**
-   * @param id
-   * @param switchId
+   * @summary Trigger switch (sent to machine)
+   * @param id ID of machine
+   * @param switchId ID of switch
    * @param [options] The optional parameters
    * @returns Promise<Models.SetMachineSwitchResponse>
    */
   setMachineSwitch(id: string, switchId: string, options?: msRest.RequestOptionsBase): Promise<Models.SetMachineSwitchResponse>;
   /**
-   * @param id
-   * @param switchId
+   * @param id ID of machine
+   * @param switchId ID of switch
    * @param callback The callback
    */
   setMachineSwitch(id: string, switchId: string, callback: msRest.ServiceCallback<Models.ProblemDetails>): void;
   /**
-   * @param id
-   * @param switchId
+   * @param id ID of machine
+   * @param switchId ID of switch
    * @param options The optional parameters
    * @param callback The callback
    */
@@ -391,6 +410,9 @@ const logoutOperationSpec: msRest.OperationSpec = {
   path: "api/Auth/logout",
   responses: {
     200: {},
+    401: {
+      bodyMapper: Mappers.ProblemDetails
+    },
     default: {}
   },
   serializer
@@ -463,29 +485,8 @@ const addMachineOperationSpec: msRest.OperationSpec = {
   },
   responses: {
     201: {
-      bodyMapper: Mappers.Machine
-    },
-    default: {}
-  },
-  serializer
-};
-
-const updateMachineOperationSpec: msRest.OperationSpec = {
-  httpMethod: "PUT",
-  path: "api/machines",
-  requestBody: {
-    parameterPath: [
-      "options",
-      "body"
-    ],
-    mapper: Mappers.Machine
-  },
-  responses: {
-    200: {
-      bodyMapper: Mappers.Machine
-    },
-    404: {
-      bodyMapper: Mappers.ProblemDetails
+      bodyMapper: Mappers.Machine,
+      headersMapper: Mappers.AddMachineHeaders
     },
     default: {}
   },
@@ -501,6 +502,34 @@ const machineByIdOperationSpec: msRest.OperationSpec = {
   responses: {
     200: {
       bodyMapper: Mappers.MachineMetadata
+    },
+    404: {
+      bodyMapper: Mappers.ProblemDetails
+    },
+    default: {}
+  },
+  serializer
+};
+
+const updateMachineOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PUT",
+  path: "api/machines/{id}",
+  urlParameters: [
+    Parameters.id
+  ],
+  requestBody: {
+    parameterPath: [
+      "options",
+      "body"
+    ],
+    mapper: Mappers.Machine
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.Machine
+    },
+    400: {
+      bodyMapper: Mappers.ProblemDetails
     },
     404: {
       bodyMapper: Mappers.ProblemDetails
@@ -563,6 +592,9 @@ const getMachineSettingsOperationSpec: msRest.OperationSpec = {
         }
       }
     },
+    404: {
+      bodyMapper: Mappers.ProblemDetails
+    },
     default: {}
   },
   serializer
@@ -622,6 +654,9 @@ const getMachineSwitchesOperationSpec: msRest.OperationSpec = {
           }
         }
       }
+    },
+    404: {
+      bodyMapper: Mappers.ProblemDetails
     },
     default: {}
   },

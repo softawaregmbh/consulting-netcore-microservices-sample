@@ -3,7 +3,7 @@ import "./index.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import { MachineConfigurationViewModel } from './viewModel';
 import { NetCoreMicroserviceSampleApi } from './apiClient/netCoreMicroserviceSampleApi';
-import { MachineSettingsUpdateDto, UserProfile } from './apiClient/models';
+import { MachineSetting, MachineSettingsUpdateDto, MachineSwitch, UserProfile } from './apiClient/models';
 import { HubConnectionBuilder } from '@aspnet/signalr';
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const imageResponse = await client.getMachineImage(m.id);
         viewModel.machineImage = imageResponse._response.bodyAsText;
 
-        viewModel.settings = await client.getMachineSettings(m.id);
-        viewModel.switches = await client.getMachineSwitches(m.id);
+        viewModel.settings = <MachineSetting[]><unknown>await client.getMachineSettings(m.id);
+        viewModel.switches = <MachineSwitch[]><unknown>await client.getMachineSwitches(m.id);
 
         await hubConnection.stop();
         await hubConnection.start();

@@ -69,15 +69,6 @@ export interface MachineSettingsUpdateDto {
 }
 
 /**
- * An interface representing UserProfile.
- */
-export interface UserProfile {
-  name?: string;
-  email?: string;
-  subject?: string;
-}
-
-/**
  * An interface representing ProblemDetails.
  */
 export interface ProblemDetails {
@@ -93,6 +84,15 @@ export interface ProblemDetails {
 }
 
 /**
+ * An interface representing UserProfile.
+ */
+export interface UserProfile {
+  name?: string;
+  email?: string;
+  subject?: string;
+}
+
+/**
  * An interface representing NetCoreMicroserviceSampleApiOptions.
  */
 export interface NetCoreMicroserviceSampleApiOptions extends ServiceClientOptions {
@@ -103,6 +103,9 @@ export interface NetCoreMicroserviceSampleApiOptions extends ServiceClientOption
  * Optional Parameters.
  */
 export interface NetCoreMicroserviceSampleApiAddMachineOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Machine to create
+   */
   body?: Machine;
 }
 
@@ -110,6 +113,9 @@ export interface NetCoreMicroserviceSampleApiAddMachineOptionalParams extends ms
  * Optional Parameters.
  */
 export interface NetCoreMicroserviceSampleApiUpdateMachineOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Machine data
+   */
   body?: Machine;
 }
 
@@ -117,8 +123,41 @@ export interface NetCoreMicroserviceSampleApiUpdateMachineOptionalParams extends
  * Optional Parameters.
  */
 export interface NetCoreMicroserviceSampleApiUpdateMachineSettingsOptionalParams extends msRest.RequestOptionsBase {
+  /**
+   * Settings to write
+   */
   body?: MachineSettingsUpdateDto[];
 }
+
+/**
+ * Defines headers for AddMachine operation.
+ */
+export interface AddMachineHeaders {
+  /**
+   * Location of the created machine
+   */
+  location: string;
+}
+
+/**
+ * Contains response data for the logout operation.
+ */
+export type LogoutResponse = ProblemDetails & {
+  /**
+   * The underlying HTTP response.
+   */
+  _response: msRest.HttpResponse & {
+      /**
+       * The response body as text (string format)
+       */
+      bodyAsText: string;
+
+      /**
+       * The response body as parsed JSON or XML
+       */
+      parsedBody: ProblemDetails;
+    };
+};
 
 /**
  * Contains response data for the getProfile operation.
@@ -193,11 +232,16 @@ export type GetAllMachinesResponse = Array<MachineMetadata> & {
 /**
  * Contains response data for the addMachine operation.
  */
-export type AddMachineResponse = Machine & {
+export type AddMachineResponse = Machine & AddMachineHeaders & {
   /**
    * The underlying HTTP response.
    */
   _response: msRest.HttpResponse & {
+      /**
+       * The parsed HTTP response headers.
+       */
+      parsedHeaders: AddMachineHeaders;
+
       /**
        * The response body as text (string format)
        */
@@ -211,9 +255,9 @@ export type AddMachineResponse = Machine & {
 };
 
 /**
- * Contains response data for the updateMachine operation.
+ * Contains response data for the machineById operation.
  */
-export type UpdateMachineResponse = {
+export type MachineByIdResponse = {
   /**
    * The parsed response body.
    */
@@ -236,9 +280,9 @@ export type UpdateMachineResponse = {
 };
 
 /**
- * Contains response data for the machineById operation.
+ * Contains response data for the updateMachine operation.
  */
-export type MachineByIdResponse = {
+export type UpdateMachineResponse = {
   /**
    * The parsed response body.
    */
@@ -303,7 +347,12 @@ export type GetMachineImageResponse = ProblemDetails & {
 /**
  * Contains response data for the getMachineSettings operation.
  */
-export type GetMachineSettingsResponse = Array<MachineSetting> & {
+export type GetMachineSettingsResponse = {
+  /**
+   * The parsed response body.
+   */
+  body: any;
+
   /**
    * The underlying HTTP response.
    */
@@ -316,7 +365,7 @@ export type GetMachineSettingsResponse = Array<MachineSetting> & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: MachineSetting[];
+      parsedBody: any;
     };
 };
 
@@ -343,7 +392,12 @@ export type UpdateMachineSettingsResponse = ProblemDetails & {
 /**
  * Contains response data for the getMachineSwitches operation.
  */
-export type GetMachineSwitchesResponse = Array<MachineSwitch> & {
+export type GetMachineSwitchesResponse = {
+  /**
+   * The parsed response body.
+   */
+  body: any;
+
   /**
    * The underlying HTTP response.
    */
@@ -356,7 +410,7 @@ export type GetMachineSwitchesResponse = Array<MachineSwitch> & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: MachineSwitch[];
+      parsedBody: any;
     };
 };
 
