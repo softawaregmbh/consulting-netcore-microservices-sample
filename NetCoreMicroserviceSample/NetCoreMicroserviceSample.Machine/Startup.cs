@@ -28,6 +28,11 @@ namespace NetCoreMicroserviceSample.Machine
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            if (Configuration.GetValue<bool>("UseLetsEncrypt", false))
+            {
+                services.AddLettuceEncrypt();
+            }
+
             string domain = $"{Configuration["Oidc:Domain"]}";
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

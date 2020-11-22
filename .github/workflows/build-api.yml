@@ -1,9 +1,11 @@
-name: Build Microservice Demo App
+name: Build Microservice Demo App (API)
 
 on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "NetCoreMicroserviceSample/NetCoreMicroserviceSample.Machine/**"
 env:
   DOTNET_VERSION: '5.0'
   NODE_VERSION: '14.x'
