@@ -34,7 +34,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         [HttpGet("logout", Name = "Logout")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(object), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task Logout()
         {
             await HttpContext.SignOutAsync("IdentityServer");
@@ -49,7 +49,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         [Authorize]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(UserProfile), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(object), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult GetProfile()
         {
             var identity = HttpContext.User.Identities.First();

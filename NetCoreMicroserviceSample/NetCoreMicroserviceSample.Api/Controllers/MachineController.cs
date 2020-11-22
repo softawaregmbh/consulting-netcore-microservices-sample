@@ -47,7 +47,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         [HttpGet("{id}", Name = "MachineById")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(MachineMetadata), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAsync(Guid id)
         {
             var machine = await dbContext.Machines
@@ -107,7 +107,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         [HttpPut("{id}", Name = "UpdateMachine")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(Machine), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PutAsync(Guid id, [FromBody] Machine machine)
         {
@@ -140,8 +140,8 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         /// </summary>
         /// <param name="id">ID of the machine to delete</param>
         [HttpDelete("{id}", Name = "DeleteMachine")]
-        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Delete(Guid id)
         {
             var machine = await dbContext.Machines.SingleOrDefaultAsync(m => m.Id == id);
@@ -163,7 +163,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         [HttpGet("{id}/settings", Name = "GetMachineSettings")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(IEnumerable<MachineSetting>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetSettingsAsync(Guid id)
         {
             var settings = await dbContext.MachineSettings.Where(s => s.MachineId == id).ToListAsync();
@@ -183,7 +183,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         [HttpGet("{id}/switches", Name = "GetMachineSwitches")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(MachineSwitch[]), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetSwitchesAsync(Guid id)
         {
             var switches = await dbContext.MachineSwitches.Where(s => s.MachineId == id).ToListAsync();
@@ -205,8 +205,8 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         /// <param name="id">ID of machine</param>
         /// <param name="settings">Settings to write</param>
         [HttpPut("{id}/settings", Name = "UpdateMachineSettings")]
-        [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> PutSettingsAsync(Guid id, [FromBody] MachineSettingsUpdateDto[] settings)
         {
             var existingSettings = await dbContext.MachineSettings.Where(s => s.MachineId == id).ToListAsync();

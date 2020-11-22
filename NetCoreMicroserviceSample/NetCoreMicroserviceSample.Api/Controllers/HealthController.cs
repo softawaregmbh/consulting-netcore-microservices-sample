@@ -13,7 +13,6 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet(Name = "GetHealth")]
-        [Produces(MediaTypeNames.Text.Html)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public string Get() => "I'm alive ;)";
     }
