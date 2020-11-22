@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using Grpc.Core;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NetCoreMicroserviceSample.Api.Controllers
 {
@@ -132,6 +133,7 @@ namespace NetCoreMicroserviceSample.Api.Controllers
             return Ok(switches);
         }
 
+        [SuppressMessage("Design", "CA1812", Justification = "Instantiated by JsonSerializer")]
         private class OidcAccessToken
         {
             [JsonPropertyName("access_token")]

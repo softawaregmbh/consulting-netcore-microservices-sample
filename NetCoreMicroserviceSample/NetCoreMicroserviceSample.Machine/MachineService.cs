@@ -17,7 +17,6 @@ namespace NetCoreMicroserviceSample.Machine
     public class MachineService : MachineAccessBase
     {
         private readonly ILogger<MachineService> logger;
-        private readonly ConcurrentDictionary<Guid, double> speeds = new();
 
         public MachineService(ILogger<MachineService> logger)
         {
