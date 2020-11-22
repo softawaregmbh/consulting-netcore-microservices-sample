@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>preview</LangVersion>
         <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
