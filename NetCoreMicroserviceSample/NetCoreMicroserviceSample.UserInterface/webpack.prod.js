@@ -1,5 +1,4 @@
 const { merge } = require('webpack-merge');
-const { DefinePlugin } = require('webpack');
 const common = require('./webpack.common.js');
 const TerserPlugin = require('terser-webpack-plugin');
 
@@ -8,8 +7,5 @@ module.exports = merge(common, {
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()],
-  },
-  plugins: [
-    new DefinePlugin({ API_DOMAIN: JSON.stringify('/') })
-  ]
+  }
 });

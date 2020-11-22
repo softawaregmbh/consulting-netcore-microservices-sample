@@ -1,34 +1,45 @@
 import { Machine, MachineMetadata, MachineSetting, MachineSwitch } from "./apiClient/models";
 
 export class MachineConfigurationViewModel {
-    private profile: HTMLDivElement;
-    private loadingIndicator: HTMLDivElement;
-    private settingsContainer: HTMLDivElement;
-    private loadedContent: HTMLDivElement;
-    private machinesDropdown: HTMLSelectElement;
-    private machineDescription: HTMLInputElement;
-    private settingName: HTMLInputElement;
-    private settingValue: HTMLInputElement;
-    private settingsUpdateButton: HTMLButtonElement;
-    private machineContainer: HTMLDivElement;
-    private machineImageContainer: HTMLDivElement;
-    private machineSensorValue: HTMLInputElement;
+    //#region Get references to HTML elements
+    private profile: HTMLDivElement = <HTMLDivElement>document.getElementById('profile');
+    private login: HTMLAnchorElement = <HTMLAnchorElement>document.getElementById('login');
+    private logout: HTMLAnchorElement = <HTMLAnchorElement>document.getElementById('logout');
+    private profileLoadingIndicator: HTMLDivElement = <HTMLDivElement>document.getElementById('profile-loading-indicator');
+    private profileLoadedContent: HTMLDivElement = <HTMLDivElement>document.getElementById('profile-loaded');
+    private welcome: HTMLDivElement = <HTMLParagraphElement>document.getElementById('welcome');
+    private loadingIndicator: HTMLDivElement = <HTMLDivElement>document.getElementById('loading-indicator');
+    private settingsContainer: HTMLDivElement = <HTMLDivElement>document.getElementById('settings');
+    private loadedContent: HTMLDivElement = <HTMLDivElement>document.getElementById('loaded-content');
+    private machinesDropdown: HTMLSelectElement = <HTMLSelectElement>document.getElementById('machines-dropdown');
+    private machineDescription: HTMLInputElement = <HTMLInputElement>document.getElementById('machine-description');
+    private settingName: HTMLInputElement = <HTMLInputElement>document.getElementById('setting-name');
+    private settingValue: HTMLInputElement = <HTMLInputElement>document.getElementById('setting-value');
+    private settingsUpdateButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('settings-update-btn');
+    private machineContainer: HTMLDivElement = <HTMLDivElement>document.getElementById('machine-container');
+    private machineImageContainer: HTMLDivElement = <HTMLDivElement>document.getElementById('machine-image-container');
+    private machineSensorValue: HTMLInputElement = <HTMLInputElement>document.getElementById('machine-sensor-value');
     private hook: HTMLElement;
-    private login: HTMLAnchorElement;
-    private logout: HTMLAnchorElement;
+    //#endregion
 
+    //#region Internal fields holding state
     private machineList: MachineMetadata[];
     private machineSettings: MachineSetting[];
     private machineSwitches: MachineSwitch[];
-
     private selectedMachine: MachineMetadata;
     private selectedSetting: MachineSetting;
+    //#endregion
 
+    //#region Callbacks
+    /** Callback that will be called when the user selects a new machine */
     public selectMachine: (machine: MachineMetadata) => void;
-    public updateMachineData: (machine: MachineMetadata) => void;
 
+    /** Callback that will be called when the user clicks on a switch */
     public switchClicked: (machineSwitch: MachineSwitch) => void;
+
+    /** Callback that will be called when the user requests to store machine settings */
     public settingsSaveClicked: (machine: MachineMetadata, settings: MachineSetting[]) => void;
+    //#endregion
 
     public set machines(machines: MachineMetadata[]) {
         // Clear existing list of machines
@@ -72,21 +83,6 @@ export class MachineConfigurationViewModel {
     }
 
     constructor() {
-        this.loadingIndicator = <HTMLDivElement>document.getElementById('loading-indicator');
-        this.settingsContainer = <HTMLDivElement>document.getElementById('settings');
-        this.loadedContent = <HTMLDivElement>document.getElementById('loaded-content');
-        this.machinesDropdown = <HTMLSelectElement>document.getElementById('machines-dropdown');
-        this.machineDescription = <HTMLInputElement>document.getElementById('machine-description');
-        this.settingName = <HTMLInputElement>document.getElementById('setting-name');
-        this.settingValue = <HTMLInputElement>document.getElementById('setting-value');
-        this.settingsUpdateButton = <HTMLButtonElement>document.getElementById('settings-update-btn');
-        this.machineContainer = <HTMLDivElement>document.getElementById('machine-container');
-        this.machineImageContainer = <HTMLDivElement>document.getElementById('machine-image-container');
-        this.machineSensorValue = <HTMLInputElement>document.getElementById('machine-sensor-value');
-        this.profile = <HTMLDivElement>document.getElementById('profile');
-        this.login = <HTMLAnchorElement>document.getElementById('login');
-        this.logout = <HTMLAnchorElement>document.getElementById('logout');
-
         this.machinesDropdown.onchange = ev => this.onSelectedMachineChanged(ev);
         this.settingsUpdateButton.onclick = ev => this.onSettingsUpdate(ev);
     }
@@ -199,8 +195,18 @@ export class MachineConfigurationViewModel {
     }
 
     public setProfile(profile: (string | null)) {
+        const isSignedIn = !!profile;
+
+        // Remove loading indicator
+        this.profileLoadingIndicator.hidden = true;
+        this.profileLoadedContent.hidden = false;
+
+        // Display welcome message if user is signed in
+        this.welcome.hidden = !isSignedIn;
         this.profile.innerText = profile ?? '';
-        this.login.hidden = !!profile;
-        this.logout.hidden = !!!profile;
+
+        // Hide/show login/logout depending on whether the user is signed in
+        this.login.hidden = isSignedIn;
+        this.logout.hidden = !isSignedIn;
     }
 }

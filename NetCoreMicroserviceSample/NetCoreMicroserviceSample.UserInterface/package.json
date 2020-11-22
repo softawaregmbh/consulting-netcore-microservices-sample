@@ -25,14 +25,14 @@
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.4.0"
+    "webpack-merge": "^5.4.0",
+    "terser-webpack-plugin": "^5.0.3"
   },
   "dependencies": {
     "@aspnet/signalr": "^1.1.4",
     "@azure/ms-rest-js": "^2.1.0",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
-    "popper.js": "^1.16.1",
-    "terser-webpack-plugin": "^5.0.3"
+    "popper.js": "^1.16.1"
   }
 }

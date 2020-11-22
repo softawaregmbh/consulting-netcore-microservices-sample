@@ -6,18 +6,16 @@ import { NetCoreMicroserviceSampleApi } from './apiClient/netCoreMicroserviceSam
 import { MachineSettingsUpdateDto, UserProfile } from './apiClient/models';
 import { HubConnectionBuilder } from '@aspnet/signalr';
 
-declare const API_DOMAIN: string;
-
 document.addEventListener('DOMContentLoaded', async () => {
     var hubConnection = new HubConnectionBuilder()
-        .withUrl(API_DOMAIN + "/livedata")
+        .withUrl("/livedata")
         .build();
 
     hubConnection.start();
     
     var viewModel = new MachineConfigurationViewModel();
     
-    var profileClient = new NetCoreMicroserviceSampleApi({ baseUri: API_DOMAIN });
+    var profileClient = new NetCoreMicroserviceSampleApi({ baseUri: '/' });
     profileClient.getProfile().then(
         response => viewModel.setProfile((response as any).name),
         () => viewModel.setProfile(null));
@@ -48,10 +46,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
     }
 
-    viewModel.updateMachineData = async m => {
-        await client.updateMachine(m);
-    }
-
     viewModel.settingsSaveClicked = async (machine, settings) => {
         console.log("setting save clicked", machine, settings);
 
@@ -79,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let hookDistanceX = initialHookDistance;
 
     try {
-        var client = new NetCoreMicroserviceSampleApi({ baseUri: API_DOMAIN });
+        var client = new NetCoreMicroserviceSampleApi({ baseUri: '/' });
         const machines = await client.getAllMachines();
 
         viewModel.machines = machines;
