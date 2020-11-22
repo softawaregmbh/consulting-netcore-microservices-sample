@@ -8,8 +8,8 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <DocumentationFile>C:\Code\GitHub\consulting-netcore-microservices-sample\NetCoreMicroserviceSample\NetCoreMicroserviceSample.Api\NetCoreMicroserviceSample.Api.xml</DocumentationFile>
-      <NoWarn>1591</NoWarn>
+        <DocumentationFile>NetCoreMicroserviceSample.Api.xml</DocumentationFile>
+        <NoWarn>1591</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,8 +17,8 @@
         <PackageReference Include="Grpc.Net.Client" Version="2.33.1" />
         <PackageReference Include="Grpc.Net.ClientFactory" Version="2.33.1" />
         <PackageReference Include="Grpc.Tools" Version="2.33.1">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" NoWarn="NU1605" />
@@ -41,7 +41,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Protobuf Include="..\NetCoreMicroserviceSample.Machine\machine.proto" Link="machine.proto" GrpcServices="Client" />
+        <Protobuf Include="..\NetCoreMicroserviceSample.Machine\machine.proto" Link="machine.proto" GrpcServices="Client" />
     </ItemGroup>
 
     <ItemGroup>
@@ -49,8 +49,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="NetCoreMicroserviceSample.Api.xml">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+        <None Update="NetCoreMicroserviceSample.Api.xml">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 </Project>
