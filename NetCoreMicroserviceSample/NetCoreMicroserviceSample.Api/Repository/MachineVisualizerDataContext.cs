@@ -77,11 +77,11 @@ namespace NetCoreMicroserviceSample.Api.Repository
 
             modelBuilder.Entity<MachineSetting>().HasData(new
             {
-                Id = Guid.NewGuid(),
+                Id = new Guid("c0927560-36b9-403b-b9cf-d5a96d7cc075"),
                 MachineId = machineGuid1,
-                Name = "Setting 1",
-                Description = "Description Setting 1",
-                Value = 5.6,
+                Name = "Speed",
+                Description = "Speed of crane hook",
+                Value = 1d,
                 PositionX = 124,
                 PositionY = -7
             });
@@ -100,10 +100,10 @@ namespace NetCoreMicroserviceSample.Api.Repository
 
             modelBuilder.Entity<MachineSwitch>().HasData(new
             {
-                Id = Guid.NewGuid(),
+                Id = new Guid("87a217b2-90e7-48a7-a477-7b2d2bf40f49"),
                 MachineId = machineGuid1,
-                Name = "Switch 1",
-                Description = "Switch Setting 1",
+                Name = "StopStartHook",
+                Description = "Start/Stop hook",
                 Value = true,
                 PositionX = 212,
                 PositionY = 80

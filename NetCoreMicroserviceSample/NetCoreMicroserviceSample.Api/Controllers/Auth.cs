@@ -3,36 +3,53 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Net;
+using System.Net.Mime;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace NetCoreMicroserviceSample.Api.Controllers
 {
+    /// <summary>
+    /// Controller methods related to authentication
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class Auth : ControllerBase
     {
+        /// <summary>
+        /// Trigger login process
+        /// </summary>
         [HttpGet("login", Name = "Login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task Login()
         {
             await HttpContext.ChallengeAsync("IdentityServer", new AuthenticationProperties() { RedirectUri = "/" });
         }
 
+        /// <summary>
+        /// Trigger logout process
+        /// </summary>
         [HttpGet("logout", Name = "Logout")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status401Unauthorized)]
         public async Task Logout()
         {
             await HttpContext.SignOutAsync("IdentityServer");
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
+        /// <summary>
+        /// Get user profile of currently signed in user
+        /// </summary>
+        /// <returns>User profile</returns>
         [HttpGet("profile", Name = "GetProfile")]
         [Authorize]
-        [ProducesResponseType(typeof(UserProfile), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(UserProfile), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status401Unauthorized)]
         public IActionResult GetProfile()
         {
             var identity = HttpContext.User.Identities.First();

@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetCoreMicroserviceSample.Api</name>
+    </assembly>
+    <members>
+        <member name="T:NetCoreMicroserviceSample.Api.Controllers.Auth">
+            <summary>
+            Controller methods related to authentication
+            </summary>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.Auth.Login">
+            <summary>
+            Trigger login process
+            </summary>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.Auth.Logout">
+            <summary>
+            Trigger logout process
+            </summary>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.Auth.GetProfile">
+            <summary>
+            Get user profile of currently signed in user
+            </summary>
+            <returns>User profile</returns>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.HealthController.Get">
+            <summary>
+            Find out whether API is running
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.MachineController.Get">
+            <summary>
+            Get a list of available machines
+            </summary>
+            <returns>List of machines</returns>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.MachineController.GetAsync(System.Guid)">
+            <summary>
+            Get a machine by id
+            </summary>
+            <param name="id">ID of the machine to get</param>
+            <returns>Machine</returns>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.MachineController.GetImageAsync(System.Guid)">
+            <summary>
+            Get SVG image for machine with given ID
+            </summary>
+            <param name="id">ID of the machine</param>
+            <returns>Machine SVG image</returns>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.MachineController.PostAsync(NetCoreMicroserviceSample.Api.Domain.Machine)">
+            <summary>
+            Create a machine
+            </summary>
+            <param name="machine">Machine to create</param>
+            <returns>Created machine</returns>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.MachineController.PutAsync(System.Guid,NetCoreMicroserviceSample.Api.Domain.Machine)">
+            <summary>
+            Update machine with given id
+            </summary>
+            <param name="id">ID of the machine to update</param>
+            <param name="machine">Machine data</param>
+            <remarks>
+            ID in URL and body must match. If they don't, bad request is returned.
+            </remarks>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.MachineController.Delete(System.Guid)">
+            <summary>
+            Delete a machine with given ID
+            </summary>
+            <param name="id">ID of the machine to delete</param>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.MachineController.GetSettingsAsync(System.Guid)">
+            <summary>
+            Get settings for a given machine
+            </summary>
+            <param name="id">Machine ID</param>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.MachineController.GetSwitchesAsync(System.Guid)">
+            <summary>
+            Get switches for a given machine
+            </summary>
+            <param name="id">Machine ID</param>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.MachineController.PutSettingsAsync(System.Guid,NetCoreMicroserviceSample.Api.Controllers.MachineController.MachineSettingsUpdateDto[])">
+            <summary>
+            Write settings to DB and to machine
+            </summary>
+            <param name="id">ID of machine</param>
+            <param name="settings">Settings to write</param>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.Api.Controllers.MachineController.PostSwitchAsync(System.Guid,System.Guid)">
+            <summary>
+            Trigger switch (sent to machine)
+            </summary>
+            <param name="id">ID of machine</param>
+            <param name="switchId">ID of switch</param>
+        </member>
+        <member name="T:NetCoreMicroserviceSample.MachineService.MachineReflection">
+            <summary>Holder for reflection information generated from machine.proto</summary>
+        </member>
+        <member name="P:NetCoreMicroserviceSample.MachineService.MachineReflection.Descriptor">
+            <summary>File descriptor for machine.proto</summary>
+        </member>
+        <member name="F:NetCoreMicroserviceSample.MachineService.MachineSettingsUpdate.MachineIdFieldNumber">
+            <summary>Field number for the "MachineId" field.</summary>
+        </member>
+        <member name="F:NetCoreMicroserviceSample.MachineService.MachineSettingsUpdate.SettingIdFieldNumber">
+            <summary>Field number for the "SettingId" field.</summary>
+        </member>
+        <member name="F:NetCoreMicroserviceSample.MachineService.MachineSettingsUpdate.ValueFieldNumber">
+            <summary>Field number for the "Value" field.</summary>
+        </member>
+        <member name="F:NetCoreMicroserviceSample.MachineService.SwitchTrigger.MachineIdFieldNumber">
+            <summary>Field number for the "MachineId" field.</summary>
+        </member>
+        <member name="F:NetCoreMicroserviceSample.MachineService.SwitchTrigger.SwitchIdFieldNumber">
+            <summary>Field number for the "SwitchId" field.</summary>
+        </member>
+        <member name="F:NetCoreMicroserviceSample.MachineService.MachineResponse.ResultCodeFieldNumber">
+            <summary>Field number for the "ResultCode" field.</summary>
+        </member>
+        <member name="P:NetCoreMicroserviceSample.MachineService.MachineResponse.ResultCode">
+            <summary>
+            For demo purposes only, will always be 1
+            </summary>
+        </member>
+        <member name="F:NetCoreMicroserviceSample.MachineService.MeasurementRequest.MachineIdFieldNumber">
+            <summary>Field number for the "MachineId" field.</summary>
+        </member>
+        <member name="F:NetCoreMicroserviceSample.MachineService.MeasurementResponse.MachineIdFieldNumber">
+            <summary>Field number for the "MachineId" field.</summary>
+        </member>
+        <member name="F:NetCoreMicroserviceSample.MachineService.MeasurementResponse.ValueFieldNumber">
+            <summary>Field number for the "Value" field.</summary>
+        </member>
+        <member name="P:NetCoreMicroserviceSample.MachineService.MachineAccess.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:NetCoreMicroserviceSample.MachineService.MachineAccess.MachineAccessClient">
+            <summary>Client for MachineAccess</summary>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.MachineService.MachineAccess.MachineAccessClient.#ctor(Grpc.Core.ChannelBase)">
+            <summary>Creates a new client for MachineAccess</summary>
+            <param name="channel">The channel to use to make remote calls.</param>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.MachineService.MachineAccess.MachineAccessClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for MachineAccess that uses a custom <c>CallInvoker</c>.</summary>
+            <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.MachineService.MachineAccess.MachineAccessClient.#ctor">
+            <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.MachineService.MachineAccess.MachineAccessClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Protected constructor to allow creation of configured clients.</summary>
+            <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:NetCoreMicroserviceSample.MachineService.MachineAccess.MachineAccessClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+        </member>
+    </members>
+</doc>

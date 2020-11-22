@@ -7,6 +7,11 @@
         <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DocumentationFile>C:\Code\GitHub\consulting-netcore-microservices-sample\NetCoreMicroserviceSample\NetCoreMicroserviceSample.Api\NetCoreMicroserviceSample.Api.xml</DocumentationFile>
+      <NoWarn>1591</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Google.Protobuf" Version="3.14.0" />
         <PackageReference Include="Grpc.Net.Client" Version="2.33.1" />
@@ -28,6 +33,7 @@
         <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
         <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -40,5 +46,11 @@
 
     <ItemGroup>
         <Content Update="wwwroot\**\*.*" CopyToPublishDirectory="Never" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="NetCoreMicroserviceSample.Api.xml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 </Project>

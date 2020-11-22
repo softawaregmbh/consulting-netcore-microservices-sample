@@ -44,6 +44,29 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
 
   /**
    * @param [options] The optional parameters
+   * @returns Promise<msRest.RestResponse>
+   */
+  logout(options?: msRest.RequestOptionsBase): Promise<msRest.RestResponse>;
+  /**
+   * @param callback The callback
+   */
+  logout(callback: msRest.ServiceCallback<void>): void;
+  /**
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  logout(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<void>): void;
+  logout(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<void>, callback?: msRest.ServiceCallback<void>): Promise<msRest.RestResponse> {
+    return this.sendOperationRequest(
+      {
+        options
+      },
+      logoutOperationSpec,
+      callback);
+  }
+
+  /**
+   * @param [options] The optional parameters
    * @returns Promise<Models.GetProfileResponse>
    */
   getProfile(options?: msRest.RequestOptionsBase): Promise<Models.GetProfileResponse>;
@@ -302,14 +325,14 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
    * @param id
    * @param callback The callback
    */
-  getMachineSwitches(id: string, callback: msRest.ServiceCallback<any>): void;
+  getMachineSwitches(id: string, callback: msRest.ServiceCallback<Models.MachineSwitch[]>): void;
   /**
    * @param id
    * @param options The optional parameters
    * @param callback The callback
    */
-  getMachineSwitches(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<any>): void;
-  getMachineSwitches(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<any>, callback?: msRest.ServiceCallback<any>): Promise<Models.GetMachineSwitchesResponse> {
+  getMachineSwitches(id: string, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.MachineSwitch[]>): void;
+  getMachineSwitches(id: string, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.MachineSwitch[]>, callback?: msRest.ServiceCallback<Models.MachineSwitch[]>): Promise<Models.GetMachineSwitchesResponse> {
     return this.sendOperationRequest(
       {
         id,
@@ -355,7 +378,17 @@ class NetCoreMicroserviceSampleApi extends NetCoreMicroserviceSampleApiContext {
 const serializer = new msRest.Serializer(Mappers);
 const loginOperationSpec: msRest.OperationSpec = {
   httpMethod: "GET",
-  path: "api/Auth",
+  path: "api/Auth/login",
+  responses: {
+    200: {},
+    default: {}
+  },
+  serializer
+};
+
+const logoutOperationSpec: msRest.OperationSpec = {
+  httpMethod: "GET",
+  path: "api/Auth/logout",
   responses: {
     200: {},
     default: {}
@@ -589,9 +622,6 @@ const getMachineSwitchesOperationSpec: msRest.OperationSpec = {
           }
         }
       }
-    },
-    404: {
-      bodyMapper: Mappers.ProblemDetails
     },
     default: {}
   },

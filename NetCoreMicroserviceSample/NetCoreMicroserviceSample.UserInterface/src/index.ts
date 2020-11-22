@@ -17,14 +17,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     var profileClient = new NetCoreMicroserviceSampleApi({ baseUri: '/' });
     profileClient.getProfile().then(
-        response => viewModel.setProfile((response as any).name),
-        () => viewModel.setProfile(null));
+        response => viewModel.profile = (<UserProfile>response).name,
+        () => viewModel.profile = null);
 
     viewModel.selectMachine = async m => {
         console.log(m.name + ' selected');
 
         const imageResponse = await client.getMachineImage(m.id);
-        viewModel.setMachineImage(imageResponse._response.bodyAsText);
+        viewModel.machineImage = imageResponse._response.bodyAsText;
 
         viewModel.settings = await client.getMachineSettings(m.id);
         viewModel.switches = await client.getMachineSwitches(m.id);
@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         const machines = await client.getAllMachines();
 
         viewModel.machines = machines;
-        viewModel.removeLoadingIndicator();
 
         animateHook();
 

@@ -5,6 +5,8 @@ using NetCoreMicroserviceSample.Api;
 using Serilog;
 using System;
 
+AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();

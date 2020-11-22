@@ -2,7 +2,7 @@ import { Machine, MachineMetadata, MachineSetting, MachineSwitch } from "./apiCl
 
 export class MachineConfigurationViewModel {
     //#region Get references to HTML elements
-    private profile: HTMLDivElement = <HTMLDivElement>document.getElementById('profile');
+    private profileDiv: HTMLDivElement = <HTMLDivElement>document.getElementById('profile');
     private login: HTMLAnchorElement = <HTMLAnchorElement>document.getElementById('login');
     private logout: HTMLAnchorElement = <HTMLAnchorElement>document.getElementById('logout');
     private profileLoadingIndicator: HTMLDivElement = <HTMLDivElement>document.getElementById('profile-loading-indicator');
@@ -41,116 +41,170 @@ export class MachineConfigurationViewModel {
     public settingsSaveClicked: (machine: MachineMetadata, settings: MachineSetting[]) => void;
     //#endregion
 
+    //#region Properties for setting machine-related data
+    /** Set list of available machines */
     public set machines(machines: MachineMetadata[]) {
-        // Clear existing list of machines
-        while (this.machinesDropdown.options.length > 0) {
-            this.machinesDropdown.remove(0);
-        }
+        // Clear machines dropdown
+        while (this.machinesDropdown.options.length > 0) this.machinesDropdown.remove(0);
 
-        // Add all machines
+        // Cleanup existing image
+        this.cleanUpImage();
+
+        // Hide settings container. Will become visible if user selects
+        // a setting that she wants to edit.
+        this.settingsContainer.hidden = true;
+
+        // Add all machines to selection list
         machines.forEach(m => this.addMachineToSelectionList(m));
 
         // Store machines for later use
         this.machineList = machines;
-        if (this.selectMachine && this.machineList.length > 0) {
-            // cleanup
-            this.cleanUpImage();
-            this.settingsContainer.hidden = true;
 
-            this.selectedMachine = this.machineList[0];
-
+        if (this.machineList.length > 0) {
             // Select first machine and set metadata
+            this.selectedMachine = this.machineList[0];
             this.setMachineMetadata(this.selectedMachine);
-            this.selectMachine(this.selectedMachine);
+
+            if (this.selectMachine) {
+                // Call callback function
+                this.selectMachine(this.selectedMachine);
+            }
         }
+
+        // Remove loading indicator
+        this.loadingIndicator.hidden = true;
+        this.loadedContent.hidden = false;
     }
 
+    /** Set list of available settings for currently selected machine */
     public set settings(settings: MachineSetting[]) {
         this.machineSettings = settings;
         settings.forEach(s => this.addSettingToImage(s));
     }
 
-    public set switches(switches: any) { // TODO - why is the MachineSwitch[] not working here?
+    /** Set list of available switches for currently selected machine */
+    public set switches(switches: MachineSwitch[]) {
         this.machineSwitches = switches;
         switches.forEach(s => this.addSwitchToImage(s));
     }
 
+    /** Set current sensor value for currently selected machine */
     public set sensorValue(value: number) {
         this.machineSensorValue.value = value + "";
 
+        // For demo purposes, we animate the "hook" (element in SVG of crane
+        // which represents machine 1).
         this.hook = <HTMLElement>document.getElementById('hook');
-        this.hook.setAttribute('x', value + "");
+        if (this.hook) {
+            this.hook.setAttribute('x', value + "");
+        }
     }
+    
+    public set machineImage(svgImage: string) {
+        this.machineImageContainer.innerHTML = svgImage;
+    }
+
+    public set profile(profileString: (string | null)) {
+        const isSignedIn = !!profileString;
+
+        // Remove loading indicator
+        this.profileLoadingIndicator.hidden = true;
+        this.profileLoadedContent.hidden = false;
+
+        // Display welcome message if user is signed in
+        this.welcome.hidden = !isSignedIn;
+        this.profileDiv.innerText = profileString ?? '';
+
+        // Hide/show login/logout depending on whether the user is signed in
+        this.login.hidden = isSignedIn;
+        this.logout.hidden = !isSignedIn;
+    }
+
+    //#endregion
 
     constructor() {
         this.machinesDropdown.onchange = ev => this.onSelectedMachineChanged(ev);
-        this.settingsUpdateButton.onclick = ev => this.onSettingsUpdate(ev);
+        this.settingsUpdateButton.onclick = () => this.onSettingsUpdate();
     }
 
+    //#region Event handler
+    /** Handler for machine selection change */
     private onSelectedMachineChanged(ev: Event): void {
-        if (this.machineList && this.machineList.length > 0 && this.selectMachine) {
-            // Get currently selected machine
-            const machineId = ((<HTMLSelectElement>ev.target).value);
-            if (machineId) {
+        // Get currently selected machine
+        const machineId = ((<HTMLSelectElement>ev.target).value);
+        if (machineId && this.machineList && this.machineList.length > 0) {
+            // Cleanup settings and image
+            this.selectedSetting = null;
+            this.settingsContainer.hidden = true;
+            this.cleanUpImage();
 
-                // cleanup
-                this.selectedSetting = null;
-                this.settingsContainer.hidden = true;
-                this.cleanUpImage();
+            // Find selected machine in machine list
+            this.selectedMachine = this.machineList.find(m => m.id === machineId);
 
-                // Select machine
-                this.selectedMachine = this.machineList.find(m => m.id === machineId);
-                this.setMachineMetadata(this.selectedMachine);
+            // Display machine metadata
+            this.setMachineMetadata(this.selectedMachine);
+
+            if (this.selectMachine) {
+                // Call callback
                 this.selectMachine(this.selectedMachine);
             }
         }
     }
 
+    /** Handler for click on machine settings button */
     private onSettingClicked(ev: Event) {
-        console.log("setting clicked", (<HTMLElement>ev.target).id);
-
+        // Find machine setting in list of settings
         const clickedSetting = this.machineSettings.find(s => s.id == (<HTMLElement>ev.target).id);
+
+        // Store selected setting for later use
         this.selectedSetting = clickedSetting;
+
+        // Display selected setting
         this.settingsContainer.hidden = false;
         this.settingName.value = clickedSetting.name;
-        this.settingValue.value = clickedSetting.value + "";
+        this.settingValue.value = clickedSetting.value.toString();
     }
 
+    /** Handler for click on machine switch */
     private onSwitchClicked(ev: Event) {
         if (this.switchClicked) {
+            // Find switch in list of switches
             const clickedSwitch = this.machineSwitches.find(s => s.id == (<HTMLElement>ev.target).id);
+
+            // Call callback
             this.switchClicked(clickedSwitch);
         }
     }
 
+    /** Display machine metadata */
     private setMachineMetadata(m: MachineMetadata) {
         this.machineDescription.value = m.description;
     }
 
-    private onSettingsUpdate(ev: Event): void {
+    /** Handler for "Update settings" button */
+    private onSettingsUpdate(): void {
         if (this.settingsSaveClicked && this.selectedSetting) {
-
+            // Copy machine settings
             const dataToUpdate = [... this.machineSettings];
 
+            // Write changed setting
             var settingToUpdate = dataToUpdate.find(s => s.id === this.selectedSetting.id);
             settingToUpdate.value = parseFloat(this.settingValue.value);
 
+            // Call callback
             this.settingsSaveClicked(this.selectedMachine, dataToUpdate);
         }
     }
 
+    /** Removes image, switches, and settings indicators */
     private cleanUpImage() {
-        this.machineContainer.innerHTML = "";
-
-        const imageContainer = document.createElement('div');
-        imageContainer.setAttribute("id", "machine-image-container");
-
-        this.machineImageContainer = imageContainer;
-
-        this.machineContainer.appendChild(imageContainer);
+        Array.from(this.machineContainer.childNodes)
+            .filter(c => c !== this.machineImageContainer)
+            .forEach(r => this.machineContainer.removeChild(r));
     }
 
-    private addMachineToSelectionList(machine: MachineMetadata, selected: boolean = true): void {
+    /** Add selection option to machine list */
+    private addMachineToSelectionList(machine: MachineMetadata): void {
         // Add option to machine list
         const node = document.createElement('option');
         node.setAttribute('value', machine.id);
@@ -159,19 +213,18 @@ export class MachineConfigurationViewModel {
         this.machinesDropdown.append(node);
     }
 
+    /** Add setting indicator to image */
     private addSettingToImage(setting: MachineSetting): void {
-        // Add option to machine list
         const node = document.createElement('div');
         node.setAttribute('style', "cursor: pointer; font-size: 82px; color: red; position: absolute; left:" + setting.positionX + "px; top:" + setting.positionY + "px;");
         node.setAttribute('id', setting.id);
         const text = document.createTextNode("•");
         node.appendChild(text);
-
         node.onclick = ev => this.onSettingClicked(ev);
-
         this.machineContainer.appendChild(node);
     }
 
+    /** Add switch to image */
     private addSwitchToImage(switchToAdd: MachineSwitch): void {
         // Add option to machine list
         const node = document.createElement('button');
@@ -179,34 +232,8 @@ export class MachineConfigurationViewModel {
         node.setAttribute('id', switchToAdd.id);
         const text = document.createTextNode(switchToAdd.name);
         node.appendChild(text);
-
         node.onclick = ev => this.onSwitchClicked(ev);
-
         this.machineContainer.appendChild(node);
     }
-
-    public removeLoadingIndicator(): void {
-        this.loadingIndicator.hidden = true;
-        this.loadedContent.hidden = false;
-    }
-
-    public setMachineImage(svgImage: string) {
-        this.machineImageContainer.innerHTML = svgImage;
-    }
-
-    public setProfile(profile: (string | null)) {
-        const isSignedIn = !!profile;
-
-        // Remove loading indicator
-        this.profileLoadingIndicator.hidden = true;
-        this.profileLoadedContent.hidden = false;
-
-        // Display welcome message if user is signed in
-        this.welcome.hidden = !isSignedIn;
-        this.profile.innerText = profile ?? '';
-
-        // Hide/show login/logout depending on whether the user is signed in
-        this.login.hidden = isSignedIn;
-        this.logout.hidden = !isSignedIn;
-    }
+    //#endregion
 }

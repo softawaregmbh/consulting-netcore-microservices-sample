@@ -343,12 +343,7 @@ export type UpdateMachineSettingsResponse = ProblemDetails & {
 /**
  * Contains response data for the getMachineSwitches operation.
  */
-export type GetMachineSwitchesResponse = {
-  /**
-   * The parsed response body.
-   */
-  body: any;
-
+export type GetMachineSwitchesResponse = Array<MachineSwitch> & {
   /**
    * The underlying HTTP response.
    */
@@ -361,7 +356,7 @@ export type GetMachineSwitchesResponse = {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: any;
+      parsedBody: MachineSwitch[];
     };
 };
 
