@@ -8,9 +8,7 @@ on:
       - "NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api/**"
       - "NetCoreMicroserviceSample/NetCoreMicroserviceSample.UserInterface/**"
 env:
-  DOTNET_VERSION: '5.0'
   MACHINE_PATH: './NetCoreMicroserviceSample/NetCoreMicroserviceSample.Machine'
-  CONFIG: 'Debug'
 
 jobs:
   build:
@@ -18,11 +16,6 @@ jobs:
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@master
-
-    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
   
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
