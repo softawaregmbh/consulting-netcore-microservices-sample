@@ -66,7 +66,6 @@ namespace NetCoreMicroserviceSample.Api.Controllers
         /// <param name="id">ID of the machine</param>
         /// <returns>Machine SVG image</returns>
         [HttpGet("{id}/image", Name = "GetMachineImage")]
-        [Produces("image/svg+xml")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetImageAsync(Guid id)
