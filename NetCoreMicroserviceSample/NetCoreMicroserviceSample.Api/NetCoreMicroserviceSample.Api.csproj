@@ -13,6 +13,11 @@
         <NoWarn>1591</NoWarn>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <DocumentationFile>NetCoreMicroserviceSample.Api.xml</DocumentationFile>
+        <NoWarn>1591</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Google.Protobuf" Version="3.14.0" />
         <PackageReference Include="Grpc.Net.Client" Version="2.33.1" />
