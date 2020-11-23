@@ -1,6 +1,19 @@
 # NetCoreMicroserviceSample
 
-This sample project consists of multiple (micro-)services based on .NET 5. It's part of a consulting workshop and free to use.
+This project consists of multiple (micro-)services based on .NET 5. It's part of a consulting workshop and free to use.
+
+## General
+
+This sample is a simplified abstraction of a *machine visualization* based on a sample machine implementation (simulated via a console application), an ASP.NET Core REST service backend and a HTML frontend. For demonstration purposes an additional OpenID Connect/OAuth 2 user authorization is included in the REST backend.
+
+## User Flow / Program Flow
+
+* User logs in into the system
+* The UI is loading the available machines and displays them
+* The user can select one of the available machines for further details
+* Afterwards the machine visualization (in our sample SVG) and some machine specific data (settings, switches) is loaded and displayed
+* The used can directly interact with settings and switches in the displayed machine visualization
+
 
 ## Technologies
 
@@ -15,21 +28,17 @@ The following technologies should be demonstrated:
 
 ## Project architecture
 
-TODO: graphic goes here ;)
+![Architecture](doc/assets/arch.svg)
 
 ## Overall project folder structure
 
 The following (sub-)projects are part of this sample:
 
-* [Main .NET 5 project](NetCoreMicroserviceSample/NetCoreMicroserviceSample.Common) with base domain classes and interfaces
 * [ASP .NET project](NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api) with API controllers and REST service endpoints
 * [gRPC machine simulation](NetCoreMicroserviceSample/NetCoreMicroserviceSample.Machine) as remote machine data service
-* [HTML5 web frontend](NetCoreMicroserviceSample/NetCoreMicroserviceSample.Web) as simple 2D HMI frontend
-* [In memory implementation of the data repository](NetCoreMicroserviceSample/NetCoreMicroserviceSample.Repositories.InMemory) for storing sample machine data (without a "real" database)
+* [HTML5 web frontend](NetCoreMicroserviceSample/NetCoreMicroserviceSample.UserInterface) as simple 2D HMI frontend
 
-## open questions, TODOs, to discuss
-* Should we use the domain model classes in the REST interface or should we build separated DTOs?
 
 ## Notes
 
-Project is built with [GitHub Actions](.github/workflows/build.yml).
+Project is built with [GitHub Actions](.github/workflows).
