@@ -1,4 +1,4 @@
-import { Machine, MachineMetadata, MachineSetting, MachineSwitch } from "./apiClient/models";
+import { MachineMetadata, MachineSetting, MachineSwitch } from "./apiClient/models";
 
 export class MachineConfigurationViewModel {
     //#region Get references to HTML elements
@@ -99,7 +99,7 @@ export class MachineConfigurationViewModel {
             this.hook.setAttribute('x', value + "");
         }
     }
-    
+
     public set machineImage(svgImage: string) {
         this.machineImageContainer.innerHTML = svgImage;
     }
