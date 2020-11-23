@@ -14,6 +14,9 @@ using System.Threading;
 
 namespace NetCoreMicroserviceSample.Api.MachineConnection
 {
+    /// <summary>
+    /// This class is acting as gRPC communication endpoint. See https://grpc.io/ for further information.
+    /// </summary>
     [SuppressMessage("", "CA1724", Justification = "Name is fine")]
     public class MachineService : IMachineService
     {

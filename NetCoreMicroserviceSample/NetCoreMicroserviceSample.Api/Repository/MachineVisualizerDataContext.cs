@@ -4,6 +4,10 @@ using System;
 
 namespace NetCoreMicroserviceSample.Api.Repository
 {
+    /// <summary>
+    /// This class is acting as repository. For the sake of simplicity we're using the in-memory 
+    /// version of Entity Framework (https://docs.microsoft.com/en-us/ef/).
+    /// </summary>
     public class MachineVisualizerDataContext : DbContext
     {
         public DbSet<Machine> Machines { get; set; }

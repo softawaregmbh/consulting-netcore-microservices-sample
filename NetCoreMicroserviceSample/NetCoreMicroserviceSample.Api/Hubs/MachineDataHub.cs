@@ -9,6 +9,9 @@ using System.Threading;
 
 namespace NetCoreMicroserviceSample.Api.Hubs
 {
+    /// <summary>
+    /// This class is acting as SignalR communication hub. See https://dotnet.microsoft.com/apps/aspnet/signalr for further information.
+    /// </summary>
     public class MachineDataHub : Hub
     {
         private readonly ILogger<MachineDataHub> logger;

@@ -67,7 +67,7 @@ namespace NetCoreMicroserviceSample.Api
             // Add HTTP client used to get tokens from identity server
             services.AddHttpClient("identity-server", c => c.BaseAddress = new Uri(Configuration["Oidc:Domain"]));
 
-            // Add authentication services
+            // Add authentication services see https://identityserver4.readthedocs.io
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -137,7 +137,7 @@ namespace NetCoreMicroserviceSample.Api
                 };
             });
 
-            // Add gRPC client for machine service
+            // Add gRPC client for machine service (see https://grpc.io/)
             services.AddGrpcClient<MachineAccess.MachineAccessClient>(o => o.Address = new Uri(Configuration["MachineGrpcService"]));
 
             // Add gRPC service
@@ -167,6 +167,7 @@ namespace NetCoreMicroserviceSample.Api
                 c.OperationFilter<AddResponseHeadersFilter>();
             });
 
+            // add SignalR websocket communication for bidirectional message transfer over HTTP (https://dotnet.microsoft.com/apps/aspnet/signalr)
             services.AddSignalR();
         }
 
@@ -177,12 +178,15 @@ namespace NetCoreMicroserviceSample.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            // Register swagger integration for 'documenting' the REST interface (see https://swagger.io/ and 
+            // https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-5.0&tabs=visual-studio)
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetCoreMicroserviceSample.Api v1"));
             dbContext.Database.EnsureCreated();
 
             app.UseCors();
 
+            // use Serilog as Logging framework (https://serilog.net/)
             app.UseSerilogRequestLogging();
 
             app.UseHttpsRedirection();
