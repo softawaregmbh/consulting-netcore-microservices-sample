@@ -1,4 +1,4 @@
-# NetCoreMicroserviceSample
+# .NET Core Microservices Sample
 
 This project consists of multiple (micro-)services based on .NET 5. It's part of a consulting workshop and free to use.
 
@@ -28,7 +28,7 @@ The following technologies should be demonstrated:
 
 ## Project architecture
 
-![Architecture](doc/assets/arch.svg)
+![Architecture](doc/assets/arch.png)
 
 ## Overall project folder structure
 
@@ -37,7 +37,6 @@ The following (sub-)projects are part of this sample:
 * [ASP .NET project](NetCoreMicroserviceSample/NetCoreMicroserviceSample.Api) with API controllers and REST service endpoints
 * [gRPC machine simulation](NetCoreMicroserviceSample/NetCoreMicroserviceSample.Machine) as remote machine data service
 * [HTML5 web frontend](NetCoreMicroserviceSample/NetCoreMicroserviceSample.UserInterface) as simple 2D HMI frontend
-
 
 ## Notes
 
